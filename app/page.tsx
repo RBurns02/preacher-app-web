@@ -404,7 +404,7 @@ export default function Home() {
               <FeatureCard
                 icon={<BookIcon />}
                 title="Deep Bible Study"
-                description="Read in KJV, ESV, NIV, or ASV. Highlight verses in multiple colors, add personal notes, and search your entire annotation history."
+                description="Read in multiple Bible versions. Highlight verses in multiple colors, add personal notes, and search your entire annotation history."
               />
               <FeatureCard
                 icon={<ZapIcon />}
@@ -509,7 +509,7 @@ export default function Home() {
                 </span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
-                A full Bible reader with KJV, ESV, NIV, and ASV — with
+                A full Bible reader with multiple versions — with
                 multi-color highlighting, personal verse notes, and a searchable
                 annotation library that travels with you everywhere.
               </p>

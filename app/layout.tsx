@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Preacher Log — Track Your Ministry",
+  title: "The Preacher — Log Sermons. Study Scripture. Grow.",
   description:
-    "The app built for ministers. Log every sermon, study scripture deeper, and grow in your calling.",
+    "The app for ministers and congregations. Log every sermon you preach or hear, study scripture deeper, and grow in your faith.",
   openGraph: {
-    title: "Preacher Log",
-    description: "Log every sermon. Study deeper. Preach better.",
+    title: "The Preacher",
+    description: "Log every sermon. Study deeper. Grow together.",
     type: "website",
   },
 };

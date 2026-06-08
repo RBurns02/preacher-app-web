@@ -66,19 +66,25 @@ function PhoneFrame({
   width?: number;
   height?: number;
   float?: boolean;
-  glowColor?: "gold" | "purple";
+  glowColor?: "gold" | "purple" | "teal";
 }) {
+  const glowBg =
+    glowColor === "gold"
+      ? "rgba(217,119,6,0.2)"
+      : glowColor === "purple"
+      ? "rgba(139,92,246,0.15)"
+      : "rgba(20,184,166,0.15)";
+  const borderColor =
+    glowColor === "gold"
+      ? "rgba(217,119,6,0.2)"
+      : glowColor === "teal"
+      ? "rgba(20,184,166,0.2)"
+      : "rgba(255,255,255,0.07)";
   return (
     <div className={`relative${float ? " animate-float" : ""}`}>
       <div
         className="absolute inset-0 blur-3xl scale-110"
-        style={{
-          borderRadius: 44,
-          background:
-            glowColor === "gold"
-              ? "rgba(217,119,6,0.2)"
-              : "rgba(139,92,246,0.15)",
-        }}
+        style={{ borderRadius: 44, background: glowBg }}
       />
       <div
         className="relative overflow-hidden"
@@ -87,10 +93,7 @@ function PhoneFrame({
           height,
           borderRadius: 44,
           background: "#0e0e1c",
-          boxShadow:
-            glowColor === "gold"
-              ? "0 0 0 1px rgba(217,119,6,0.2), 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)"
-              : "0 0 0 1px rgba(255,255,255,0.07), 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)",
+          boxShadow: `0 0 0 1px ${borderColor}, 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)`,
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -112,7 +115,7 @@ function PhoneMockup() {
   return (
     <PhoneFrame
       src="/screenshots/home.png"
-      alt="Preacher Log home screen showing sermon dashboard"
+      alt="The Preacher home screen showing sermon dashboard"
       float
     />
   );
@@ -220,15 +223,19 @@ function Nav() {
             <MicIcon />
           </div>
         </div>
-        <span className="text-white font-bold text-[15px] tracking-tight">Preacher Log</span>
+        <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 
       {/* Desktop links */}
       <div className="hidden md:flex items-center gap-8">
-        {["Features", "Bible Study", "For Ministers"].map((item) => (
-          <a key={item} href="#features"
+        {[
+          { label: "Features", href: "#features" },
+          { label: "For Ministers", href: "#features" },
+          { label: "For Congregations", href: "#congregation" },
+        ].map(({ label, href }) => (
+          <a key={label} href={href}
             className="text-white/50 hover:text-white text-sm font-medium transition-colors duration-150">
-            {item}
+            {label}
           </a>
         ))}
       </div>
@@ -263,11 +270,15 @@ function Nav() {
             backdropFilter: "blur(20px)",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
           }}>
-          {["Features", "Bible Study", "For Ministers"].map((item) => (
-            <a key={item} href="#features"
+          {[
+            { label: "Features", href: "#features" },
+            { label: "For Ministers", href: "#features" },
+            { label: "For Congregations", href: "#congregation" },
+          ].map(({ label, href }) => (
+            <a key={label} href={href}
               onClick={() => setOpen(false)}
               className="px-4 py-3 text-white/70 hover:text-white text-sm font-medium rounded-xl hover:bg-white/[0.04] transition-all">
-              {item}
+              {label}
             </a>
           ))}
           <a href="#download" onClick={() => setOpen(false)}
@@ -315,9 +326,10 @@ export default function Home() {
               </h1>
 
               <p className="text-white/55 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
-                Preacher Log is the ministry companion built for pastors,
-                evangelists, and teachers. Log every sermon, study Scripture
-                deeper, and watch your calling grow.
+                The Preacher is the ministry companion for pastors, evangelists,
+                and teachers — and for every member of the congregation. Log
+                every sermon you preach or hear, study Scripture deeper, and
+                grow in your faith.
               </p>
 
               {/* Download buttons */}
@@ -349,9 +361,9 @@ export default function Home() {
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: "Every", label: "Sermon Logged" },
-              { value: "4", label: "Bible Versions" },
+              { value: "Multiple", label: "Bible Versions" },
               { value: "Full", label: "Offline Access" },
-              { value: "Free", label: "To Get Started" },
+              { value: "Cloud", label: "Sync & Backup" },
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-3xl md:text-4xl font-black text-gold-gradient mb-1">
@@ -376,7 +388,7 @@ export default function Home() {
                 Your whole ministry.<br />One app.
               </h2>
               <p className="text-white/40 text-lg max-w-xl mx-auto">
-                From the pulpit to the pew — Preacher Log keeps your entire
+                From the pulpit to the pew — The Preacher keeps your entire
                 ministry history at your fingertips.
               </p>
             </div>
@@ -392,7 +404,7 @@ export default function Home() {
               <FeatureCard
                 icon={<BookIcon />}
                 title="Deep Bible Study"
-                description="Read in KJV, ESV, NIV, or ASV. Highlight verses in multiple colors, add personal notes, and search your entire annotation history."
+                description="Read in multiple Bible versions. Highlight verses in multiple colors, add personal notes, and search your entire annotation history."
               />
               <FeatureCard
                 icon={<ZapIcon />}
@@ -425,7 +437,7 @@ export default function Home() {
             <div className="flex-1 flex justify-center lg:justify-start">
               <PhoneFrame
                 src="/screenshots/preaching.png"
-                alt="Preacher Log active sermon mode with timer and outline"
+                alt="The Preacher active sermon mode with timer and outline"
                 width={240}
                 height={490}
               />
@@ -476,7 +488,7 @@ export default function Home() {
             <div className="flex-1 flex justify-center lg:justify-end">
               <PhoneFrame
                 src="/screenshots/bible.jpeg"
-                alt="Preacher Log Bible study with verse highlights"
+                alt="The Preacher Bible study with verse highlights"
                 width={240}
                 height={490}
                 glowColor="purple"
@@ -497,7 +509,7 @@ export default function Home() {
                 </span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
-                A full Bible reader with KJV, ESV, NIV, and ASV — with
+                A full Bible reader with multiple versions — with
                 multi-color highlighting, personal verse notes, and a searchable
                 annotation library that travels with you everywhere.
               </p>
@@ -523,6 +535,62 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Feature spotlight: Congregation ── */}
+        <section id="congregation" className="py-24 px-6">
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            {/* Visual */}
+            <div className="flex-1 flex justify-center lg:justify-start">
+              <PhoneFrame
+                src="/screenshots/preaching.png"
+                alt="Congregation member following along with a live sermon"
+                width={240}
+                height={490}
+                glowColor="teal"
+              />
+            </div>
+
+            {/* Text */}
+            <div className="flex-1 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold uppercase tracking-wide"
+                style={{ background: "rgba(20,184,166,0.1)", border: "1px solid rgba(20,184,166,0.2)", color: "#2DD4BF" }}>
+                For the Congregation
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
+                <span className="text-silver-gradient">Follow every message.</span>
+                <br />
+                <span style={{ background: "linear-gradient(135deg, #14B8A6, #67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Never forget a word.
+                </span>
+              </h2>
+              <p className="text-white/50 text-lg leading-relaxed mb-8">
+                You don&apos;t have to be behind the pulpit to grow. The Preacher
+                gives congregation members the same powerful tools — log every
+                sermon you hear, take notes in real time, highlight scripture
+                that speaks to you, and build a personal record of every message
+                that moves you.
+              </p>
+              <ul className="flex flex-col gap-3 text-left">
+                {[
+                  "Log any sermon you hear — not just ones you preach",
+                  "Take real-time notes while the message is being delivered",
+                  "Highlight scriptures from the message in your Bible",
+                  "Build a personal library of every word that impacted you",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(20,184,166,0.15)" }}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#14B8A6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                    <span className="text-white/60 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* ── Quote ── */}
         <section className="py-24 px-6 text-center">
           <div className="max-w-3xl mx-auto">
@@ -532,7 +600,7 @@ export default function Home() {
               what to say.
             </p>
             <p className="text-white/30 text-sm font-medium uppercase tracking-widest">
-              — The Mission of Preacher Log
+              — The Mission of The Preacher
             </p>
           </div>
         </section>
@@ -578,7 +646,7 @@ export default function Home() {
               <div className="w-7 h-7 rounded-xl bg-gold-600/20 flex items-center justify-center">
                 <div className="w-3.5 h-3.5 text-gold-500"><MicIcon /></div>
               </div>
-              <span className="text-white/60 font-semibold text-sm">Preacher Log</span>
+              <span className="text-white/60 font-semibold text-sm">The Preacher</span>
             </div>
 
             {/* Links */}
@@ -593,7 +661,7 @@ export default function Home() {
 
             {/* Copyright */}
             <p className="text-white/20 text-xs">
-              © {new Date().getFullYear()} Preacher Log. All rights reserved.
+              © {new Date().getFullYear()} The Preacher. All rights reserved.
             </p>
           </div>
         </footer>

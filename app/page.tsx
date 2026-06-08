@@ -52,131 +52,69 @@ const PlayIcon = () => (
   </svg>
 );
 
-/* ─── Phone Mockup ──────────────────────────────────────────────────────── */
-function PhoneMockup() {
+/* ─── Phone Frame ───────────────────────────────────────────────────────── */
+function PhoneFrame({
+  src,
+  alt,
+  width = 260,
+  height = 530,
+  float = false,
+  glowColor = "gold",
+}: {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  float?: boolean;
+  glowColor?: "gold" | "purple";
+}) {
   return (
-    <div className="relative animate-float">
-      {/* Outer glow */}
-      <div className="absolute inset-0 rounded-[44px] blur-3xl bg-gold-600/20 scale-110" />
-
-      {/* Phone frame */}
+    <div className={`relative${float ? " animate-float" : ""}`}>
       <div
-        className="relative rounded-[44px] overflow-hidden card-gold-border"
+        className="absolute inset-0 blur-3xl scale-110"
         style={{
-          width: 260,
-          height: 530,
-          background: "linear-gradient(160deg, #1a1a2e 0%, #0e0e1c 100%)",
+          borderRadius: 44,
+          background:
+            glowColor === "gold"
+              ? "rgba(217,119,6,0.2)"
+              : "rgba(139,92,246,0.15)",
+        }}
+      />
+      <div
+        className="relative overflow-hidden"
+        style={{
+          width,
+          height,
+          borderRadius: 44,
+          background: "#0e0e1c",
           boxShadow:
-            "0 0 0 1px rgba(217,119,6,0.2), 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)",
+            glowColor === "gold"
+              ? "0 0 0 1px rgba(217,119,6,0.2), 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)"
+              : "0 0 0 1px rgba(255,255,255,0.07), 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)",
         }}
       >
-        {/* Notch */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-b-2xl z-10" />
-
-        {/* Screen content */}
-        <div className="absolute inset-0 p-4 pt-10 flex flex-col gap-3 overflow-hidden">
-          {/* Header bar */}
-          <div className="flex items-center justify-between mt-2">
-            <div>
-              <div className="text-white/40 text-[9px] font-medium tracking-wide uppercase">Today</div>
-              <div className="text-white text-sm font-bold">June 8, 2025</div>
-            </div>
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center"
-              style={{ background: "rgba(217,119,6,0.2)" }}
-            >
-              <div className="w-4 h-4 text-gold-500">
-                <MicIcon />
-              </div>
-            </div>
-          </div>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-2 gap-2 mt-1">
-            {[
-              { label: "Sermons", value: "142" },
-              { label: "This Year", value: "38" },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className="rounded-2xl p-3"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.07)",
-                }}
-              >
-                <div className="text-white/40 text-[9px] font-semibold uppercase tracking-wide">
-                  {s.label}
-                </div>
-                <div className="text-gold-400 text-xl font-black mt-0.5">
-                  {s.value}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Sermon cards */}
-          {[
-            { title: "Walking in Faith", ref: "Hebrews 11:1", date: "Jun 1" },
-            { title: "The Great Commission", ref: "Matthew 28:19", date: "May 25" },
-            { title: "Grace Abounding", ref: "Romans 5:20", date: "May 18" },
-          ].map((s, i) => (
-            <div
-              key={i}
-              className="rounded-2xl p-3 flex items-center gap-3"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                opacity: 1 - i * 0.15,
-              }}
-            >
-              <div
-                className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(217,119,6,0.15)" }}
-              >
-                <div className="w-3.5 h-3.5 text-gold-500">
-                  <MicIcon />
-                </div>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-white text-[11px] font-semibold truncate">
-                  {s.title}
-                </div>
-                <div className="text-white/40 text-[9px] mt-0.5">{s.ref}</div>
-              </div>
-              <div className="text-white/30 text-[9px]">{s.date}</div>
-            </div>
-          ))}
-
-          {/* Bible highlight preview */}
-          <div
-            className="rounded-2xl p-3 mt-auto"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(217,119,6,0.12), rgba(217,119,6,0.04))",
-              border: "1px solid rgba(217,119,6,0.2)",
-            }}
-          >
-            <div className="text-white/40 text-[8px] uppercase tracking-widest font-semibold mb-1">
-              Highlighted · John 3:16
-            </div>
-            <div className="text-white/80 text-[10px] leading-relaxed italic">
-              &ldquo;For God so loved the world, that he gave his only begotten
-              Son...&rdquo;
-            </div>
-          </div>
-        </div>
-
-        {/* Screen shine */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%)",
+              "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%)",
           }}
         />
       </div>
     </div>
+  );
+}
+
+/* ─── Phone Mockup (hero) ───────────────────────────────────────────────── */
+function PhoneMockup() {
+  return (
+    <PhoneFrame
+      src="/screenshots/home.png"
+      alt="Preacher Log home screen showing sermon dashboard"
+      float
+    />
   );
 }
 
@@ -485,56 +423,12 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
             {/* Visual */}
             <div className="flex-1 flex justify-center lg:justify-start">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-3xl blur-3xl bg-gold-600/10 scale-110" />
-                <div className="relative rounded-3xl p-6 max-w-sm"
-                  style={{
-                    background: "linear-gradient(135deg, #141428, #0e0e1c)",
-                    border: "1px solid rgba(217,119,6,0.2)",
-                    boxShadow: "0 40px 80px rgba(0,0,0,0.5)",
-                  }}>
-                  {/* Header */}
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-2xl flex items-center justify-center"
-                      style={{ background: "rgba(217,119,6,0.2)" }}>
-                      <div className="w-5 h-5 text-gold-500"><MicIcon /></div>
-                    </div>
-                    <div>
-                      <div className="text-white font-bold text-sm">Walking in Faith</div>
-                      <div className="text-white/40 text-xs">Hebrews 11:1–6 · June 1, 2025</div>
-                    </div>
-                  </div>
-
-                  {/* Outline bubbles */}
-                  {[
-                    { label: "Introduction", text: "Faith is the substance of things hoped for..." },
-                    { label: "Point 1", text: "Abel's offering — faith expressed through action" },
-                    { label: "Point 2", text: "Enoch walked with God — a life of daily faith" },
-                    { label: "Conclusion", text: "Without faith it is impossible to please Him" },
-                  ].map((b, i) => (
-                    <div key={i} className="mb-3 p-3 rounded-2xl"
-                      style={{
-                        background: i === 1 ? "rgba(217,119,6,0.1)" : "rgba(255,255,255,0.04)",
-                        border: i === 1 ? "1px solid rgba(217,119,6,0.2)" : "1px solid rgba(255,255,255,0.06)",
-                      }}>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-1">{b.label}</div>
-                      <div className="text-white/75 text-[12px] leading-relaxed">{b.text}</div>
-                    </div>
-                  ))}
-
-                  {/* Footer tag */}
-                  <div className="mt-4 flex gap-2">
-                    <span className="text-[10px] px-2.5 py-1 rounded-full font-semibold"
-                      style={{ background: "rgba(217,119,6,0.15)", color: "#F59E0B" }}>
-                      Congregation: ~200
-                    </span>
-                    <span className="text-[10px] px-2.5 py-1 rounded-full font-semibold text-white/40"
-                      style={{ background: "rgba(255,255,255,0.05)" }}>
-                      45 min
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <PhoneFrame
+                src="/screenshots/preaching.png"
+                alt="Preacher Log active sermon mode with timer and outline"
+                width={240}
+                height={490}
+              />
             </div>
 
             {/* Text */}
@@ -580,43 +474,13 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-16">
             {/* Visual */}
             <div className="flex-1 flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-3xl blur-3xl"
-                  style={{ background: "radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%)", transform: "scale(1.1)" }} />
-                <div className="relative rounded-3xl p-5 max-w-xs"
-                  style={{
-                    background: "linear-gradient(135deg, #141428, #0e0e1c)",
-                    border: "1px solid rgba(255,255,255,0.07)",
-                    boxShadow: "0 40px 80px rgba(0,0,0,0.5)",
-                  }}>
-                  <div className="text-white/30 text-[10px] font-semibold uppercase tracking-widest mb-3">John 3 · ESV</div>
-                  {[
-                    { num: 14, text: "And as Moses lifted up the serpent in the wilderness...", color: "rgba(0,229,255,0.15)", border: "rgba(0,229,255,0.3)" },
-                    { num: 15, text: "...so must the Son of Man be lifted up, that whoever believes in him may have eternal life.", color: null, border: null },
-                    { num: 16, text: "For God so loved the world, that he gave his only Son...", color: "rgba(255,0,255,0.15)", border: "rgba(255,0,255,0.3)" },
-                    { num: 17, text: "For God did not send his Son into the world to condemn the world...", color: "rgba(255,109,0,0.15)", border: "rgba(255,109,0,0.3)" },
-                  ].map((v) => (
-                    <div key={v.num} className="flex gap-2 mb-2">
-                      <span className="text-white/20 text-[10px] font-bold mt-0.5 flex-shrink-0 w-4">{v.num}</span>
-                      <p className="text-[11px] leading-relaxed px-2 py-1 rounded-lg flex-1"
-                        style={{
-                          color: v.color ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.5)",
-                          background: v.color ?? "transparent",
-                          border: v.border ? `1px solid ${v.border}` : "none",
-                        }}>
-                        {v.text}
-                      </p>
-                    </div>
-                  ))}
-                  {/* Color picker strip */}
-                  <div className="mt-4 flex items-center gap-2 justify-center">
-                    {["#FFFF00", "#00E5FF", "#FF6D00", "#FF00FF"].map((c) => (
-                      <div key={c} className="w-6 h-6 rounded-full border-2"
-                        style={{ background: c, borderColor: "rgba(255,255,255,0.3)" }} />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <PhoneFrame
+                src="/screenshots/bible.jpeg"
+                alt="Preacher Log Bible study with verse highlights"
+                width={240}
+                height={490}
+                glowColor="purple"
+              />
             </div>
 
             {/* Text */}

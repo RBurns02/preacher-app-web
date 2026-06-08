@@ -361,9 +361,9 @@ export default function Home() {
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: "Every", label: "Sermon Logged" },
-              { value: "4", label: "Bible Versions" },
+              { value: "Multiple", label: "Bible Versions" },
               { value: "Full", label: "Offline Access" },
-              { value: "Free", label: "To Get Started" },
+              { value: "Cloud", label: "Sync & Backup" },
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-3xl md:text-4xl font-black text-gold-gradient mb-1">

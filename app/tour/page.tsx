@@ -132,9 +132,8 @@ function Nav() {
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 h-16"
       style={{ background: "rgba(7,7,15,0.85)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
       <a href="/" className="flex items-center gap-2.5">
-        <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "rgba(217,119,6,0.2)" }}>
-          <div className="w-4 h-4" style={{ color: "#F59E0B" }}><MicIcon /></div>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/icon.png" alt="The Preacher" className="w-11 h-11 rounded-xl object-contain" style={{ background: "rgba(255,255,255,0.06)" }} />
         <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 

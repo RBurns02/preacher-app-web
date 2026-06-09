@@ -219,7 +219,7 @@ function Nav() {
       {/* Logo */}
       <a href="/" className="flex items-center gap-2.5 group">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icon.png" alt="The Preacher" className="w-8 h-8 rounded-xl object-contain" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <img src="/icon.png" alt="The Preacher" className="w-11 h-11 rounded-xl object-contain" style={{ background: "rgba(255,255,255,0.06)" }} />
         <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 

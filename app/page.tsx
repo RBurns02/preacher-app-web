@@ -542,8 +542,8 @@ export default function Home() {
             {/* Visual */}
             <div className="flex-1 flex justify-center lg:justify-start">
               <PhoneFrame
-                src="/screenshots/preaching.png"
-                alt="Congregation member following along with a live sermon"
+                src="/logo.png"
+                alt="The Preacher app"
                 width={240}
                 height={490}
                 glowColor="teal"

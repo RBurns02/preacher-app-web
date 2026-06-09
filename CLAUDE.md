@@ -6,7 +6,7 @@ Marketing landing page for the Preacher Log mobile app (Flutter, iOS + Android).
 ## Repo & Deployment
 - **GitHub**: github.com/RBurns02/Preacher-App-Web
 - **Hosting**: Vercel (connect GitHub repo, auto-deploys on push)
-- **Live URL**: TBD (set up after first Vercel deployment)
+- **Live URL**: https://thepreacherapp.com
 
 ## Tech Stack
 - **Next.js 14** (App Router) with `output: 'export'` for static site generation

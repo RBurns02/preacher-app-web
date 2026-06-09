@@ -230,6 +230,7 @@ function Nav() {
       <div className="hidden md:flex items-center gap-8">
         {[
           { label: "Features", href: "#features" },
+          { label: "Tour the App", href: "/tour" },
           { label: "For Ministers", href: "#features" },
           { label: "For Congregations", href: "#congregation" },
         ].map(({ label, href }) => (

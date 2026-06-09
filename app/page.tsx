@@ -661,8 +661,8 @@ export default function Home() {
               {[
                 { label: "Privacy Policy", href: "/privacy" },
                 { label: "Terms of Use", href: "#" },
-                { label: "Support", href: "mailto:support@thepreacherapp.com" },
-                { label: "Contact", href: "mailto:support@thepreacherapp.com" },
+                { label: "Support", href: "mailto:thepreacherapp@gmail.com" },
+                { label: "Contact", href: "mailto:thepreacherapp@gmail.com" },
               ].map(({ label, href }) => (
                 <a key={label} href={href}
                   className="text-white/30 hover:text-white/70 text-xs font-medium transition-colors duration-150">

@@ -219,7 +219,7 @@ function Nav() {
       {/* Logo */}
       <a href="/" className="flex items-center gap-2.5 group">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <div className="w-11 h-11 rounded-xl flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.06)", backgroundImage: "url('/icon.png')", backgroundSize: "600%", backgroundPosition: "49% 42%", backgroundRepeat: "no-repeat" }} />
+        <div className="w-11 h-11 rounded-xl flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.06)", backgroundImage: "url('/icon.png')", backgroundSize: "580%", backgroundPosition: "49% 49%", backgroundRepeat: "no-repeat" }} />
         <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 

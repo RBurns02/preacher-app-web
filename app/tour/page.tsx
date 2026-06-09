@@ -2,37 +2,10 @@
 
 import { useState } from "react";
 
-/* ─── Nav icons ─────────────────────────────────────────────────────────── */
-const NavHomeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-  </svg>
-);
-const NavMicIcon = () => (
+/* ─── Icons ─────────────────────────────────────────────────────────────── */
+const MicIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
     <path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v6a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm-1 15.93V21H9v2h6v-2h-2v-2.07A8 8 0 0 0 20 11h-2a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.93z" />
-  </svg>
-);
-const NavListIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="w-full h-full">
-    <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
-    <circle cx="3" cy="6" r="1" fill="currentColor" stroke="none" /><circle cx="3" cy="12" r="1" fill="currentColor" stroke="none" /><circle cx="3" cy="18" r="1" fill="currentColor" stroke="none" />
-  </svg>
-);
-const NavBookIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-  </svg>
-);
-const NavSearchIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-  </svg>
-);
-const NavSettingsIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-    <circle cx="12" cy="12" r="3" />
-    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
   </svg>
 );
 const AppleIcon = () => (
@@ -45,103 +18,24 @@ const PlayIcon = () => (
     <path d="M3.18 23.18C1.44 22.18 0 20.46 0 18.26V5.74C0 3.54 1.44 1.82 3.18.82c1.74-1 3.74-.8 5.4.28l11.6 6.26c1.64 1.06 2.82 2.86 2.82 4.64 0 1.78-1.18 3.58-2.82 4.64L8.58 22.9c-1.66 1.08-3.66 1.28-5.4.28z" />
   </svg>
 );
-const ChevronRightIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
 
-/* ─── App bottom nav bar (used in all CSS mockups) ──────────────────────── */
-function AppBottomNav({ active }: { active: "home" | "sermons" | "services" | "bible" | "settings" }) {
-  const items = [
-    { id: "home", label: "Home", Icon: NavHomeIcon },
-    { id: "sermons", label: "Sermons", Icon: NavMicIcon },
-    { id: "services", label: "Services", Icon: NavListIcon },
-    { id: "bible", label: "Bible", Icon: NavBookIcon },
-    { id: "settings", label: "Settings", Icon: NavSettingsIcon },
-  ];
+/* ─── Phone frame ────────────────────────────────────────────────────────── */
+function PhoneFrame({ src, alt, glowColor = "gold" }: { src: string; alt: string; glowColor?: "gold" | "blue" | "purple" | "teal" | "red" }) {
+  const glows: Record<string, [string, string]> = {
+    gold:   ["rgba(217,119,6,0.2)",    "rgba(217,119,6,0.25)"],
+    blue:   ["rgba(59,130,246,0.2)",   "rgba(59,130,246,0.25)"],
+    purple: ["rgba(139,92,246,0.15)",  "rgba(139,92,246,0.2)"],
+    teal:   ["rgba(20,184,166,0.15)",  "rgba(20,184,166,0.2)"],
+    red:    ["rgba(239,68,68,0.15)",   "rgba(239,68,68,0.2)"],
+  };
+  const [bg, border] = glows[glowColor];
   return (
-    <div className="absolute bottom-0 left-0 right-0 flex items-center justify-around px-2 pt-2 pb-3"
-      style={{ background: "#0c0c1a", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-      {items.map(({ id, label, Icon }) => (
-        <div key={id} className="flex flex-col items-center gap-0.5 w-10"
-          style={{ color: id === active ? "#3B82F6" : "rgba(255,255,255,0.3)" }}>
-          <div className="w-[18px] h-[18px]"><Icon /></div>
-          <span style={{ fontSize: 7.5, fontWeight: 500 }}>{label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* ─── Phone frame ───────────────────────────────────────────────────────── */
-function PhoneFrame({
-  children,
-  glowColor = "gold",
-}: {
-  children: React.ReactNode;
-  glowColor?: "gold" | "blue" | "purple" | "teal" | "red";
-}) {
-  const glowMap: Record<string, string> = {
-    gold: "rgba(217,119,6,0.2)",
-    blue: "rgba(59,130,246,0.2)",
-    purple: "rgba(139,92,246,0.15)",
-    teal: "rgba(20,184,166,0.15)",
-    red: "rgba(239,68,68,0.15)",
-  };
-  const borderMap: Record<string, string> = {
-    gold: "rgba(217,119,6,0.25)",
-    blue: "rgba(59,130,246,0.25)",
-    purple: "rgba(139,92,246,0.2)",
-    teal: "rgba(20,184,166,0.2)",
-    red: "rgba(239,68,68,0.2)",
-  };
-  return (
-    <div className="relative">
-      <div className="absolute inset-0 blur-3xl scale-110"
-        style={{ borderRadius: 44, background: glowMap[glowColor] }} />
-      <div className="relative overflow-hidden"
-        style={{
-          width: 260,
-          height: 530,
-          borderRadius: 44,
-          background: "#08080f",
-          boxShadow: `0 0 0 1px ${borderMap[glowColor]}, 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)`,
-        }}>
-        {children}
-        <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%)" }} />
-      </div>
-    </div>
-  );
-}
-
-/* ─── Screenshot frame (real photos) ───────────────────────────────────── */
-function ScreenshotFrame({ src, alt, glowColor = "gold" }: { src: string; alt: string; glowColor?: "gold" | "blue" | "purple" | "teal" }) {
-  const glowMap: Record<string, string> = {
-    gold: "rgba(217,119,6,0.2)",
-    blue: "rgba(59,130,246,0.2)",
-    purple: "rgba(139,92,246,0.15)",
-    teal: "rgba(20,184,166,0.15)",
-  };
-  const borderMap: Record<string, string> = {
-    gold: "rgba(217,119,6,0.25)",
-    blue: "rgba(59,130,246,0.25)",
-    purple: "rgba(139,92,246,0.2)",
-    teal: "rgba(20,184,166,0.2)",
-  };
-  return (
-    <div className="relative">
-      <div className="absolute inset-0 blur-3xl scale-110"
-        style={{ borderRadius: 44, background: glowMap[glowColor] }} />
-      <div className="relative overflow-hidden"
-        style={{
-          width: 260,
-          height: 530,
-          borderRadius: 44,
-          background: "#08080f",
-          boxShadow: `0 0 0 1px ${borderMap[glowColor]}, 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)`,
-        }}>
+    <div className="relative flex-shrink-0">
+      <div className="absolute inset-0 blur-3xl scale-110" style={{ borderRadius: 44, background: bg }} />
+      <div className="relative overflow-hidden" style={{
+        width: 260, height: 530, borderRadius: 44, background: "#08080f",
+        boxShadow: `0 0 0 1px ${border}, 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)`,
+      }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
         <div className="absolute inset-0 pointer-events-none"
@@ -151,217 +45,72 @@ function ScreenshotFrame({ src, alt, glowColor = "gold" }: { src: string; alt: s
   );
 }
 
-/* ─── CSS Screen Mockups ────────────────────────────────────────────────── */
-
-function SermonLoggerScreen() {
-  return (
-    <PhoneFrame glowColor="gold">
-      <div className="absolute inset-0 flex flex-col" style={{ background: "#08080f", color: "white", fontSize: 11 }}>
-        {/* Header */}
-        <div className="px-4 pt-6 pb-3 flex items-center gap-3" style={{ background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-          <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 18, lineHeight: 1 }}>‹</div>
-          <span className="font-bold text-sm flex-1">Log Sermon</span>
-          <span style={{ color: "#3B82F6", fontSize: 12, fontWeight: 600 }}>Save</span>
-        </div>
-
-        {/* Form body */}
-        <div className="flex-1 px-4 py-3 flex flex-col gap-2.5 overflow-hidden">
-          {/* Title */}
-          <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(59,130,246,0.4)" }}>
-            <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 8.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 3 }}>Title</div>
-            <div style={{ fontWeight: 700, fontSize: 13 }}>Walking in Faith</div>
-          </div>
-
-          {/* Scripture */}
-          <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
-            <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 8.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 3 }}>Scripture</div>
-            <div style={{ fontWeight: 600, fontSize: 12, color: "#3B82F6" }}>Hebrews 11:1–6</div>
-          </div>
-
-          {/* Date + Location row */}
-          <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 8.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 3 }}>Date</div>
-              <div style={{ fontWeight: 600, fontSize: 11 }}>June 1, 2025</div>
-            </div>
-            <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 8.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 3 }}>Duration</div>
-              <div style={{ fontWeight: 600, fontSize: 11 }}>45 min</div>
-            </div>
-          </div>
-
-          {/* Church */}
-          <div className="rounded-xl p-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
-            <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 8.5, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1, marginBottom: 3 }}>Church / Location</div>
-            <div style={{ fontWeight: 600, fontSize: 11 }}>Grace Fellowship Church</div>
-          </div>
-
-          {/* Outline section */}
-          <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 8.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, marginTop: 2 }}>Outline</div>
-          {[
-            { tag: "Intro", text: "Faith is the substance of things hoped for..." },
-            { tag: "Point 1", text: "Abel's offering — faith in action" },
-            { tag: "Conclusion", text: "Without faith it is impossible to please Him" },
-          ].map((p) => (
-            <div key={p.tag} className="rounded-xl p-2.5 flex items-start gap-2" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <span className="rounded-md px-1.5 py-0.5 flex-shrink-0" style={{ background: "rgba(217,119,6,0.15)", color: "#F59E0B", fontSize: 8, fontWeight: 700 }}>{p.tag}</span>
-              <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 9.5, lineHeight: 1.4 }}>{p.text}</span>
-            </div>
-          ))}
-        </div>
-
-        <AppBottomNav active="sermons" />
-      </div>
-    </PhoneFrame>
-  );
-}
-
-function PrepareScreen() {
-  return (
-    <PhoneFrame glowColor="gold">
-      <div className="absolute inset-0 flex flex-col" style={{ background: "#08080f", color: "white", fontSize: 11 }}>
-        {/* Header */}
-        <div className="px-4 pt-6 pb-3 flex items-center gap-3" style={{ background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-          <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 18, lineHeight: 1 }}>‹</div>
-          <span className="font-bold text-sm flex-1">Prepare</span>
-        </div>
-
-        <div className="flex-1 px-4 py-3 flex flex-col gap-3 overflow-hidden">
-          {/* Sermon card */}
-          <div className="rounded-xl p-3" style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.15), rgba(59,130,246,0.05))", border: "1px solid rgba(59,130,246,0.25)" }}>
-            <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>Walking in Faith</div>
-            <div style={{ color: "#3B82F6", fontSize: 10, fontWeight: 600 }}>Hebrews 11:1–6</div>
-          </div>
-
-          {/* Outline builder */}
-          <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 8.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2 }}>Message Outline</div>
-
-          {[
-            { label: "Introduction", text: "Open with the definition of faith — what does it mean to truly believe?", active: false },
-            { label: "Point 1", text: "Abel's offering showed that true faith requires action, not just belief.", active: true },
-            { label: "Point 2", text: "Enoch walked with God — faith sustained as a daily lifestyle.", active: false },
-            { label: "Point 3", text: "Noah prepared the ark before a single drop of rain fell.", active: false },
-            { label: "Conclusion", text: "Without faith, it is impossible to please God — our call to action.", active: false },
-          ].map((point) => (
-            <div key={point.label} className="rounded-xl p-2.5" style={{
-              background: point.active ? "rgba(59,130,246,0.1)" : "rgba(255,255,255,0.04)",
-              border: point.active ? "1px solid rgba(59,130,246,0.3)" : "1px solid rgba(255,255,255,0.06)",
-            }}>
-              <div style={{ color: point.active ? "#60A5FA" : "rgba(255,255,255,0.35)", fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 3 }}>{point.label}</div>
-              <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 9.5, lineHeight: 1.4 }}>{point.text}</div>
-            </div>
-          ))}
-
-          {/* Start button */}
-          <button className="w-full rounded-xl py-3 font-bold text-white text-sm"
-            style={{ background: "linear-gradient(135deg, #DC2626, #EF4444)", boxShadow: "0 4px 20px rgba(220,38,38,0.4)", marginTop: "auto" }}>
-            ● Start Preaching
-          </button>
-        </div>
-
-        <AppBottomNav active="sermons" />
-      </div>
-    </PhoneFrame>
-  );
-}
-
-function ServicesScreen() {
-  return (
-    <PhoneFrame glowColor="teal">
-      <div className="absolute inset-0 flex flex-col" style={{ background: "#08080f", color: "white", fontSize: 11 }}>
-        {/* Header */}
-        <div className="px-4 pt-6 pb-3 flex items-center justify-between" style={{ background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-          <span className="font-bold text-sm">Services</span>
-          <span style={{ color: "#3B82F6", fontSize: 20, lineHeight: 1, fontWeight: 300 }}>+</span>
-        </div>
-
-        <div className="flex-1 px-4 py-3 flex flex-col gap-2.5 overflow-hidden">
-          {/* Filter chips */}
-          <div className="flex gap-2">
-            {["All", "This Year", "Past"].map((f, i) => (
-              <span key={f} className="rounded-full px-3 py-1" style={{
-                background: i === 0 ? "#3B82F6" : "rgba(255,255,255,0.06)",
-                color: i === 0 ? "white" : "rgba(255,255,255,0.4)",
-                fontSize: 9, fontWeight: 600,
-              }}>{f}</span>
-            ))}
-          </div>
-
-          {/* Service cards */}
-          {[
-            { name: "Sunday Morning Service", church: "Springhill Pentecostal", date: "Jun 8, 2025", sermons: 2, color: "#3B82F6" },
-            { name: "Wednesday Night Bible Study", church: "Grace Fellowship", date: "Jun 4, 2025", sermons: 1, color: "#8B5CF6" },
-            { name: "Youth Rally", church: "City Church", date: "May 31, 2025", sermons: 3, color: "#14B8A6" },
-            { name: "Sunday Morning Service", church: "Bethel Assembly", date: "May 25, 2025", sermons: 1, color: "#3B82F6" },
-            { name: "Revival Night", church: "New Life Church", date: "May 18, 2025", sermons: 2, color: "#F59E0B" },
-          ].map((s, i) => (
-            <div key={i} className="rounded-xl p-3 flex items-center gap-3"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `${s.color}22` }}>
-                <div className="w-3.5 h-3.5" style={{ color: s.color }}>
-                  <NavListIcon />
-                </div>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div style={{ fontWeight: 700, fontSize: 10.5, marginBottom: 2, color: "rgba(255,255,255,0.9)" }} className="truncate">{s.name}</div>
-                <div style={{ color: "rgba(255,255,255,0.35)", fontSize: 8.5 }}>{s.church} · {s.date}</div>
-              </div>
-              <div className="flex flex-col items-end gap-0.5">
-                <span style={{ color: s.color, fontSize: 9, fontWeight: 700 }}>{s.sermons} sermon{s.sermons !== 1 ? "s" : ""}</span>
-                <div style={{ color: "rgba(255,255,255,0.2)" }}><ChevronRightIcon /></div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <AppBottomNav active="services" />
-      </div>
-    </PhoneFrame>
-  );
-}
-
-/* ─── Reusable section layout ───────────────────────────────────────────── */
-function TourSection({
+/* ─── Step section ───────────────────────────────────────────────────────── */
+function Step({
+  number,
   flip = false,
-  visual,
-  badge,
-  badgeColor,
+  src,
+  alt,
+  glowColor = "gold",
+  label,
   headline,
   description,
   items,
   bg,
 }: {
+  number: string;
   flip?: boolean;
-  visual: React.ReactNode;
-  badge: string;
-  badgeColor: { text: string; bg: string; border: string };
+  src: string;
+  alt: string;
+  glowColor?: "gold" | "blue" | "purple" | "teal" | "red";
+  label: string;
   headline: React.ReactNode;
   description: string;
   items: string[];
   bg?: string;
 }) {
+  const accentColors: Record<string, { text: string; bg: string; border: string; check: string }> = {
+    gold:   { text: "#F59E0B", bg: "rgba(217,119,6,0.12)",   border: "rgba(217,119,6,0.3)",   check: "#D97706" },
+    blue:   { text: "#60A5FA", bg: "rgba(59,130,246,0.12)",  border: "rgba(59,130,246,0.3)",  check: "#3B82F6" },
+    purple: { text: "#C4B5FD", bg: "rgba(139,92,246,0.12)",  border: "rgba(139,92,246,0.3)",  check: "#8B5CF6" },
+    teal:   { text: "#2DD4BF", bg: "rgba(20,184,166,0.12)",  border: "rgba(20,184,166,0.3)",  check: "#14B8A6" },
+    red:    { text: "#FCA5A5", bg: "rgba(239,68,68,0.12)",   border: "rgba(239,68,68,0.3)",   check: "#EF4444" },
+  };
+  const c = accentColors[glowColor];
+
   return (
-    <section className="py-24 px-6" style={bg ? { background: bg } : {}}>
-      <div className={`max-w-6xl mx-auto flex flex-col items-center gap-16 ${flip ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+    <section className="py-20 px-6" style={bg ? { background: bg } : {}}>
+      <div className={`max-w-6xl mx-auto flex flex-col items-center gap-12 lg:gap-20 ${flip ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+
+        {/* Phone */}
         <div className={`flex-1 flex ${flip ? "justify-center lg:justify-end" : "justify-center lg:justify-start"}`}>
-          {visual}
+          <PhoneFrame src={src} alt={alt} glowColor={glowColor} />
         </div>
+
+        {/* Text */}
         <div className="flex-1 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold uppercase tracking-wide"
-            style={{ background: badgeColor.bg, border: `1px solid ${badgeColor.border}`, color: badgeColor.text }}>
-            {badge}
+          {/* Step number */}
+          <div className="flex items-center gap-3 justify-center lg:justify-start mb-5">
+            <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-lg font-black flex-shrink-0"
+              style={{ background: c.bg, border: `1px solid ${c.border}`, color: c.text }}>
+              {number}
+            </div>
+            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: c.text }}>
+              {label}
+            </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
+
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 leading-tight">
             {headline}
           </h2>
           <p className="text-white/50 text-lg leading-relaxed mb-8">{description}</p>
+
           <ul className="flex flex-col gap-3 text-left">
             {items.map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{ background: badgeColor.bg }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke={badgeColor.text} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
+                  style={{ background: c.bg }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke={c.check} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -370,12 +119,13 @@ function TourSection({
             ))}
           </ul>
         </div>
+
       </div>
     </section>
   );
 }
 
-/* ─── Nav ───────────────────────────────────────────────────────────────── */
+/* ─── Nav ────────────────────────────────────────────────────────────────── */
 function Nav() {
   const [open, setOpen] = useState(false);
   return (
@@ -383,22 +133,22 @@ function Nav() {
       style={{ background: "rgba(7,7,15,0.85)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
       <a href="/" className="flex items-center gap-2.5">
         <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "rgba(217,119,6,0.2)" }}>
-          <div className="w-4 h-4" style={{ color: "#F59E0B" }}><NavMicIcon /></div>
+          <div className="w-4 h-4" style={{ color: "#F59E0B" }}><MicIcon /></div>
         </div>
         <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 
       <div className="hidden md:flex items-center gap-8">
         {[
-          { label: "← Back to Home", href: "/" },
+          { label: "← Home", href: "/" },
           { label: "Features", href: "/#features" },
           { label: "For Congregations", href: "/#congregation" },
         ].map(({ label, href }) => (
-          <a key={label} href={href} className="text-white/50 hover:text-white text-sm font-medium transition-colors duration-150">{label}</a>
+          <a key={label} href={href} className="text-white/50 hover:text-white text-sm font-medium transition-colors">{label}</a>
         ))}
       </div>
 
-      <a href="#download" className="hidden md:block px-4 py-2 rounded-xl text-sm font-semibold text-black transition-all duration-200 hover:scale-105"
+      <a href="#download" className="hidden md:block px-4 py-2 rounded-xl text-sm font-semibold text-black transition-all hover:scale-105"
         style={{ background: "linear-gradient(135deg, #D97706, #F59E0B)", boxShadow: "0 4px 20px rgba(217,119,6,0.35)" }}>
         Get the App
       </a>
@@ -415,7 +165,7 @@ function Nav() {
         <div className="absolute top-16 left-0 right-0 p-4 flex flex-col gap-2 md:hidden"
           style={{ background: "rgba(14,14,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           {[
-            { label: "← Back to Home", href: "/" },
+            { label: "← Home", href: "/" },
             { label: "Features", href: "/#features" },
             { label: "For Congregations", href: "/#congregation" },
           ].map(({ label, href }) => (
@@ -433,214 +183,225 @@ function Nav() {
   );
 }
 
-/* ─── Page ──────────────────────────────────────────────────────────────── */
-export default function TourPage() {
+/* ─── Page ───────────────────────────────────────────────────────────────── */
+export default function HowItWorksPage() {
   return (
     <>
       <Nav />
       <main className="overflow-hidden" style={{ background: "#07070F" }}>
 
         {/* ── Hero ── */}
-        <section className="relative pt-40 pb-20 px-6 text-center">
+        <section className="relative pt-40 pb-16 px-6 text-center">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
             style={{ background: "radial-gradient(ellipse at top, rgba(217,119,6,0.12), transparent 70%)" }} />
           <div className="relative z-10 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold uppercase tracking-wide"
               style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.25)", color: "#F59E0B" }}>
-              App Tour
+              How It Works
             </div>
             <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
               <span style={{ background: "linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Every screen,
+                From download
               </span>
               <br />
               <span style={{ background: "linear-gradient(135deg, #D97706, #F59E0B, #FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                explained.
+                to the pulpit.
               </span>
             </h1>
             <p className="text-white/50 text-xl leading-relaxed max-w-xl mx-auto">
-              A screen-by-screen walkthrough of The Preacher — built for ministers
-              and congregation members alike.
+              Seven steps that take you from opening the app for the first time
+              to preaching with everything you need — and logging every word after.
             </p>
           </div>
         </section>
 
-        {/* ── Screen 1: Home ── */}
-        <TourSection
-          visual={<ScreenshotFrame src="/screenshots/home.png" alt="The Preacher home screen" glowColor="gold" />}
-          badge="Home Screen"
-          badgeColor={{ text: "#F59E0B", bg: "rgba(217,119,6,0.1)", border: "rgba(217,119,6,0.25)" }}
+        {/* ── Step 1: Your Dashboard ── */}
+        <Step
+          number="1"
+          src="/screenshots/home.png"
+          alt="The Preacher home dashboard"
+          glowColor="gold"
+          label="Open the App"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Your ministry at
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Everything you need,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #D97706, #F59E0B, #FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                a glance.
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#D97706,#F59E0B,#FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>right up front.</span>
             </>
           }
-          description="The moment you open The Preacher, everything that matters is right in front of you. Your stats, your most recent sermons, the verse of the day, and quick-access buttons to everything you need — all in one place."
+          description="The moment you open The Preacher, your dashboard shows you everything at a glance — your sermon count, streak, verse of the day, recent sermons, and quick actions. Whether you're a minister or a congregation member, your ministry starts here."
           items={[
-            "Your sermon count and ministry stats at a glance",
+            "Your total sermons, streak, and series count on the home screen",
             "Today's verse of the day to center your spirit",
             "Quick shortcuts to log, prepare, or start preaching",
-            "Your most recent services and sermons front and center",
+            "Your most recent sermons always one tap away",
           ]}
         />
 
-        {/* ── Screen 2: Sermon Logger ── */}
-        <TourSection
+        {/* ── Step 2: Prepare ── */}
+        <Step
+          number="2"
           flip
           bg="rgba(255,255,255,0.015)"
-          visual={<SermonLoggerScreen />}
-          badge="Sermon Log"
-          badgeColor={{ text: "#F59E0B", bg: "rgba(217,119,6,0.1)", border: "rgba(217,119,6,0.25)" }}
+          src="/screenshots/prepare.png"
+          alt="The Preacher prepare mode"
+          glowColor="blue"
+          label="Build Your Message"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Every sermon,
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Write your outline</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #D97706, #F59E0B, #FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                captured in detail.
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#3B82F6,#93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>before you preach.</span>
             </>
           }
-          description="Whether you're behind the pulpit or sitting in the pew — log it all. Record the title, scripture references, your outline, the church, how long the message ran, and personal notes. Nothing gets lost."
+          description="Before you step behind the pulpit, build your full message in Prepare Mode. Add your title, opening scriptures, and each point of your outline. When you're done — tap Start Message and you're live."
           items={[
-            "Title, scripture, date, and duration in one place",
-            "Build a structured outline with as many points as you need",
-            "Log the church name and location for every entry",
-            "Works for preachers AND congregation members taking notes",
+            "Name your message and add opening scriptures",
+            "Build out Opening, Point 1, Point 2, and more",
+            "Insert additional sections anywhere in the outline",
+            "Tap 'Start Message' to go live the moment you're ready",
           ]}
         />
 
-        {/* ── Screen 3: Prepare Mode ── */}
-        <TourSection
-          visual={<PrepareScreen />}
-          badge="Prepare Mode"
-          badgeColor={{ text: "#60A5FA", bg: "rgba(59,130,246,0.1)", border: "rgba(59,130,246,0.25)" }}
+        {/* ── Step 3: Preach Live ── */}
+        <Step
+          number="3"
+          src="/screenshots/preaching.png"
+          alt="The Preacher live preaching mode"
+          glowColor="red"
+          label="Go Live"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Build your message
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Preach with nothing</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #3B82F6, #93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                before you preach.
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#EF4444,#FCA5A5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>in your way.</span>
             </>
           }
-          description="Walk into the pulpit prepared. Write out your full outline ahead of time — introduction, main points, scriptures, and conclusion — so when it's time to preach, every word is ready. One tap and you go live."
+          description="Live mode activates your timer, puts your full outline on screen, and keeps your scripture references one tap away. No fumbling. No forgetting. Just you and the Word."
           items={[
-            "Build a full outline before the service starts",
-            "Add scripture references to each point",
-            "Write talking points and illustrations",
-            "Tap 'Start Preaching' to go live when you're ready",
+            "Real-time timer keeps you on track",
+            "Your full outline visible the entire time",
+            "Scripture points displayed clearly as you go",
+            "Save everything with one tap when you finish",
           ]}
         />
 
-        {/* ── Screen 4: Live Preaching ── */}
-        <TourSection
+        {/* ── Step 4: Log It ── */}
+        <Step
+          number="4"
           flip
           bg="rgba(255,255,255,0.015)"
-          visual={<ScreenshotFrame src="/screenshots/preaching.png" alt="The Preacher live preaching mode" glowColor="blue" />}
-          badge="Live Preaching Mode"
-          badgeColor={{ text: "#F87171", bg: "rgba(239,68,68,0.1)", border: "rgba(239,68,68,0.25)" }}
+          src="/screenshots/sermons.png"
+          alt="The Preacher sermons list"
+          glowColor="gold"
+          label="Your Sermon Library"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Preach with
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Every message,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #EF4444, #FCA5A5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                everything you need.
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#D97706,#F59E0B,#FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>saved forever.</span>
             </>
           }
-          description="Tap Start and live mode activates — a running timer, your full outline, and all your scripture references, optimized for the pulpit. No fumbling through notes. No forgetting your points. Just preach."
+          description="Every sermon you preach — or hear — is logged to your personal library. Browse by series, filter by date, and revisit any message you've ever given. Your entire preaching history in one place."
           items={[
-            "Real-time sermon timer keeps you on track",
-            "Your full outline visible at all times",
-            "Scripture references one tap away",
-            "Save everything the moment you finish",
+            "Every sermon stored with title, scripture, and date",
+            "Organize by series and filter however you need",
+            "See your total count, streak, and series at the top",
+            "Congregation members can log sermons they've heard too",
           ]}
         />
 
-        {/* ── Screen 5: Bible Reader ── */}
-        <TourSection
-          visual={<ScreenshotFrame src="/screenshots/bible.jpeg" alt="The Preacher Bible study screen" glowColor="purple" />}
-          badge="Bible"
-          badgeColor={{ text: "#C4B5FD", bg: "rgba(139,92,246,0.1)", border: "rgba(139,92,246,0.25)" }}
+        {/* ── Step 5: Study the Bible ── */}
+        <Step
+          number="5"
+          src="/screenshots/bible.jpeg"
+          alt="The Preacher Bible study"
+          glowColor="purple"
+          label="Study the Word"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Study the Word,
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Highlight, note,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #8B5CF6, #C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                your way.
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#8B5CF6,#C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>and dig deeper.</span>
             </>
           }
-          description="A full Bible reader across multiple versions. Read, highlight in four colors, write personal notes on any verse, and add scriptures directly to a sermon or service with a single tap."
+          description="The Preacher has a full Bible reader built in across multiple versions. Read, highlight in four colors, write personal notes on any verse, and add scripture straight to a sermon — all without leaving the app."
           items={[
             "Multiple Bible versions available",
-            "Highlight verses in yellow, blue, orange, or pink",
+            "Highlight in yellow, blue, orange, or pink",
             "Write personal notes on any verse",
             "Add any verse directly to a sermon or service",
           ]}
         />
 
-        {/* ── Screen 6: Services ── */}
-        <TourSection
+        {/* ── Step 6: Track Services ── */}
+        <Step
+          number="6"
           flip
           bg="rgba(255,255,255,0.015)"
-          visual={<ServicesScreen />}
-          badge="Services"
-          badgeColor={{ text: "#2DD4BF", bg: "rgba(20,184,166,0.1)", border: "rgba(20,184,166,0.25)" }}
+          src="/screenshots/services.png"
+          alt="The Preacher services timeline"
+          glowColor="teal"
+          label="Track Your Services"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Track every service
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>See your full</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #14B8A6, #67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                you&apos;ve been part of.
-              </span>
+              <span style={{ background: "linear-gradient(135deg,#14B8A6,#67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ministry timeline.</span>
             </>
           }
-          description="Beyond individual sermons, track the full services — Sunday mornings, Wednesday nights, revivals, and more. Group multiple sermons under one service and build a complete record of every gathering you've attended or led."
+          description="Beyond individual sermons, Services gives you a timeline of every gathering you've been part of. Sunday mornings, Wednesday nights, revivals — grouped by church and location, with every sermon attached."
           items={[
-            "Group multiple sermons under one service",
-            "Log the church name, city, and date",
-            "See your full ministry timeline at a glance",
-            "Great for both preachers and regular attendees",
+            "Every service logged with church name and location",
+            "See sermons preached at each service",
+            "Timeline view grouped by date and location",
+            "Track your ministry across multiple churches",
+          ]}
+        />
+
+        {/* ── Step 7: Search Everything ── */}
+        <Step
+          number="7"
+          src="/screenshots/search.png"
+          alt="The Preacher search"
+          glowColor="blue"
+          label="Find Anything"
+          headline={
+            <>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Your entire history,</span>
+              <br />
+              <span style={{ background: "linear-gradient(135deg,#3B82F6,#93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>instantly searchable.</span>
+            </>
+          }
+          description="Need to find that sermon about Hebrews from last spring? Or every time you've preached on faith? Search cuts across your sermons, services, scriptures, and notes in seconds — no scrolling required."
+          items={[
+            "Search across sermons, services, and scriptures at once",
+            "Filter by type — Sermons, Services, Favorites, or My Messages",
+            "Search by keyword, scripture reference, or location",
+            "Find any message you've ever preached or heard",
           ]}
         />
 
         {/* ── CTA ── */}
-        <section id="download" className="py-24 px-6 text-center">
+        <section id="download" className="py-24 px-6 text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
-              <span style={{ background: "linear-gradient(135deg, #fff, rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                Ready to get started?
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold uppercase tracking-wide"
+              style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.25)", color: "#F59E0B" }}>
+              Ready to start?
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                Download The Preacher.
               </span>
             </h2>
-            <p className="text-white/50 text-lg mb-10">
-              Download The Preacher and take your ministry to the next level.
-            </p>
+            <p className="text-white/40 text-lg mb-10">For ministers. For congregations. For everyone who loves the Word.</p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <a href="#" className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-black text-base transition-all duration-200 hover:scale-105 active:scale-95"
+              <a href="#" className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-black text-base transition-all hover:scale-105"
                 style={{ background: "white", boxShadow: "0 4px 20px rgba(255,255,255,0.15)" }}>
-                <AppleIcon />
-                Download for iOS
+                <AppleIcon />Download for iOS
               </a>
-              <a href="#" className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-white text-base border border-white/10 bg-white/[0.08] transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-white/[0.12]">
-                <PlayIcon />
-                Download for Android
+              <a href="#" className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-white text-base border border-white/10 bg-white/[0.08] transition-all hover:scale-105 hover:bg-white/[0.12]">
+                <PlayIcon />Download for Android
               </a>
             </div>
           </div>

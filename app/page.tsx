@@ -343,6 +343,15 @@ export default function Home() {
               <p className="text-white/25 text-sm">
                 Coming soon to iOS &amp; Android
               </p>
+
+              {/* Tour link */}
+              <a href="/tour" className="inline-flex items-center gap-2 mt-4 text-sm font-medium transition-colors duration-150"
+                style={{ color: "#F59E0B" }}>
+                See how the app works
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
             </div>
 
             {/* Phone mockup */}

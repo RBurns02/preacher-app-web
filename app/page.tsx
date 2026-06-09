@@ -218,11 +218,8 @@ function Nav() {
       }}>
       {/* Logo */}
       <a href="/" className="flex items-center gap-2.5 group">
-        <div className="w-8 h-8 rounded-xl bg-gold-600/20 flex items-center justify-center">
-          <div className="w-4 h-4 text-gold-500">
-            <MicIcon />
-          </div>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/icon.png" alt="The Preacher" className="w-8 h-8 rounded-xl object-contain" style={{ background: "rgba(255,255,255,0.06)" }} />
         <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 
@@ -661,10 +658,15 @@ export default function Home() {
 
             {/* Links */}
             <div className="flex items-center gap-6">
-              {["Privacy Policy", "Terms of Use", "Support", "Contact"].map((link) => (
-                <a key={link} href="#"
+              {[
+                { label: "Privacy Policy", href: "/privacy" },
+                { label: "Terms of Use", href: "#" },
+                { label: "Support", href: "mailto:support@thepreacherapp.com" },
+                { label: "Contact", href: "mailto:support@thepreacherapp.com" },
+              ].map(({ label, href }) => (
+                <a key={label} href={href}
                   className="text-white/30 hover:text-white/70 text-xs font-medium transition-colors duration-150">
-                  {link}
+                  {label}
                 </a>
               ))}
             </div>

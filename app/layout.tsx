@@ -6,17 +6,23 @@ export const metadata: Metadata = {
   title: "The Preacher — Log Sermons. Study Scripture. Grow.",
   description:
     "The app for ministers and congregations. Log every sermon you preach or hear, study scripture deeper, and grow in your faith.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     title: "The Preacher",
     description: "Log every sermon. Study deeper. Grow together.",
     type: "website",
     url: "https://thepreacherapp.com",
     siteName: "The Preacher",
+    images: [{ url: "/og-image.png", width: 1456, height: 816, alt: "The Preacher" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Preacher",
     description: "Log every sermon. Study deeper. Grow together.",
+    images: ["/og-image.png"],
   },
 };
 

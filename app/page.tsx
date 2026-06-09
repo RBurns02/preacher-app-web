@@ -342,10 +342,15 @@ export default function Home() {
               </p>
 
               {/* Tour link */}
-              <a href="/tour" className="inline-flex items-center gap-2 mt-4 text-sm font-medium transition-colors duration-150"
+              <a href="/tour"
+                className="group inline-flex items-center gap-2.5 mt-6 px-5 py-2.5 rounded-full text-[15px] font-semibold border border-amber-500/40 bg-amber-500/[0.08] animate-glow-pulse hover:bg-amber-500/[0.16] hover:border-amber-500/70 transition-colors duration-200"
                 style={{ color: "#F59E0B" }}>
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 flex-shrink-0">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
                 See how the app works
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1">
                   <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
                 </svg>
               </a>

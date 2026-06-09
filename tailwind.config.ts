@@ -27,6 +27,7 @@ const config: Config = {
       animation: {
         "fade-up": "fadeUp 0.6s ease forwards",
         float: "float 6s ease-in-out infinite",
+        "glow-pulse": "glowPulse 2.5s ease-in-out infinite",
       },
       keyframes: {
         fadeUp: {
@@ -36,6 +37,10 @@ const config: Config = {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
+        },
+        glowPulse: {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(245,158,11,0)" },
+          "50%": { boxShadow: "0 0 22px 6px rgba(245,158,11,0.2)" },
         },
       },
     },

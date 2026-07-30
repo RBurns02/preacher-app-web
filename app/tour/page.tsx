@@ -252,11 +252,11 @@ export default function HowItWorksPage() {
               <span style={{ background: "linear-gradient(135deg,#3B82F6,#93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>before you preach.</span>
             </>
           }
-          description="Before you step behind the pulpit, build your full message in Prepare Mode. Add your title, opening scriptures, and each point of your outline. When you're done — tap Start Message and you're live."
+          description="Before you step behind the pulpit, build your full message in Prepare Mode. Add your title, scriptures, and each point as an ordered stack of content and scripture blocks. When you're ready — tap Start and you're live."
           items={[
-            "Name your message and add opening scriptures",
-            "Build out Opening, Point 1, Point 2, and more",
-            "Insert additional sections anywhere in the outline",
+            "Each outline point is a stack of content and scripture blocks in any order",
+            "Verse text fills in automatically — no manual typing",
+            "Tap-to-edit cards with autosave",
             "Tap 'Start Message' to go live the moment you're ready",
           ]}
         />
@@ -275,12 +275,12 @@ export default function HowItWorksPage() {
               <span style={{ background: "linear-gradient(135deg,#EF4444,#FCA5A5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>in your way.</span>
             </>
           }
-          description="Live mode activates your timer, puts your full outline on screen, and keeps your scripture references one tap away. No fumbling. No forgetting. Just you and the Word."
+          description="Live mode activates your message timer, puts your full outline on screen, and keeps your screen awake. Auto-scroll teleprompter keeps pace with you. Finish and log the service with one tap."
           items={[
-            "Real-time timer keeps you on track",
-            "Your full outline visible the entire time",
-            "Scripture points displayed clearly as you go",
-            "Save everything with one tap when you finish",
+            "Real-time message timer keeps you on track",
+            "Auto-scroll teleprompter — adjustable text size for the pulpit",
+            "Screen stays awake the entire time",
+            "One tap to stop, log the service, and file it into your timeline",
           ]}
         />
 
@@ -323,37 +323,37 @@ export default function HowItWorksPage() {
               <span style={{ background: "linear-gradient(135deg,#8B5CF6,#C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>and dig deeper.</span>
             </>
           }
-          description="The Preacher has a full Bible reader built in across multiple versions. Read, highlight in four colors, write personal notes on any verse, and add scripture straight to a sermon — all without leaving the app."
+          description="Four translations built in: KJV, ASV, ESV, NIV. Tap any KJV word to pull up its original Hebrew or Greek with Strong's Concordance — full definitions, cross-references, and plain-English meaning. Add any verse straight to a sermon."
           items={[
-            "Multiple Bible versions available",
-            "Highlight in yellow, blue, orange, or pink",
-            "Write personal notes on any verse",
-            "Add any verse directly to a sermon or service",
+            "Strong's Concordance for every KJV word — tap to see the original language",
+            "Word Study Notebook keeps studied words with your personal notes",
+            "Highlight in yellow, blue, orange, or pink — write notes on any verse",
+            "Add any verse directly to a sermon outline without leaving the Bible",
           ]}
         />
 
-        {/* ── Step 6: Track Services ── */}
+        {/* ── Step 6: Ministry Timeline ── */}
         <Step
           number="6"
           flip
           bg="rgba(255,255,255,0.015)"
           src="/screenshots/services.png"
-          alt="The Preacher services timeline"
+          alt="The Preacher ministry timeline"
           glowColor="teal"
-          label="Track Your Services"
+          label="Your Ministry Timeline"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>See your full</span>
+              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Your full history,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#14B8A6,#67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ministry timeline.</span>
+              <span style={{ background: "linear-gradient(135deg,#14B8A6,#67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>every service attended.</span>
             </>
           }
-          description="Beyond individual sermons, Services gives you a timeline of every gathering you've been part of. Sunday mornings, Wednesday nights, revivals — grouped by church and location, with every sermon attached."
+          description="The Timeline view in the Sermons tab shows every service you've preached or attended — Sunday mornings, Wednesday nights, revivals — in chronological order. Searchable and filterable."
           items={[
-            "Every service logged with church name and location",
-            "See sermons preached at each service",
-            "Timeline view grouped by date and location",
-            "Track your ministry across multiple churches",
+            "Full ministry history in date order",
+            "Every service with church, location, and sermons attached",
+            "Filter by location, speaker, or date range",
+            "Congregation members can log services they attended too",
           ]}
         />
 
@@ -371,12 +371,12 @@ export default function HowItWorksPage() {
               <span style={{ background: "linear-gradient(135deg,#3B82F6,#93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>instantly searchable.</span>
             </>
           }
-          description="Need to find that sermon about Hebrews from last spring? Or every time you've preached on faith? Search cuts across your sermons, services, scriptures, and notes in seconds — no scrolling required."
+          description="Need to find that sermon on Hebrews from last spring? Or every time you've preached on faith? Global search cuts across your sermons, scriptures, and notes in seconds. Save searches so your filters are always ready."
           items={[
-            "Search across sermons, services, and scriptures at once",
-            "Filter by type — Sermons, Services, Favorites, or My Messages",
-            "Search by keyword, scripture reference, or location",
-            "Find any message you've ever preached or heard",
+            "Search across your entire library by keyword, scripture, or location",
+            "Save searches — your filters stay ready for next time",
+            "Filter by type: sermons you preached, services you attended, favorites",
+            "Find any message, highlight, or note you've ever created",
           ]}
         />
 
@@ -407,7 +407,7 @@ export default function HowItWorksPage() {
 
         {/* ── Footer ── */}
         <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          <p className="text-white/20 text-sm">© 2025 The Preacher. All rights reserved.</p>
+          <p className="text-white/20 text-sm">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
           <div className="flex justify-center gap-6 mt-4">
             <a href="/" className="text-white/30 hover:text-white/60 text-sm transition-colors">Home</a>
             <a href="/#features" className="text-white/30 hover:text-white/60 text-sm transition-colors">Features</a>

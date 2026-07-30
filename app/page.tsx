@@ -324,10 +324,10 @@ export default function Home() {
               </h1>
 
               <p className="text-white/55 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
-                The Preacher is the ministry companion for pastors, evangelists,
-                and teachers — and for every member of the congregation. Log
-                every sermon you preach or hear, study Scripture deeper, and
-                grow in your faith.
+                The record of a minister&apos;s life in the Word — every sermon
+                written, every place preached, every service attended, kept in
+                one place. For working preachers and the congregations they
+                serve.
               </p>
 
               {/* Download buttons */}
@@ -335,11 +335,6 @@ export default function Home() {
                 <DownloadButton platform="ios" size="lg" />
                 <DownloadButton platform="android" size="lg" />
               </div>
-
-              {/* Social proof */}
-              <p className="text-white/25 text-sm">
-                Coming soon to iOS &amp; Android
-              </p>
 
               {/* Tour link */}
               <a href="/tour"
@@ -409,34 +404,34 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <FeatureCard
                 icon={<MicIcon />}
-                title="Log Every Sermon"
-                description="Record your message title, scripture references, notes, and outline. Build a lifetime library of every word you've preached."
+                title="Log in 30 Seconds"
+                description="Title, location, date — and you're done. Scriptures, outline, notes, tags, and attachments are there when you want them. Batch Log handles conferences and revivals."
                 accent
               />
               <FeatureCard
                 icon={<BookIcon />}
-                title="Deep Bible Study"
-                description="Read in multiple Bible versions. Highlight verses in multiple colors, add personal notes, and search your entire annotation history."
+                title="Study Bible + Strong's"
+                description="Four translations: KJV, ASV, ESV, NIV. Tap any KJV word for the original Hebrew or Greek with Strong's Concordance. Add it straight to a sermon."
               />
               <FeatureCard
                 icon={<ZapIcon />}
                 title="Prepare Mode"
-                description="Build your sermon outline before you preach. Organize scriptures, talking points, and illustrations — all in one place."
+                description="Pulpit-ready view with a message timer, auto-scroll teleprompter, and screen-stays-awake. Finish preaching and log the service with one tap."
               />
               <FeatureCard
                 icon={<MapPinIcon />}
-                title="Track Locations"
-                description="See every city and church you've preached in on an interactive map. Watch your ministry territory grow over time."
+                title="Library & Timeline"
+                description="Two ways to browse your sermons. Library shows one card per message. Timeline shows your full ministry history in date order, searchable and filterable."
               />
               <FeatureCard
                 icon={<CloudIcon />}
-                title="Syncs Everywhere"
-                description="Your sermons and notes are securely backed up to the cloud and sync instantly across all your devices."
+                title="Analytics & Reports"
+                description="Top scriptures, top locations, charts, a Scripture Coverage report, an Annual Report, and a Ministry Report PDF you can export and share."
               />
               <FeatureCard
                 icon={<HighlightIcon />}
-                title="Works Offline"
-                description="Full access to your Bible, sermons, and notes even without an internet connection. Ministry doesn't pause for bad signal."
+                title="Offline-First"
+                description="Everything saves to your phone first. Full access with no signal. Syncs automatically when you're back online. Deleted items go to a Recycle Bin for 30 days."
               />
             </div>
           </div>
@@ -467,16 +462,17 @@ export default function Home() {
                 <span className="text-gold-gradient">preserved forever.</span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
-                Log the full details of every sermon you preach — title,
-                scripture, structured outline, location, congregation size, and
-                personal notes. Your entire preaching history in one place.
+                Log a sermon in about 30 seconds — title, location, date.
+                Everything else is optional: scriptures, outline, notes, tags,
+                photos, audio. Location autocomplete pulls from past services so
+                you&apos;re not retyping the same church every week.
               </p>
               <ul className="flex flex-col gap-3 text-left">
                 {[
-                  "Structured outline builder with multiple points",
-                  "Scripture references linked to the built-in Bible reader",
-                  "Track where and when you preached each message",
-                  "Quick Log mode for fast on-the-go entries",
+                  "Library view: one card per sermon, tracks every time and place it was preached",
+                  "Timeline view: full ministry history in date order, searchable and filterable",
+                  "Batch Log for conferences and revivals — per-night entries with speaker and notes",
+                  '"I Attended" flow for services where someone else preached',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -521,16 +517,17 @@ export default function Home() {
                 </span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
-                A full Bible reader with multiple versions — with
-                multi-color highlighting, personal verse notes, and a searchable
-                annotation library that travels with you everywhere.
+                Four translations in one reader — KJV, ASV, ESV, NIV. Tap any
+                KJV word to see the original Hebrew or Greek with Strong&apos;s
+                Concordance: definitions, cross-references, and a plain-English
+                meaning for every word. Add it straight to a sermon outline.
               </p>
               <ul className="flex flex-col gap-3 text-left">
                 {[
-                  "Highlight in yellow, blue, orange, or pink",
-                  "Write personal notes on any verse",
-                  "Search all your highlights and notes instantly",
-                  "Tap a scripture in a sermon to jump straight to it",
+                  "Strong's Concordance — original Hebrew/Greek for every KJV word",
+                  "Word Study Notebook keeps studied words with your personal notes",
+                  "Highlight verses, write notes, jump to any exact verse",
+                  "Add any verse directly to a sermon outline from the reader",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -575,18 +572,18 @@ export default function Home() {
                 </span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
-                You don&apos;t have to be behind the pulpit to grow. The Preacher
-                gives congregation members the same powerful tools — log every
-                sermon you hear, take notes in real time, highlight scripture
-                that speaks to you, and build a personal record of every message
-                that moves you.
+                You don&apos;t have to be behind the pulpit to use The Preacher.
+                Congregation members get the same tools — log the services you
+                attend, use the &ldquo;I Attended&rdquo; flow so it goes into
+                your timeline, highlight scripture, and build a personal record
+                of every message that moved you.
               </p>
               <ul className="flex flex-col gap-3 text-left">
                 {[
-                  "Log any sermon you hear — not just ones you preach",
-                  "Take real-time notes while the message is being delivered",
-                  "Highlight scriptures from the message in your Bible",
-                  "Build a personal library of every word that impacted you",
+                  '"I Attended" flow — log any service you sit in on, not just ones you preach',
+                  "Notes, scripture highlights, and tags — all the same tools ministers use",
+                  "Your full attendance history in the Timeline view",
+                  "Study the same Bible with Strong’s Concordance built in",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -639,7 +636,7 @@ export default function Home() {
                 <span className="text-gold-gradient">your ministry today.</span>
               </h2>
               <p className="text-white/45 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
-                Free to download. Every sermon you preach deserves to be remembered.
+                Available on iOS and Android. Every sermon you preach deserves to be remembered.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
@@ -655,9 +652,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-xl bg-gold-600/20 flex items-center justify-center">
-                <div className="w-3.5 h-3.5 text-gold-500"><MicIcon /></div>
-              </div>
+              <div className="w-8 h-8 rounded-xl flex-shrink-0" style={{ backgroundImage: "url('/icon.png')", backgroundSize: "580%", backgroundPosition: "49% 49%", backgroundRepeat: "no-repeat" }} />
               <span className="text-white/60 font-semibold text-sm">The Preacher</span>
             </div>
 

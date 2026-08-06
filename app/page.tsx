@@ -660,8 +660,8 @@ export default function Home() {
             <div className="flex items-center gap-6">
               {[
                 { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Use", href: "#" },
-                { label: "Support", href: "mailto:thepreacherapp@gmail.com" },
+                { label: "Terms of Use", href: "/terms" },
+                { label: "Support", href: "/support" },
                 { label: "Contact", href: "mailto:thepreacherapp@gmail.com" },
               ].map(({ label, href }) => (
                 <a key={label} href={href}

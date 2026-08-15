@@ -312,7 +312,7 @@ export default function HowItWorksPage() {
         {/* ── Step 5: Study the Bible ── */}
         <Step
           number="5"
-          src="/screenshots/bible.jpeg"
+          src="/screenshots/bible.png"
           alt="The Preacher Bible study"
           glowColor="purple"
           label="Study the Word"

@@ -23,7 +23,7 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="text-4xl font-black text-white mb-2">Privacy Policy</h1>
         <p className="text-white/40 text-sm mb-1">Effective Date: June 9, 2026</p>
-        <p className="text-white/40 text-sm mb-12">Last Updated: June 9, 2026</p>
+        <p className="text-white/40 text-sm mb-12">Last Updated: August 13, 2026</p>
 
         <div className="flex flex-col gap-10" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.8 }}>
 
@@ -45,14 +45,16 @@ export default function PrivacyPage() {
             <BulletList items={[
               "Account Information — Your email address and password when you create an account",
               "Sermon & Ministry Records — Sermon titles, dates, locations, scripture references, and notes you log",
-              "Bible Study Data — Highlights, annotations, and notes you add while reading",
-              "Prayer & Message Preparation Notes — Content you create in the message preparation feature",
+              "Bible Study Data — Highlights, annotations, verse notes, and word studies you add while reading",
+              "Message Preparation Notes — Content you create in the message preparation feature",
+              "Photos You Attach — Images you choose to attach to a sermon or service",
             ]} />
 
             <SubHeading>Information Collected Automatically</SubHeading>
             <BulletList items={[
-              "Location Data — When you log a sermon, the App may record the location where it was preached to display on your preaching history map. Location is only recorded when you voluntarily log an entry.",
-              "Photos — When you use the Scan Notes feature, the App accesses your camera or photo library to perform text recognition (OCR). Photos are processed on-device and are not uploaded to our servers.",
+              "Location Names — When you log a sermon, the App records the location name you enter to display on your preaching history. The App never reads your device's GPS; only the text you type is stored.",
+              "Scanned Notes — The Scan Notes feature accesses your camera or photo library to perform text recognition (OCR). This processing happens entirely on your device.",
+              "Usage & Diagnostics — Anonymous app-usage statistics (which features are used, via Firebase Analytics) and crash reports (via Firebase Crashlytics). This data is used only to fix bugs and improve the App, and is not used for advertising.",
               "App Preferences — Theme settings, font choices, accent color, and onboarding state are stored locally on your device.",
             ]} />
 
@@ -60,6 +62,7 @@ export default function PrivacyPage() {
             <BulletList items={[
               "We do not collect advertising identifiers",
               "We do not track you across other apps or websites",
+              "We do not read your device's GPS location",
               "We do not sell your data to third parties",
             ]} />
           </Section>
@@ -69,9 +72,9 @@ export default function PrivacyPage() {
             <BulletList items={[
               "Create and manage your account",
               "Sync your ministry data across your devices",
-              "Display your preaching history on the map feature",
+              "Display your preaching history and locations",
               "Restore your data if you switch devices or reinstall the App",
-              "Improve App performance and fix bugs",
+              "Improve App performance, understand which features are used, and fix bugs",
             ]} />
           </Section>
 
@@ -79,7 +82,7 @@ export default function PrivacyPage() {
             <p>Your data is stored in two places:</p>
             <BulletList items={[
               "Locally on your device via SQLite — your primary data source, available offline",
-              "Remotely via Google Firebase (Firestore) — encrypted cloud storage used to sync your data across devices",
+              "Remotely via Google Firebase (Cloud Firestore and Firebase Storage) — encrypted cloud storage used to sync your data and photo attachments across devices",
             ]} />
             <p className="mt-3">
               We use industry-standard security measures including encrypted data transmission
@@ -91,14 +94,17 @@ export default function PrivacyPage() {
 
           <Section title="5. Third-Party Services">
             <p>
-              The App uses the following third-party services, each governed by their own
-              privacy policies:
+              The App uses the following Google services, each governed by Google&apos;s privacy
+              policy (firebase.google.com/support/privacy):
             </p>
             <BulletList items={[
-              "Google Firebase (Authentication & Firestore) — firebase.google.com/support/privacy",
+              "Firebase Authentication — account sign-in and email verification",
+              "Cloud Firestore & Firebase Storage — encrypted cloud sync of your ministry data and photo attachments",
+              "Firebase Analytics & Crashlytics — anonymous usage statistics and crash reports, used only to improve stability and understand which features are used",
+              "Google Places — suggests location names as you type when logging a service; only the text you type is sent",
             ]} />
             <p className="mt-3">
-              We do not use any third-party advertising networks, analytics SDKs, or data brokers.
+              We do not use any third-party advertising networks or data brokers, and we never sell your data.
             </p>
           </Section>
 
@@ -115,8 +121,8 @@ export default function PrivacyPage() {
             <BulletList items={[
               "Access — Request a copy of the personal data we hold about you",
               "Correction — Update or correct your information within the App",
-              "Deletion — Delete your account and all associated data by contacting us at the email below",
-              "Portability — Request an export of your data",
+              "Deletion — Delete your account and all associated data directly in the App (Settings → Account → Delete Account), or by contacting us at the email below",
+              "Portability — Request an export of your data (the App also includes a built-in backup export)",
             ]} />
             <p className="mt-3">
               To exercise any of these rights, contact us at{" "}
@@ -178,11 +184,11 @@ export default function PrivacyPage() {
 
       {/* Footer */}
       <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <p className="text-white/20 text-sm">© 2025 The Preacher. All rights reserved.</p>
+        <p className="text-white/20 text-sm">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
         <div className="flex justify-center gap-6 mt-4">
           <a href="/" className="text-white/30 hover:text-white/60 text-sm transition-colors">Home</a>
-          <a href="/#features" className="text-white/30 hover:text-white/60 text-sm transition-colors">Features</a>
-          <a href="/tour" className="text-white/30 hover:text-white/60 text-sm transition-colors">How It Works</a>
+          <a href="/terms" className="text-white/30 hover:text-white/60 text-sm transition-colors">Terms of Use</a>
+          <a href="/support" className="text-white/30 hover:text-white/60 text-sm transition-colors">Support</a>
         </div>
       </footer>
     </main>

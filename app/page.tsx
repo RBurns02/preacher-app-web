@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
-/* ─── Icons (inline SVG to avoid dependencies) ─────────────────────────── */
+/* ─── Icons ─────────────────────────────────────────────────────────────── */
 const MicIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
     <path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v6a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm-1 15.93V21H9v2h6v-2h-2v-2.07A8 8 0 0 0 20 11h-2a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.93z" />
@@ -52,178 +52,169 @@ const PlayIcon = () => (
   </svg>
 );
 
-/* ─── Phone Frame ───────────────────────────────────────────────────────── */
-function PhoneFrame({
-  src,
-  alt,
-  width = 260,
-  height = 530,
-  float = false,
-  glowColor = "gold",
-}: {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  float?: boolean;
-  glowColor?: "gold" | "purple" | "teal";
+/* ─── Scroll progress bar ────────────────────────────────────────────────── */
+function ScrollProgress() {
+  const barRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handler = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const pct = (scrollTop / (scrollHeight - clientHeight)) * 100;
+      if (barRef.current) barRef.current.style.width = `${pct}%`;
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+  return (
+    <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]" style={{ background: "rgba(255,255,255,0.05)" }}>
+      <div ref={barRef} className="h-full" style={{ width: "0%", background: "linear-gradient(90deg, #D97706, #F59E0B, #FDE68A)", transition: "width 0.05s linear" }} />
+    </div>
+  );
+}
+
+/* ─── useInView ──────────────────────────────────────────────────────────── */
+function useInView(threshold = 0.12) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
+/* ─── FadeUp ─────────────────────────────────────────────────────────────── */
+function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const { ref, inView } = useInView();
+  return (
+    <div ref={ref} className={className} style={{
+      opacity: inView ? 1 : 0,
+      transform: inView ? "translateY(0)" : "translateY(28px)",
+      transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+    }}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── SlideIn ────────────────────────────────────────────────────────────── */
+function SlideIn({ children, from = "left", delay = 0, className = "" }: { children: React.ReactNode; from?: "left" | "right"; delay?: number; className?: string }) {
+  const { ref, inView } = useInView(0.08);
+  return (
+    <div ref={ref} className={className} style={{
+      opacity: inView ? 1 : 0,
+      transform: inView ? "translateX(0)" : `translateX(${from === "left" ? "-52px" : "52px"})`,
+      transition: `opacity 0.75s ease ${delay}ms, transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms`,
+    }}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── ScaleUp ────────────────────────────────────────────────────────────── */
+function ScaleUp({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const { ref, inView } = useInView(0.15);
+  return (
+    <div ref={ref} className={className} style={{
+      opacity: inView ? 1 : 0,
+      transform: inView ? "scale(1) translateY(0)" : "scale(0.93) translateY(24px)",
+      transition: `opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.2, 0.64, 1)`,
+    }}>
+      {children}
+    </div>
+  );
+}
+
+/* ─── Phone Frame ────────────────────────────────────────────────────────── */
+function PhoneFrame({ src, alt, width = 260, height = 530, float = false, glowColor = "gold" }: {
+  src: string; alt: string; width?: number; height?: number; float?: boolean; glowColor?: "gold" | "purple" | "teal";
 }) {
-  const glowBg =
-    glowColor === "gold"
-      ? "rgba(217,119,6,0.2)"
-      : glowColor === "purple"
-      ? "rgba(139,92,246,0.15)"
-      : "rgba(20,184,166,0.15)";
-  const borderColor =
-    glowColor === "gold"
-      ? "rgba(217,119,6,0.2)"
-      : glowColor === "teal"
-      ? "rgba(20,184,166,0.2)"
-      : "rgba(255,255,255,0.07)";
+  const glowBg = glowColor === "gold" ? "rgba(217,119,6,0.2)" : glowColor === "purple" ? "rgba(139,92,246,0.15)" : "rgba(20,184,166,0.15)";
+  const borderColor = glowColor === "gold" ? "rgba(217,119,6,0.2)" : glowColor === "teal" ? "rgba(20,184,166,0.2)" : "rgba(255,255,255,0.07)";
   return (
     <div className={`relative${float ? " animate-float" : ""}`}>
-      <div
-        className="absolute inset-0 blur-3xl scale-110"
-        style={{ borderRadius: 44, background: glowBg }}
-      />
-      <div
-        className="relative overflow-hidden"
-        style={{
-          width,
-          height,
-          borderRadius: 44,
-          background: "#0e0e1c",
-          boxShadow: `0 0 0 1px ${borderColor}, 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)`,
-        }}
-      >
+      <div className="absolute inset-0 blur-3xl scale-110" style={{ borderRadius: 44, background: glowBg }} />
+      <div className="relative overflow-hidden" style={{
+        width, height, borderRadius: 44, background: "#0e0e1c",
+        boxShadow: `0 0 0 1px ${borderColor}, 0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)`,
+      }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%)",
-          }}
-        />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%)" }} />
       </div>
     </div>
   );
 }
 
-/* ─── Phone Mockup (hero) ───────────────────────────────────────────────── */
+/* ─── Phone Mockup (hero) ────────────────────────────────────────────────── */
 function PhoneMockup() {
-  return (
-    <PhoneFrame
-      src="/screenshots/home.png"
-      alt="The Preacher home screen showing sermon dashboard"
-      float
-    />
-  );
+  return <PhoneFrame src="/screenshots/home.png" alt="The Preacher home screen showing sermon dashboard" float />;
 }
 
-/* ─── Feature Card ──────────────────────────────────────────────────────── */
-function FeatureCard({
-  icon,
-  title,
-  description,
-  accent = false,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  accent?: boolean;
-}) {
+/* ─── Feature Card ───────────────────────────────────────────────────────── */
+function FeatureCard({ icon, title, description, accent = false }: { icon: React.ReactNode; title: string; description: string; accent?: boolean }) {
   return (
-    <div
-      className={`relative rounded-3xl p-6 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1 group ${
-        accent ? "card-gold-border" : "card-border"
-      }`}
+    <div className={`relative rounded-3xl p-6 flex flex-col gap-4 h-full transition-all duration-300 hover:-translate-y-1 group ${accent ? "card-gold-border" : "card-border"}`}
       style={{
-        background: accent
-          ? "linear-gradient(135deg, rgba(217,119,6,0.08), rgba(217,119,6,0.02))"
-          : "rgba(255,255,255,0.025)",
-        boxShadow: accent
-          ? "0 0 40px rgba(217,119,6,0.1), 0 4px 24px rgba(0,0,0,0.4)"
-          : "0 4px 24px rgba(0,0,0,0.3)",
-      }}
-    >
-      <div
-        className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110 ${
-          accent ? "bg-gold-600/20" : "bg-white/[0.06]"
-        }`}
-      >
-        <div className={`w-6 h-6 ${accent ? "text-gold-500" : "text-white/70"}`}>
-          {icon}
-        </div>
+        background: accent ? "linear-gradient(135deg, rgba(217,119,6,0.08), rgba(217,119,6,0.02))" : "rgba(255,255,255,0.025)",
+        boxShadow: accent ? "0 0 40px rgba(217,119,6,0.1), 0 4px 24px rgba(0,0,0,0.4)" : "0 4px 24px rgba(0,0,0,0.3)",
+      }}>
+      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110 ${accent ? "bg-gold-600/20" : "bg-white/[0.06]"}`}>
+        <div className={`w-6 h-6 ${accent ? "text-gold-500" : "text-white/70"}`}>{icon}</div>
       </div>
       <div>
-        <h3
-          className={`text-base font-bold mb-1.5 ${
-            accent ? "text-gold-gradient" : "text-white"
-          }`}
-        >
-          {title}
-        </h3>
+        <h3 className={`text-base font-bold mb-1.5 ${accent ? "text-gold-gradient" : "text-white"}`}>{title}</h3>
         <p className="text-white/50 text-sm leading-relaxed">{description}</p>
       </div>
     </div>
   );
 }
 
-/* ─── Download Button ───────────────────────────────────────────────────── */
-function DownloadButton({
-  platform,
-  href,
-  size = "md",
-}: {
-  platform: "ios" | "android";
-  href?: string;
-  size?: "md" | "lg";
-}) {
+/* ─── Download Button ────────────────────────────────────────────────────── */
+function DownloadButton({ platform, href, size = "md" }: { platform: "ios" | "android"; href?: string; size?: "md" | "lg" }) {
   const isLg = size === "lg";
   return (
-    <a
-      href={href ?? "#"}
-      className={`inline-flex items-center gap-3 rounded-2xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95 ${
-        platform === "ios"
-          ? "bg-white text-black hover:bg-white/90"
-          : "bg-white/[0.08] text-white border border-white/10 hover:bg-white/[0.12]"
-      } ${isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"}`}
-      style={
-        platform === "ios"
-          ? { boxShadow: "0 4px 20px rgba(255,255,255,0.15)" }
-          : {}
-      }
-    >
+    <a href={href ?? "#"}
+      className={`inline-flex items-center gap-3 rounded-2xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95 ${platform === "ios" ? "bg-white text-black hover:bg-white/90" : "bg-white/[0.08] text-white border border-white/10 hover:bg-white/[0.12]"} ${isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"}`}
+      style={platform === "ios" ? { boxShadow: "0 4px 20px rgba(255,255,255,0.15)" } : {}}>
       {platform === "ios" ? <AppleIcon /> : <PlayIcon />}
       <span>
-        <div className={`text-[10px] opacity-60 leading-none ${isLg ? "mb-0.5" : ""}`}>
-          {platform === "ios" ? "Download on the" : "Get it on"}
-        </div>
+        <div className={`text-[10px] opacity-60 leading-none ${isLg ? "mb-0.5" : ""}`}>{platform === "ios" ? "Download on the" : "Get it on"}</div>
         <div>{platform === "ios" ? "App Store" : "Google Play"}</div>
       </span>
     </a>
   );
 }
 
-/* ─── Nav ───────────────────────────────────────────────────────────────── */
+/* ─── Checklist item ─────────────────────────────────────────────────────── */
+function CheckItem({ text, color }: { text: string; color: string }) {
+  return (
+    <li className="flex items-start gap-3">
+      <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: `${color}22` }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </span>
+      <span className="text-white/60 text-sm leading-relaxed">{text}</span>
+    </li>
+  );
+}
+
+/* ─── Nav ────────────────────────────────────────────────────────────────── */
 function Nav() {
   const [open, setOpen] = useState(false);
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 h-16"
-      style={{
-        background: "rgba(7,7,15,0.85)",
-        backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-      }}>
-      {/* Logo */}
-      <a href="/" className="flex items-center gap-2.5 group">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+      style={{ background: "rgba(7,7,15,0.85)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      <a href="/" className="flex items-center gap-2.5">
         <div className="w-11 h-11 rounded-xl flex-shrink-0" style={{ backgroundImage: "url('/icon.png')", backgroundSize: "580%", backgroundPosition: "49% 49%", backgroundRepeat: "no-repeat" }} />
         <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
-
-      {/* Desktop links */}
       <div className="hidden md:flex items-center gap-8">
         {[
           { label: "Features", href: "#features" },
@@ -231,53 +222,32 @@ function Nav() {
           { label: "For Ministers", href: "#features" },
           { label: "For Congregations", href: "#congregation" },
         ].map(({ label, href }) => (
-          <a key={label} href={href}
-            className="text-white/50 hover:text-white text-sm font-medium transition-colors duration-150">
-            {label}
-          </a>
+          <a key={label} href={href} className="text-white/50 hover:text-white text-sm font-medium transition-colors duration-150">{label}</a>
         ))}
       </div>
-
-      {/* CTA */}
       <div className="hidden md:flex items-center gap-3">
-        <a href="#download"
-          className="px-4 py-2 rounded-xl text-sm font-semibold text-black transition-all duration-200 hover:scale-105 active:scale-95"
-          style={{
-            background: "linear-gradient(135deg, #D97706, #F59E0B)",
-            boxShadow: "0 4px 20px rgba(217,119,6,0.35)",
-          }}>
+        <a href="#download" className="px-4 py-2 rounded-xl text-sm font-semibold text-black transition-all duration-200 hover:scale-105 active:scale-95"
+          style={{ background: "linear-gradient(135deg, #D97706, #F59E0B)", boxShadow: "0 4px 20px rgba(217,119,6,0.35)" }}>
           Get the App
         </a>
       </div>
-
-      {/* Mobile menu toggle */}
-      <button className="md:hidden text-white/60 hover:text-white"
-        onClick={() => setOpen(!open)}>
+      <button className="md:hidden text-white/60 hover:text-white" onClick={() => setOpen(!open)}>
         <div className="w-6 h-6 flex flex-col justify-center gap-1.5">
           <span className={`block h-0.5 bg-current rounded transition-all duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
           <span className={`block h-0.5 bg-current rounded transition-all duration-200 ${open ? "opacity-0" : ""}`} />
           <span className={`block h-0.5 bg-current rounded transition-all duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
         </div>
       </button>
-
-      {/* Mobile dropdown */}
       {open && (
         <div className="absolute top-16 left-0 right-0 p-4 flex flex-col gap-2 md:hidden"
-          style={{
-            background: "rgba(14,14,28,0.98)",
-            backdropFilter: "blur(20px)",
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
-          }}>
+          style={{ background: "rgba(14,14,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           {[
             { label: "Features", href: "#features" },
             { label: "For Ministers", href: "#features" },
             { label: "For Congregations", href: "#congregation" },
           ].map(({ label, href }) => (
-            <a key={label} href={href}
-              onClick={() => setOpen(false)}
-              className="px-4 py-3 text-white/70 hover:text-white text-sm font-medium rounded-xl hover:bg-white/[0.04] transition-all">
-              {label}
-            </a>
+            <a key={label} href={href} onClick={() => setOpen(false)}
+              className="px-4 py-3 text-white/70 hover:text-white text-sm font-medium rounded-xl hover:bg-white/[0.04] transition-all">{label}</a>
           ))}
           <a href="#download" onClick={() => setOpen(false)}
             className="mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-black text-center"
@@ -290,74 +260,96 @@ function Nav() {
   );
 }
 
-/* ─── Page ──────────────────────────────────────────────────────────────── */
+/* ─── Page ───────────────────────────────────────────────────────────────── */
 export default function Home() {
+  const glowRef = useRef<HTMLDivElement>(null);
+  const glow2Ref = useRef<HTMLDivElement>(null);
+  const phoneWrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = () => {
+      const y = window.scrollY;
+      if (glowRef.current) glowRef.current.style.transform = `translateX(-50%) translateY(${y * 0.3}px)`;
+      if (glow2Ref.current) glow2Ref.current.style.transform = `translateX(-50%) translateY(${y * 0.18}px)`;
+      if (phoneWrapRef.current) phoneWrapRef.current.style.transform = `translateY(${y * -0.07}px)`;
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  const features = [
+    { icon: <MicIcon />, title: "Log in 30 Seconds", description: "Title, location, date — and you're done. Scriptures, outline, notes, tags, and attachments are there when you want them. Batch Log handles conferences and revivals.", accent: true },
+    { icon: <BookIcon />, title: "Study Bible + Strong's", description: "Four translations: KJV, ASV, ESV, NIV. Tap any KJV word for the original Hebrew or Greek with Strong's Concordance. Add it straight to a sermon.", accent: false },
+    { icon: <ZapIcon />, title: "Prepare Mode", description: "Pulpit-ready view with a message timer, auto-scroll teleprompter, and screen-stays-awake. Finish preaching and log the service with one tap.", accent: false },
+    { icon: <MapPinIcon />, title: "Library & Timeline", description: "Two ways to browse your sermons. Library shows one card per message. Timeline shows your full ministry history in date order, searchable and filterable.", accent: false },
+    { icon: <CloudIcon />, title: "Analytics & Reports", description: "Top scriptures, top locations, charts, a Scripture Coverage report, an Annual Report, and a Ministry Report PDF you can export and share.", accent: false },
+    { icon: <HighlightIcon />, title: "Offline-First", description: "Everything saves to your phone first. Full access with no signal. Syncs automatically when you're back online. Deleted items go to a Recycle Bin for 30 days.", accent: false },
+  ];
+
   return (
     <>
+      <ScrollProgress />
       <Nav />
-
       <main className="overflow-hidden">
+
         {/* ── Hero ── */}
         <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-6">
-          {/* Background glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-hero-glow pointer-events-none" />
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-3xl"
+          <div ref={glowRef} className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-hero-glow pointer-events-none" />
+          <div ref={glow2Ref} className="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-3xl pointer-events-none"
             style={{ background: "radial-gradient(circle, rgba(217,119,6,0.12), transparent 70%)" }} />
 
           <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            {/* Text */}
+            {/* Text — cascading load animations */}
             <div className="flex-1 text-center lg:text-left max-w-2xl">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold text-gold-400 tracking-wide uppercase"
-                style={{
-                  background: "rgba(217,119,6,0.1)",
-                  border: "1px solid rgba(217,119,6,0.25)",
-                }}>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold text-gold-400 tracking-wide uppercase animate-fade-up"
+                style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.25)", animationDelay: "0ms" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse" />
                 Built for Ministers
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6 animate-fade-up"
+                style={{ animationDelay: "120ms" }}>
                 <span className="text-silver-gradient">Preach with</span>
                 <br />
                 <span className="text-gold-gradient">Purpose.</span>
               </h1>
 
-              <p className="text-white/55 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
+              <p className="text-white/55 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0 animate-fade-up"
+                style={{ animationDelay: "240ms" }}>
                 The record of a minister&apos;s life in the Word — every sermon
                 written, every place preached, every service attended, kept in
-                one place. For working preachers and the congregations they
-                serve.
+                one place. For working preachers and the congregations they serve.
               </p>
 
-              {/* Download buttons */}
-              <div id="download" className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8">
+              <div id="download" className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8 animate-fade-up"
+                style={{ animationDelay: "360ms" }}>
                 <DownloadButton platform="ios" size="lg" />
                 <DownloadButton platform="android" size="lg" />
               </div>
 
-              {/* Tour link */}
-              <a href="/tour"
-                className="group inline-flex items-center gap-2.5 mt-6 px-5 py-2.5 rounded-full text-[15px] font-semibold border border-amber-500/40 bg-amber-500/[0.08] animate-glow-pulse hover:bg-amber-500/[0.16] hover:border-amber-500/70 transition-colors duration-200"
-                style={{ color: "#F59E0B" }}>
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 flex-shrink-0">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                See how the app works
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1">
-                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                </svg>
-              </a>
+              <div className="animate-fade-up" style={{ animationDelay: "460ms" }}>
+                <a href="/tour"
+                  className="group inline-flex items-center gap-2.5 mt-6 px-5 py-2.5 rounded-full text-[15px] font-semibold border border-amber-500/40 bg-amber-500/[0.08] animate-glow-pulse hover:bg-amber-500/[0.16] hover:border-amber-500/70 transition-colors duration-200"
+                  style={{ color: "#F59E0B" }}>
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 flex-shrink-0">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  See how the app works
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                    className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1">
+                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
-            {/* Phone mockup */}
-            <div className="flex-shrink-0 flex items-center justify-center">
+            {/* Phone — parallax via ref */}
+            <div ref={phoneWrapRef} className="flex-shrink-0 flex items-center justify-center animate-fade-up"
+              style={{ animationDelay: "200ms" }}>
               <PhoneMockup />
             </div>
           </div>
 
-          {/* Scroll hint */}
           <a href="#features" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/20 hover:text-white/50 transition-colors animate-bounce">
             <ChevronDownIcon />
           </a>
@@ -371,13 +363,11 @@ export default function Home() {
               { value: "Multiple", label: "Bible Versions" },
               { value: "Full", label: "Offline Access" },
               { value: "Cloud", label: "Sync & Backup" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="text-3xl md:text-4xl font-black text-gold-gradient mb-1">
-                  {s.value}
-                </div>
+            ].map((s, i) => (
+              <FadeUp key={s.label} delay={i * 80} className="text-center">
+                <div className="text-3xl md:text-4xl font-black text-gold-gradient mb-1">{s.value}</div>
                 <div className="text-white/40 text-sm font-medium">{s.label}</div>
-              </div>
+              </FadeUp>
             ))}
           </div>
         </section>
@@ -385,8 +375,7 @@ export default function Home() {
         {/* ── Features grid ── */}
         <section id="features" className="py-24 px-6">
           <div className="max-w-6xl mx-auto">
-            {/* Section header */}
-            <div className="text-center mb-16">
+            <FadeUp className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-semibold text-white/50 tracking-wide uppercase"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                 Everything You Need
@@ -395,63 +384,27 @@ export default function Home() {
                 Your whole ministry.<br />One app.
               </h2>
               <p className="text-white/40 text-lg max-w-xl mx-auto">
-                From the pulpit to the pew — The Preacher keeps your entire
-                ministry history at your fingertips.
+                From the pulpit to the pew — The Preacher keeps your entire ministry history at your fingertips.
               </p>
-            </div>
+            </FadeUp>
 
-            {/* 3-column grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <FeatureCard
-                icon={<MicIcon />}
-                title="Log in 30 Seconds"
-                description="Title, location, date — and you're done. Scriptures, outline, notes, tags, and attachments are there when you want them. Batch Log handles conferences and revivals."
-                accent
-              />
-              <FeatureCard
-                icon={<BookIcon />}
-                title="Study Bible + Strong's"
-                description="Four translations: KJV, ASV, ESV, NIV. Tap any KJV word for the original Hebrew or Greek with Strong's Concordance. Add it straight to a sermon."
-              />
-              <FeatureCard
-                icon={<ZapIcon />}
-                title="Prepare Mode"
-                description="Pulpit-ready view with a message timer, auto-scroll teleprompter, and screen-stays-awake. Finish preaching and log the service with one tap."
-              />
-              <FeatureCard
-                icon={<MapPinIcon />}
-                title="Library & Timeline"
-                description="Two ways to browse your sermons. Library shows one card per message. Timeline shows your full ministry history in date order, searchable and filterable."
-              />
-              <FeatureCard
-                icon={<CloudIcon />}
-                title="Analytics & Reports"
-                description="Top scriptures, top locations, charts, a Scripture Coverage report, an Annual Report, and a Ministry Report PDF you can export and share."
-              />
-              <FeatureCard
-                icon={<HighlightIcon />}
-                title="Offline-First"
-                description="Everything saves to your phone first. Full access with no signal. Syncs automatically when you're back online. Deleted items go to a Recycle Bin for 30 days."
-              />
+              {features.map((card, i) => (
+                <FadeUp key={card.title} delay={i * 80} className="flex flex-col">
+                  <FeatureCard {...card} />
+                </FadeUp>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ── Feature spotlight: Sermon Log ── */}
+        {/* ── Spotlight: Sermon Log ── */}
         <section className="py-24 px-6">
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            {/* Visual */}
-            <div className="flex-1 flex justify-center lg:justify-start">
-              <PhoneFrame
-                src="/screenshots/preaching.png"
-                alt="The Preacher active sermon mode with timer and outline"
-                width={240}
-                height={490}
-              />
-            </div>
-
-            {/* Text */}
-            <div className="flex-1 text-center lg:text-left">
+            <SlideIn from="left" className="flex-1 flex justify-center lg:justify-start">
+              <PhoneFrame src="/screenshots/preaching.png" alt="The Preacher active sermon mode" width={240} height={490} />
+            </SlideIn>
+            <SlideIn from="right" delay={150} className="flex-1 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold text-gold-400 uppercase tracking-wide"
                 style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.2)" }}>
                 Sermon Log
@@ -473,38 +426,19 @@ export default function Home() {
                   "Timeline view: full ministry history in date order, searchable and filterable",
                   "Batch Log for conferences and revivals — per-night entries with speaker and notes",
                   '"I Attended" flow for services where someone else preached',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: "rgba(217,119,6,0.15)" }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </span>
-                    <span className="text-white/60 text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
+                ].map((item) => <CheckItem key={item} text={item} color="#D97706" />)}
               </ul>
-            </div>
+            </SlideIn>
           </div>
         </section>
 
-        {/* ── Feature spotlight: Bible Study ── */}
+        {/* ── Spotlight: Bible Study ── */}
         <section className="py-24 px-6" style={{ background: "rgba(255,255,255,0.015)" }}>
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row-reverse items-center gap-16">
-            {/* Visual */}
-            <div className="flex-1 flex justify-center lg:justify-end">
-              <PhoneFrame
-                src="/screenshots/bible.jpeg"
-                alt="The Preacher Bible study with verse highlights"
-                width={240}
-                height={490}
-                glowColor="purple"
-              />
-            </div>
-
-            {/* Text */}
-            <div className="flex-1 text-center lg:text-left">
+            <SlideIn from="right" className="flex-1 flex justify-center lg:justify-end">
+              <PhoneFrame src="/screenshots/bible.png" alt="The Preacher Bible study with verse highlights" width={240} height={490} glowColor="purple" />
+            </SlideIn>
+            <SlideIn from="left" delay={150} className="flex-1 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold text-purple-400 uppercase tracking-wide"
                 style={{ background: "rgba(139,92,246,0.1)", border: "1px solid rgba(139,92,246,0.2)" }}>
                 Bible Study
@@ -512,9 +446,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
                 <span className="text-silver-gradient">Study like you</span>
                 <br />
-                <span style={{ background: "linear-gradient(135deg, #8B5CF6, #C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  mean it.
-                </span>
+                <span style={{ background: "linear-gradient(135deg, #8B5CF6, #C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>mean it.</span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
                 Four translations in one reader — KJV, ASV, ESV, NIV. Tap any
@@ -528,38 +460,19 @@ export default function Home() {
                   "Word Study Notebook keeps studied words with your personal notes",
                   "Highlight verses, write notes, jump to any exact verse",
                   "Add any verse directly to a sermon outline from the reader",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: "rgba(139,92,246,0.15)" }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </span>
-                    <span className="text-white/60 text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
+                ].map((item) => <CheckItem key={item} text={item} color="#8B5CF6" />)}
               </ul>
-            </div>
+            </SlideIn>
           </div>
         </section>
 
-        {/* ── Feature spotlight: Congregation ── */}
+        {/* ── Spotlight: Congregation ── */}
         <section id="congregation" className="py-24 px-6">
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            {/* Visual */}
-            <div className="flex-1 flex justify-center lg:justify-start">
-              <PhoneFrame
-                src="/logo.png"
-                alt="The Preacher app"
-                width={240}
-                height={490}
-                glowColor="teal"
-              />
-            </div>
-
-            {/* Text */}
-            <div className="flex-1 text-center lg:text-left">
+            <SlideIn from="left" className="flex-1 flex justify-center lg:justify-start">
+              <PhoneFrame src="/screenshots/services.png" alt="The Preacher ministry timeline" width={240} height={490} glowColor="teal" />
+            </SlideIn>
+            <SlideIn from="right" delay={150} className="flex-1 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold uppercase tracking-wide"
                 style={{ background: "rgba(20,184,166,0.1)", border: "1px solid rgba(20,184,166,0.2)", color: "#2DD4BF" }}>
                 For the Congregation
@@ -567,9 +480,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
                 <span className="text-silver-gradient">Follow every message.</span>
                 <br />
-                <span style={{ background: "linear-gradient(135deg, #14B8A6, #67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  Never forget a word.
-                </span>
+                <span style={{ background: "linear-gradient(135deg, #14B8A6, #67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Never forget a word.</span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
                 You don&apos;t have to be behind the pulpit to use The Preacher.
@@ -583,53 +494,34 @@ export default function Home() {
                   '"I Attended" flow — log any service you sit in on, not just ones you preach',
                   "Notes, scripture highlights, and tags — all the same tools ministers use",
                   "Your full attendance history in the Timeline view",
-                  "Study the same Bible with Strong’s Concordance built in",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: "rgba(20,184,166,0.15)" }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#14B8A6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </span>
-                    <span className="text-white/60 text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
+                  "Study the same Bible with Strong's Concordance built in",
+                ].map((item) => <CheckItem key={item} text={item} color="#14B8A6" />)}
               </ul>
-            </div>
+            </SlideIn>
           </div>
         </section>
 
         {/* ── Quote ── */}
         <section className="py-24 px-6 text-center">
-          <div className="max-w-3xl mx-auto">
+          <ScaleUp className="max-w-3xl mx-auto">
             <div className="text-6xl text-gold-600/30 font-serif leading-none mb-6">&ldquo;</div>
             <p className="text-2xl md:text-3xl font-semibold text-white/80 leading-relaxed mb-6">
-              A minister who records what God gives them never runs out of
-              what to say.
+              A minister who records what God gives them never runs out of what to say.
             </p>
-            <p className="text-white/30 text-sm font-medium uppercase tracking-widest">
-              — The Mission of The Preacher
-            </p>
-          </div>
+            <p className="text-white/30 text-sm font-medium uppercase tracking-widest">— The Mission of The Preacher</p>
+          </ScaleUp>
         </section>
 
         {/* ── Final CTA ── */}
         <section id="download" className="py-24 px-6">
           <div className="max-w-3xl mx-auto text-center">
-            {/* Glow */}
             <div className="absolute left-1/2 -translate-x-1/2 w-[600px] h-64 blur-3xl pointer-events-none"
               style={{ background: "radial-gradient(ellipse, rgba(217,119,6,0.12), transparent 70%)" }} />
-            <div className="relative">
+            <FadeUp className="relative">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl mb-8"
-                style={{
-                  background: "linear-gradient(135deg, rgba(217,119,6,0.3), rgba(217,119,6,0.1))",
-                  border: "1px solid rgba(217,119,6,0.3)",
-                  boxShadow: "0 0 60px rgba(217,119,6,0.2)",
-                }}>
+                style={{ background: "linear-gradient(135deg, rgba(217,119,6,0.3), rgba(217,119,6,0.1))", border: "1px solid rgba(217,119,6,0.3)", boxShadow: "0 0 60px rgba(217,119,6,0.2)" }}>
                 <div className="w-10 h-10 text-gold-500"><MicIcon /></div>
               </div>
-
               <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5">
                 <span className="text-silver-gradient">Start logging</span>
                 <br />
@@ -638,25 +530,21 @@ export default function Home() {
               <p className="text-white/45 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
                 Available on iOS and Android. Every sermon you preach deserves to be remembered.
               </p>
-
               <div className="flex flex-wrap gap-4 justify-center">
                 <DownloadButton platform="ios" size="lg" />
                 <DownloadButton platform="android" size="lg" />
               </div>
-            </div>
+            </FadeUp>
           </div>
         </section>
 
         {/* ── Footer ── */}
         <footer className="py-12 px-6" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Logo */}
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl flex-shrink-0" style={{ backgroundImage: "url('/icon.png')", backgroundSize: "580%", backgroundPosition: "49% 49%", backgroundRepeat: "no-repeat" }} />
               <span className="text-white/60 font-semibold text-sm">The Preacher</span>
             </div>
-
-            {/* Links */}
             <div className="flex items-center gap-6">
               {[
                 { label: "Privacy Policy", href: "/privacy" },
@@ -664,19 +552,13 @@ export default function Home() {
                 { label: "Support", href: "/support" },
                 { label: "Contact", href: "mailto:thepreacherapp@gmail.com" },
               ].map(({ label, href }) => (
-                <a key={label} href={href}
-                  className="text-white/30 hover:text-white/70 text-xs font-medium transition-colors duration-150">
-                  {label}
-                </a>
+                <a key={label} href={href} className="text-white/30 hover:text-white/70 text-xs font-medium transition-colors duration-150">{label}</a>
               ))}
             </div>
-
-            {/* Copyright */}
-            <p className="text-white/20 text-xs">
-              © {new Date().getFullYear()} The Preacher. All rights reserved.
-            </p>
+            <p className="text-white/20 text-xs">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
           </div>
         </footer>
+
       </main>
     </>
   );

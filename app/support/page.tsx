@@ -68,26 +68,30 @@ export default function SupportPage() {
           <Section title="Frequently Asked Questions">
             <Question q="How do I log a sermon?">
               <p>
-                Tap the <strong className="text-white">+</strong> button on the Sermons tab. Fill in the
-                title, date, scripture reference, and any notes. You can log a full message in under
+                Tap the <strong className="text-white">+</strong> button and choose{" "}
+                <strong className="text-white">Log a Sermon</strong>. Fill in the title, date,
+                location, scripture references, and any notes. You can log a full message in under
                 30 seconds and add more detail later.
               </p>
             </Question>
 
-            <Question q="How do I use the Prepare Mode teleprompter?">
+            <Question q="How do I use Prepare Mode?">
               <p>
-                Open a sermon, tap <strong className="text-white">Prepare</strong>, and build your
-                outline using blocks. When you&apos;re ready to preach, tap the play button to launch
-                the auto-scrolling teleprompter. The screen stays awake automatically during your
-                message.
+                Open a sermon and tap <strong className="text-white">Prepare</strong> to build your
+                outline in blocks — content and scripture in any order, arranged with arrows. When
+                it&apos;s time to preach, tap <strong className="text-white">Start Message</strong>:
+                the screen stays awake and a message timer runs. Auto-Scroll lives in the{" "}
+                <strong className="text-white">Customize</strong> button (the tune icon), with a
+                speed slider to set your pace. When you finish, one tap logs the service for you.
               </p>
             </Question>
 
             <Question q="How do I highlight Bible verses?">
               <p>
-                In the Bible tab, tap and hold any verse to select it, then choose a highlight color.
-                Your highlights are saved across sessions and synced to your account. Tap any
-                highlighted verse to view or edit your notes.
+                In the Bible tab, tap any verse to select it, then tap the{" "}
+                <strong className="text-white">Highlight</strong> button and choose a color. Your
+                highlights are saved and synced to your account. Tap a highlighted verse anytime to
+                view or edit its notes.
               </p>
             </Question>
 
@@ -101,26 +105,28 @@ export default function SupportPage() {
 
             <Question q="How do I recover a deleted sermon?">
               <p>
-                Deleted sermons go to the <strong className="text-white">Recycle Bin</strong> in the
-                Library tab. Open it, tap the sermon, and choose Restore. Items in the Recycle Bin
-                are permanently deleted after 30 days.
+                Deleted sermons and services go to the Recycle Bin. Open{" "}
+                <strong className="text-white">Settings → Recycle Bin</strong>, tap the item, and
+                choose <strong className="text-white">Restore</strong>. Items in the Recycle Bin are
+                permanently deleted after 30 days.
               </p>
             </Question>
 
             <Question q="What is the 'I Attended' option?">
               <p>
-                If you heard a sermon rather than preached it, tap{" "}
-                <strong className="text-white">I Attended</strong> when logging. The entry is saved to
-                your Timeline with a different tag so you can distinguish sermons you preached from
-                ones you attended.
+                If you heard a message rather than preached it, tap{" "}
+                <strong className="text-white">I Attended</strong> when logging. The entry is saved
+                to your Timeline with its own tag — and you can record who preached it — so you can
+                distinguish sermons you preached from ones you attended.
               </p>
             </Question>
 
             <Question q="How do I delete my account?">
               <p>
-                Go to <strong className="text-white">Settings → Account → Delete Account</strong>.
-                This permanently removes all your data from our servers. If you need assistance,
-                email us at{" "}
+                Go to{" "}
+                <strong className="text-white">Settings → Account → Delete Account</strong>. This
+                permanently removes all your data from our servers. If you need assistance, email us
+                at{" "}
                 <a
                   href="mailto:thepreacherapp@gmail.com"
                   className="underline hover:text-white transition-colors"

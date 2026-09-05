@@ -8,19 +8,21 @@ const config: Config = {
         sans: ["Inter", "system-ui", "sans-serif"],
       },
       colors: {
-        bg: "#07070F",
-        surface: "#0E0E1C",
-        "surface-2": "#14142A",
+        paper: "#FAF8F3",
+        ink: "#1C1712",
+        muted: "#6B6257",
         gold: {
           300: "#FDE68A",
           400: "#FBBF24",
           500: "#F59E0B",
           600: "#D97706",
+          700: "#B45309",
+          800: "#92400E",
         },
       },
       backgroundImage: {
         "hero-glow":
-          "radial-gradient(ellipse 70% 40% at 50% 0%, rgba(217,119,6,0.18), transparent 70%)",
+          "radial-gradient(ellipse 70% 40% at 50% 0%, rgba(217,119,6,0.10), transparent 70%)",
         "card-shine":
           "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 60%)",
       },
@@ -40,7 +42,7 @@ const config: Config = {
         },
         glowPulse: {
           "0%, 100%": { boxShadow: "0 0 0 0 rgba(245,158,11,0)" },
-          "50%": { boxShadow: "0 0 22px 6px rgba(245,158,11,0.2)" },
+          "50%": { boxShadow: "0 0 22px 6px rgba(245,158,11,0.18)" },
         },
       },
     },

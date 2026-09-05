@@ -22,19 +22,19 @@ const PlayIcon = () => (
 /* ─── Phone frame ────────────────────────────────────────────────────────── */
 function PhoneFrame({ src, alt, glowColor = "gold" }: { src: string; alt: string; glowColor?: "gold" | "blue" | "purple" | "teal" | "red" }) {
   const glows: Record<string, [string, string]> = {
-    gold:   ["rgba(217,119,6,0.2)",    "rgba(217,119,6,0.25)"],
-    blue:   ["rgba(59,130,246,0.2)",   "rgba(59,130,246,0.25)"],
-    purple: ["rgba(139,92,246,0.15)",  "rgba(139,92,246,0.2)"],
-    teal:   ["rgba(20,184,166,0.15)",  "rgba(20,184,166,0.2)"],
-    red:    ["rgba(239,68,68,0.15)",   "rgba(239,68,68,0.2)"],
+    gold:   ["rgba(217,119,6,0.10)",   "rgba(180,83,9,0.22)"],
+    blue:   ["rgba(59,130,246,0.09)",  "rgba(37,99,235,0.20)"],
+    purple: ["rgba(139,92,246,0.09)",  "rgba(124,58,237,0.20)"],
+    teal:   ["rgba(20,184,166,0.09)",  "rgba(13,148,136,0.22)"],
+    red:    ["rgba(239,68,68,0.08)",   "rgba(220,38,38,0.20)"],
   };
   const [bg, border] = glows[glowColor];
   return (
     <div className="relative flex-shrink-0">
       <div className="absolute inset-0 blur-3xl scale-110" style={{ borderRadius: 44, background: bg }} />
       <div className="relative overflow-hidden" style={{
-        width: 260, height: 530, borderRadius: 44, background: "#08080f",
-        boxShadow: `0 0 0 1px ${border}, 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.08)`,
+        width: 260, height: 530, borderRadius: 44, background: "#17120D",
+        boxShadow: `0 0 0 1px ${border}, 0 30px 70px rgba(28,23,18,0.22), inset 0 1px 0 rgba(255,255,255,0.10)`,
       }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
@@ -70,11 +70,11 @@ function Step({
   bg?: string;
 }) {
   const accentColors: Record<string, { text: string; bg: string; border: string; check: string }> = {
-    gold:   { text: "#F59E0B", bg: "rgba(217,119,6,0.12)",   border: "rgba(217,119,6,0.3)",   check: "#D97706" },
-    blue:   { text: "#60A5FA", bg: "rgba(59,130,246,0.12)",  border: "rgba(59,130,246,0.3)",  check: "#3B82F6" },
-    purple: { text: "#C4B5FD", bg: "rgba(139,92,246,0.12)",  border: "rgba(139,92,246,0.3)",  check: "#8B5CF6" },
-    teal:   { text: "#2DD4BF", bg: "rgba(20,184,166,0.12)",  border: "rgba(20,184,166,0.3)",  check: "#14B8A6" },
-    red:    { text: "#FCA5A5", bg: "rgba(239,68,68,0.12)",   border: "rgba(239,68,68,0.3)",   check: "#EF4444" },
+    gold:   { text: "#B45309", bg: "rgba(217,119,6,0.08)",   border: "rgba(180,83,9,0.25)",   check: "#B45309" },
+    blue:   { text: "#1D4ED8", bg: "rgba(59,130,246,0.08)",  border: "rgba(37,99,235,0.25)",  check: "#2563EB" },
+    purple: { text: "#6D28D9", bg: "rgba(139,92,246,0.08)",  border: "rgba(124,58,237,0.25)", check: "#7C3AED" },
+    teal:   { text: "#0F766E", bg: "rgba(20,184,166,0.08)",  border: "rgba(13,148,136,0.25)", check: "#0F766E" },
+    red:    { text: "#B91C1C", bg: "rgba(239,68,68,0.08)",   border: "rgba(220,38,38,0.25)",  check: "#DC2626" },
   };
   const c = accentColors[glowColor];
 
@@ -103,7 +103,7 @@ function Step({
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 leading-tight">
             {headline}
           </h2>
-          <p className="text-white/50 text-lg leading-relaxed mb-8">{description}</p>
+          <p className="text-ink/55 text-lg leading-relaxed mb-8">{description}</p>
 
           <ul className="flex flex-col gap-3 text-left">
             {items.map((item) => (
@@ -114,7 +114,7 @@ function Step({
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
-                <span className="text-white/60 text-sm leading-relaxed">{item}</span>
+                <span className="text-ink/65 text-sm leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
@@ -130,10 +130,10 @@ function Nav() {
   const [open, setOpen] = useState(false);
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 h-16"
-      style={{ background: "rgba(7,7,15,0.85)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+      style={{ background: "rgba(250,248,243,0.85)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(28,23,18,0.07)" }}>
       <a href="/" className="flex items-center gap-2.5">
         <div className="w-11 h-11 rounded-xl flex-shrink-0" style={{ backgroundImage: "url('/icon.png')", backgroundSize: "580%", backgroundPosition: "49% 49%", backgroundRepeat: "no-repeat" }} />
-        <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
+        <span className="text-ink font-bold text-[15px] tracking-tight">The Preacher</span>
       </a>
 
       <div className="hidden md:flex items-center gap-8">
@@ -142,16 +142,16 @@ function Nav() {
           { label: "Features", href: "/#features" },
           { label: "For Congregations", href: "/#congregation" },
         ].map(({ label, href }) => (
-          <a key={label} href={href} className="text-white/50 hover:text-white text-sm font-medium transition-colors">{label}</a>
+          <a key={label} href={href} className="text-ink/55 hover:text-ink text-sm font-medium transition-colors">{label}</a>
         ))}
       </div>
 
-      <a href="#download" className="hidden md:block px-4 py-2 rounded-xl text-sm font-semibold text-black transition-all hover:scale-105"
-        style={{ background: "linear-gradient(135deg, #D97706, #F59E0B)", boxShadow: "0 4px 20px rgba(217,119,6,0.35)" }}>
+      <a href="#download" className="hidden md:block px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all hover:scale-105"
+        style={{ background: "linear-gradient(135deg, #B45309, #D97706)", boxShadow: "0 4px 18px rgba(180,83,9,0.30)" }}>
         Get the App
       </a>
 
-      <button className="md:hidden text-white/60 hover:text-white" onClick={() => setOpen(!open)}>
+      <button className="md:hidden text-ink/60 hover:text-ink" onClick={() => setOpen(!open)}>
         <div className="w-6 h-6 flex flex-col justify-center gap-1.5">
           <span className={`block h-0.5 bg-current rounded transition-all duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
           <span className={`block h-0.5 bg-current rounded transition-all duration-200 ${open ? "opacity-0" : ""}`} />
@@ -161,18 +161,18 @@ function Nav() {
 
       {open && (
         <div className="absolute top-16 left-0 right-0 p-4 flex flex-col gap-2 md:hidden"
-          style={{ background: "rgba(14,14,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+          style={{ background: "rgba(250,248,243,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(28,23,18,0.07)" }}>
           {[
             { label: "← Home", href: "/" },
             { label: "Features", href: "/#features" },
             { label: "For Congregations", href: "/#congregation" },
           ].map(({ label, href }) => (
             <a key={label} href={href} onClick={() => setOpen(false)}
-              className="px-4 py-3 text-white/70 hover:text-white text-sm font-medium rounded-xl hover:bg-white/[0.04] transition-all">{label}</a>
+              className="px-4 py-3 text-ink/70 hover:text-ink text-sm font-medium rounded-xl hover:bg-ink/[0.04] transition-all">{label}</a>
           ))}
           <a href="#download" onClick={() => setOpen(false)}
-            className="mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-black text-center"
-            style={{ background: "linear-gradient(135deg, #D97706, #F59E0B)" }}>
+            className="mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-white text-center"
+            style={{ background: "linear-gradient(135deg, #B45309, #D97706)" }}>
             Get the App
           </a>
         </div>
@@ -186,27 +186,27 @@ export default function HowItWorksPage() {
   return (
     <>
       <Nav />
-      <main className="overflow-hidden" style={{ background: "#07070F" }}>
+      <main className="overflow-hidden">
 
         {/* ── Hero ── */}
         <section className="relative pt-40 pb-16 px-6 text-center">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at top, rgba(217,119,6,0.12), transparent 70%)" }} />
+            style={{ background: "radial-gradient(ellipse at top, rgba(217,119,6,0.09), transparent 70%)" }} />
           <div className="relative z-10 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold uppercase tracking-wide"
-              style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.25)", color: "#F59E0B" }}>
+              style={{ background: "rgba(217,119,6,0.08)", border: "1px solid rgba(180,83,9,0.22)", color: "#B45309" }}>
               How It Works
             </div>
             <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-[1.05] mb-6">
-              <span style={{ background: "linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ background: "linear-gradient(135deg, #1C1712, #4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 From download
               </span>
               <br />
-              <span style={{ background: "linear-gradient(135deg, #D97706, #F59E0B, #FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ background: "linear-gradient(135deg, #92400E, #D97706, #F59E0B)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 to the pulpit.
               </span>
             </h1>
-            <p className="text-white/50 text-xl leading-relaxed max-w-xl mx-auto">
+            <p className="text-ink/55 text-xl leading-relaxed max-w-xl mx-auto">
               Seven steps that take you from opening the app for the first time
               to preaching with everything you need — and logging every word after.
             </p>
@@ -222,9 +222,9 @@ export default function HowItWorksPage() {
           label="Open the App"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Everything you need,</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Everything you need,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#D97706,#F59E0B,#FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>right up front.</span>
+              <span style={{ background: "linear-gradient(135deg,#92400E,#D97706,#F59E0B)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>right up front.</span>
             </>
           }
           description="The moment you open The Preacher, your dashboard shows you everything at a glance — your sermon count, streak, verse of the day, recent sermons, and quick actions. Whether you're a minister or a congregation member, your ministry starts here."
@@ -240,16 +240,16 @@ export default function HowItWorksPage() {
         <Step
           number="2"
           flip
-          bg="rgba(255,255,255,0.015)"
+          bg="#FFFFFF"
           src="/screenshots/prepare.png"
           alt="The Preacher prepare mode"
           glowColor="blue"
           label="Build Your Message"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Write your outline</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Write your outline</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#3B82F6,#93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>before you preach.</span>
+              <span style={{ background: "linear-gradient(135deg,#1D4ED8,#3B82F6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>before you preach.</span>
             </>
           }
           description="Before you step behind the pulpit, build your full message in Prepare Mode. Add your title, scriptures, and each point as an ordered stack of content and scripture blocks. When you're ready — tap Start and you're live."
@@ -270,9 +270,9 @@ export default function HowItWorksPage() {
           label="Go Live"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Preach with nothing</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Preach with nothing</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#EF4444,#FCA5A5)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>in your way.</span>
+              <span style={{ background: "linear-gradient(135deg,#B91C1C,#EF4444)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>in your way.</span>
             </>
           }
           description="Live mode activates your message timer, puts your full outline on screen, and keeps your screen awake. Auto-scroll teleprompter keeps pace with you. Finish and log the service with one tap."
@@ -288,16 +288,16 @@ export default function HowItWorksPage() {
         <Step
           number="4"
           flip
-          bg="rgba(255,255,255,0.015)"
+          bg="#FFFFFF"
           src="/screenshots/sermons.png"
           alt="The Preacher sermons list"
           glowColor="gold"
           label="Your Sermon Library"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Every message,</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Every message,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#D97706,#F59E0B,#FDE68A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>saved forever.</span>
+              <span style={{ background: "linear-gradient(135deg,#92400E,#D97706,#F59E0B)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>saved forever.</span>
             </>
           }
           description="Every sermon you preach — or hear — is logged to your personal library. Browse by series, filter by date, and revisit any message you've ever given. Your entire preaching history in one place."
@@ -318,9 +318,9 @@ export default function HowItWorksPage() {
           label="Study the Word"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Highlight, note,</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Highlight, note,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#8B5CF6,#C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>and dig deeper.</span>
+              <span style={{ background: "linear-gradient(135deg,#6D28D9,#8B5CF6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>and dig deeper.</span>
             </>
           }
           description="KJV and ASV built in, fully offline. Tap any KJV word to pull up its original Hebrew or Greek with Strong's Concordance — full definitions, cross-references, and plain-English meaning. Add any verse straight to a sermon."
@@ -336,16 +336,16 @@ export default function HowItWorksPage() {
         <Step
           number="6"
           flip
-          bg="rgba(255,255,255,0.015)"
+          bg="#FFFFFF"
           src="/screenshots/services.png"
           alt="The Preacher ministry timeline"
           glowColor="teal"
           label="Your Ministry Timeline"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Your full history,</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Your full history,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#14B8A6,#67E8F9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>every service attended.</span>
+              <span style={{ background: "linear-gradient(135deg,#0F766E,#14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>every service attended.</span>
             </>
           }
           description="The Timeline view in the Sermons tab shows every service you've preached or attended — Sunday mornings, Wednesday nights, revivals — in chronological order. Searchable and filterable."
@@ -366,9 +366,9 @@ export default function HowItWorksPage() {
           label="Find Anything"
           headline={
             <>
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Your entire history,</span>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Your entire history,</span>
               <br />
-              <span style={{ background: "linear-gradient(135deg,#3B82F6,#93C5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>instantly searchable.</span>
+              <span style={{ background: "linear-gradient(135deg,#1D4ED8,#3B82F6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>instantly searchable.</span>
             </>
           }
           description="Need to find that sermon on Hebrews from last spring? Or every time you've preached on faith? Global search cuts across your sermons, scriptures, and notes in seconds. Save searches so your filters are always ready."
@@ -381,39 +381,39 @@ export default function HowItWorksPage() {
         />
 
         {/* ── CTA ── */}
-        <section id="download" className="py-24 px-6 text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <section id="download" className="py-24 px-6 text-center" style={{ borderTop: "1px solid rgba(28,23,18,0.06)", background: "#FFFFFF" }}>
           <div className="max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold uppercase tracking-wide"
-              style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.25)", color: "#F59E0B" }}>
+              style={{ background: "rgba(217,119,6,0.08)", border: "1px solid rgba(180,83,9,0.22)", color: "#B45309" }}>
               Ready to start?
             </div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">
-              <span style={{ background: "linear-gradient(135deg,#fff,rgba(255,255,255,0.75))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ background: "linear-gradient(135deg,#1C1712,#4A3F33)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 Download The Preacher.
               </span>
             </h2>
-            <p className="text-white/40 text-lg mb-10">For ministers. For congregations. For everyone who loves the Word.</p>
+            <p className="text-ink/50 text-lg mb-10">For ministers. For congregations. For everyone who loves the Word.</p>
             <div className="flex flex-wrap gap-3 justify-center mb-4">
               <a href="https://apps.apple.com/us/app/the-preacher/id6775250750" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-black text-base transition-all hover:scale-105"
-                style={{ background: "white", boxShadow: "0 4px 20px rgba(255,255,255,0.15)" }}>
+                className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-white text-base transition-all hover:scale-105"
+                style={{ background: "#1C1712", boxShadow: "0 10px 30px rgba(28,23,18,0.25)" }}>
                 <AppleIcon />Download for iOS
               </a>
-              <div className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-white/30 text-base border border-white/[0.07] bg-white/[0.03] cursor-default select-none">
+              <div className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-ink/30 text-base border border-ink/[0.08] bg-white/60 cursor-default select-none">
                 <PlayIcon />Coming soon to Google Play
               </div>
             </div>
-            <p className="text-white/25 text-xs">3-day free trial, then $4.99/mo or $44.99/yr</p>
+            <p className="text-ink/35 text-xs">3-day free trial, then $4.99/mo or $44.99/yr</p>
           </div>
         </section>
 
         {/* ── Footer ── */}
-        <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          <p className="text-white/20 text-sm">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
+        <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(28,23,18,0.07)" }}>
+          <p className="text-ink/30 text-sm">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
           <div className="flex justify-center gap-6 mt-4">
-            <a href="/" className="text-white/30 hover:text-white/60 text-sm transition-colors">Home</a>
-            <a href="/#features" className="text-white/30 hover:text-white/60 text-sm transition-colors">Features</a>
-            <a href="/#congregation" className="text-white/30 hover:text-white/60 text-sm transition-colors">For Congregations</a>
+            <a href="/" className="text-ink/40 hover:text-ink/80 text-sm transition-colors">Home</a>
+            <a href="/#features" className="text-ink/40 hover:text-ink/80 text-sm transition-colors">Features</a>
+            <a href="/#congregation" className="text-ink/40 hover:text-ink/80 text-sm transition-colors">For Congregations</a>
           </div>
         </footer>
 

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="text-xl font-bold text-white mb-4">{title}</h2>
+      <h2 className="text-xl font-bold text-ink mb-4">{title}</h2>
       {children}
     </div>
   );
@@ -16,11 +16,11 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function TermsPage() {
   return (
-    <main style={{ background: "#07070F", minHeight: "100vh" }}>
+    <main style={{ background: "#FAF8F3", minHeight: "100vh" }}>
       {/* Nav */}
       <nav
         className="flex items-center justify-between px-6 h-16 border-b"
-        style={{ borderColor: "rgba(255,255,255,0.06)", background: "rgba(7,7,15,0.95)" }}
+        style={{ borderColor: "rgba(28,23,18,0.07)", background: "rgba(250,248,243,0.95)" }}
       >
         <a href="/" className="flex items-center gap-2.5">
           <div
@@ -32,20 +32,20 @@ export default function TermsPage() {
               backgroundRepeat: "no-repeat",
             }}
           />
-          <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
+          <span className="text-ink font-bold text-[15px] tracking-tight">The Preacher</span>
         </a>
-        <a href="/" className="text-white/50 hover:text-white text-sm font-medium transition-colors">
+        <a href="/" className="text-ink/55 hover:text-ink text-sm font-medium transition-colors">
           ← Back to Home
         </a>
       </nav>
 
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 py-20">
-        <h1 className="text-4xl font-black text-white mb-2">Terms of Use</h1>
-        <p className="text-white/40 text-sm mb-1">Effective Date: June 9, 2026</p>
-        <p className="text-white/40 text-sm mb-12">Last Updated: June 9, 2026</p>
+        <h1 className="text-4xl font-black text-ink mb-2">Terms of Use</h1>
+        <p className="text-ink/45 text-sm mb-1">Effective Date: June 9, 2026</p>
+        <p className="text-ink/45 text-sm mb-12">Last Updated: June 9, 2026</p>
 
-        <div className="flex flex-col gap-10" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.8 }}>
+        <div className="flex flex-col gap-10" style={{ color: "rgba(28,23,18,0.68)", lineHeight: 1.8 }}>
 
           <Section title="1. Acceptance of Terms">
             <p>
@@ -71,8 +71,8 @@ export default function TermsPage() {
               and for all activity that occurs under your account. Notify us immediately at{" "}
               <a
                 href="mailto:thepreacherapp@gmail.com"
-                className="underline hover:text-white transition-colors"
-                style={{ color: "rgba(251,191,36,0.85)" }}
+                className="underline hover:text-ink transition-colors"
+                style={{ color: "#B45309" }}
               >
                 thepreacherapp@gmail.com
               </a>{" "}
@@ -122,8 +122,8 @@ export default function TermsPage() {
               or by contacting us at{" "}
               <a
                 href="mailto:thepreacherapp@gmail.com"
-                className="underline hover:text-white transition-colors"
-                style={{ color: "rgba(251,191,36,0.85)" }}
+                className="underline hover:text-ink transition-colors"
+                style={{ color: "#B45309" }}
               >
                 thepreacherapp@gmail.com
               </a>
@@ -151,8 +151,8 @@ export default function TermsPage() {
               Questions about these Terms? Email us at{" "}
               <a
                 href="mailto:thepreacherapp@gmail.com"
-                className="underline hover:text-white transition-colors"
-                style={{ color: "rgba(251,191,36,0.85)" }}
+                className="underline hover:text-ink transition-colors"
+                style={{ color: "#B45309" }}
               >
                 thepreacherapp@gmail.com
               </a>
@@ -166,13 +166,13 @@ export default function TermsPage() {
       {/* Footer */}
       <footer
         className="py-8 px-6 text-center text-sm"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.3)" }}
+        style={{ borderTop: "1px solid rgba(28,23,18,0.07)", color: "rgba(28,23,18,0.35)" }}
       >
         <p>© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
         <div className="flex justify-center gap-6 mt-3">
-          <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="/terms" className="hover:text-white transition-colors">Terms of Use</a>
-          <a href="/support" className="hover:text-white transition-colors">Support</a>
+          <a href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</a>
+          <a href="/terms" className="hover:text-ink transition-colors">Terms of Use</a>
+          <a href="/support" className="hover:text-ink transition-colors">Support</a>
         </div>
       </footer>
     </main>

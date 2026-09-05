@@ -7,25 +7,25 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main style={{ background: "#07070F", minHeight: "100vh" }}>
+    <main style={{ background: "#FAF8F3", minHeight: "100vh" }}>
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 h-16 border-b"
-        style={{ borderColor: "rgba(255,255,255,0.06)", background: "rgba(7,7,15,0.95)" }}>
+        style={{ borderColor: "rgba(28,23,18,0.07)", background: "rgba(250,248,243,0.95)" }}>
         <a href="/" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <div className="w-11 h-11 rounded-xl flex-shrink-0" style={{ backgroundImage: "url('/icon.png')", backgroundSize: "580%", backgroundPosition: "49% 49%", backgroundRepeat: "no-repeat" }} />
-          <span className="text-white font-bold text-[15px] tracking-tight">The Preacher</span>
+          <span className="text-ink font-bold text-[15px] tracking-tight">The Preacher</span>
         </a>
-        <a href="/" className="text-white/50 hover:text-white text-sm font-medium transition-colors">← Back to Home</a>
+        <a href="/" className="text-ink/55 hover:text-ink text-sm font-medium transition-colors">← Back to Home</a>
       </nav>
 
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 py-20">
-        <h1 className="text-4xl font-black text-white mb-2">Privacy Policy</h1>
-        <p className="text-white/40 text-sm mb-1">Effective Date: June 9, 2026</p>
-        <p className="text-white/40 text-sm mb-12">Last Updated: August 13, 2026</p>
+        <h1 className="text-4xl font-black text-ink mb-2">Privacy Policy</h1>
+        <p className="text-ink/45 text-sm mb-1">Effective Date: June 9, 2026</p>
+        <p className="text-ink/45 text-sm mb-12">Last Updated: August 13, 2026</p>
 
-        <div className="flex flex-col gap-10" style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.8 }}>
+        <div className="flex flex-col gap-10" style={{ color: "rgba(28,23,18,0.68)", lineHeight: 1.8 }}>
 
           <Section title="1. Introduction">
             <p>
@@ -162,8 +162,8 @@ export default function PrivacyPage() {
               If you have any questions, concerns, or requests regarding this Privacy Policy,
               please contact us:
             </p>
-            <div className="mt-4 p-5 rounded-2xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <p className="text-white font-semibold">The Preacher</p>
+            <div className="mt-4 p-5 rounded-2xl" style={{ background: "rgba(28,23,18,0.03)", border: "1px solid rgba(28,23,18,0.08)" }}>
+              <p className="text-ink font-semibold">The Preacher</p>
               <p className="mt-2">
                 Email:{" "}
                 <a href="mailto:thepreacherapp@gmail.com" className="transition-colors" style={{ color: "#F59E0B" }}>
@@ -183,12 +183,12 @@ export default function PrivacyPage() {
       </div>
 
       {/* Footer */}
-      <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <p className="text-white/20 text-sm">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
+      <footer className="py-10 px-6 text-center" style={{ borderTop: "1px solid rgba(28,23,18,0.06)" }}>
+        <p className="text-ink/35 text-sm">© {new Date().getFullYear()} The Preacher. All rights reserved.</p>
         <div className="flex justify-center gap-6 mt-4">
-          <a href="/" className="text-white/30 hover:text-white/60 text-sm transition-colors">Home</a>
-          <a href="/terms" className="text-white/30 hover:text-white/60 text-sm transition-colors">Terms of Use</a>
-          <a href="/support" className="text-white/30 hover:text-white/60 text-sm transition-colors">Support</a>
+          <a href="/" className="text-ink/40 hover:text-ink/60 text-sm transition-colors">Home</a>
+          <a href="/terms" className="text-ink/40 hover:text-ink/60 text-sm transition-colors">Terms of Use</a>
+          <a href="/support" className="text-ink/40 hover:text-ink/60 text-sm transition-colors">Support</a>
         </div>
       </footer>
     </main>
@@ -199,14 +199,14 @@ export default function PrivacyPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-xl font-bold text-white mb-4">{title}</h2>
+      <h2 className="text-xl font-bold text-ink mb-4">{title}</h2>
       {children}
     </section>
   );
 }
 
 function SubHeading({ children }: { children: React.ReactNode }) {
-  return <h3 className="font-semibold mt-5 mb-2" style={{ color: "rgba(255,255,255,0.8)" }}>{children}</h3>;
+  return <h3 className="font-semibold mt-5 mb-2" style={{ color: "rgba(28,23,18,0.85)" }}>{children}</h3>;
 }
 
 function BulletList({ items }: { items: string[] }) {

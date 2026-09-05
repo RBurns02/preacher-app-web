@@ -176,16 +176,29 @@ function FeatureCard({ icon, title, description, accent = false }: { icon: React
 }
 
 /* ─── Download Button ────────────────────────────────────────────────────── */
-function DownloadButton({ platform, href, size = "md" }: { platform: "ios" | "android"; href?: string; size?: "md" | "lg" }) {
+const APP_STORE_URL = "https://apps.apple.com/us/app/the-preacher/id6775250750";
+
+function DownloadButton({ platform, size = "md" }: { platform: "ios" | "android"; size?: "md" | "lg" }) {
   const isLg = size === "lg";
+  if (platform === "android") {
+    return (
+      <div className={`inline-flex items-center gap-3 rounded-2xl font-semibold text-white/30 border border-white/[0.07] bg-white/[0.03] cursor-default select-none ${isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"}`}>
+        <PlayIcon />
+        <span>
+          <div className="text-[10px] leading-none mb-0.5">Coming soon to</div>
+          <div>Google Play</div>
+        </span>
+      </div>
+    );
+  }
   return (
-    <a href={href ?? "#"}
-      className={`inline-flex items-center gap-3 rounded-2xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95 ${platform === "ios" ? "bg-white text-black hover:bg-white/90" : "bg-white/[0.08] text-white border border-white/10 hover:bg-white/[0.12]"} ${isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"}`}
-      style={platform === "ios" ? { boxShadow: "0 4px 20px rgba(255,255,255,0.15)" } : {}}>
-      {platform === "ios" ? <AppleIcon /> : <PlayIcon />}
+    <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer"
+      className={`inline-flex items-center gap-3 rounded-2xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95 bg-white text-black hover:bg-white/90 ${isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"}`}
+      style={{ boxShadow: "0 4px 20px rgba(255,255,255,0.15)" }}>
+      <AppleIcon />
       <span>
-        <div className={`text-[10px] opacity-60 leading-none ${isLg ? "mb-0.5" : ""}`}>{platform === "ios" ? "Download on the" : "Get it on"}</div>
-        <div>{platform === "ios" ? "App Store" : "Google Play"}</div>
+        <div className={`text-[10px] opacity-60 leading-none ${isLg ? "mb-0.5" : ""}`}>Download on the</div>
+        <div>App Store</div>
       </span>
     </a>
   );
@@ -321,11 +334,15 @@ export default function Home() {
                 one place. For working preachers and the congregations they serve.
               </p>
 
-              <div id="download" className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8 animate-fade-up"
+              <div id="download" className="flex flex-wrap gap-3 justify-center lg:justify-start mb-4 animate-fade-up"
                 style={{ animationDelay: "360ms" }}>
                 <DownloadButton platform="ios" size="lg" />
                 <DownloadButton platform="android" size="lg" />
               </div>
+
+              <p className="text-white/30 text-xs mb-8 text-center lg:text-left animate-fade-up" style={{ animationDelay: "410ms" }}>
+                Now on the App Store · 3-day free trial, then $4.99/mo or $44.99/yr
+              </p>
 
               <div className="animate-fade-up" style={{ animationDelay: "460ms" }}>
                 <a href="/tour"
@@ -528,12 +545,13 @@ export default function Home() {
                 <span className="text-gold-gradient">your ministry today.</span>
               </h2>
               <p className="text-white/45 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
-                Available on iOS and Android. Every sermon you preach deserves to be remembered.
+                Now on the App Store. Every sermon you preach deserves to be remembered.
               </p>
-              <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex flex-wrap gap-4 justify-center mb-4">
                 <DownloadButton platform="ios" size="lg" />
                 <DownloadButton platform="android" size="lg" />
               </div>
+              <p className="text-white/25 text-xs">3-day free trial, then $4.99/mo or $44.99/yr</p>
             </FadeUp>
           </div>
         </section>
@@ -548,7 +566,7 @@ export default function Home() {
             <div className="flex items-center gap-6">
               {[
                 { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Use", href: "/terms" },
+                { label: "Terms of Use", href: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" },
                 { label: "Support", href: "/support" },
                 { label: "Contact", href: "mailto:thepreacherapp@gmail.com" },
               ].map(({ label, href }) => (

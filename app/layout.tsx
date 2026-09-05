@@ -4,9 +4,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://thepreacherapp.com"),
-  title: "The Preacher — Log Sermons. Study Scripture. Grow.",
+  title: "The Preacher — Sermon Log & Study for Pastors",
   description:
-    "The app for ministers and congregations. Log every sermon you preach or hear, study scripture deeper, and grow in your faith.",
+    "The record of your ministry. Log every sermon, preach from your phone, and study with Strong's Concordance. Now on the App Store with a 3-day free trial.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "The Preacher",
-    description: "Log every sermon. Study deeper. Grow together.",
+    description: "The record of your ministry. Log every sermon, preach from your phone, and study deeper. Now on the App Store.",
     type: "website",
     url: "https://thepreacherapp.com",
     siteName: "The Preacher",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "The Preacher",
-    description: "Log every sermon. Study deeper. Grow together.",
+    description: "The record of your ministry. Log every sermon, preach from your phone, and study deeper. Now on the App Store.",
     images: ["/og-image.png"],
   },
 };

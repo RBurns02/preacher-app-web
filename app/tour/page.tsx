@@ -393,15 +393,17 @@ export default function HowItWorksPage() {
               </span>
             </h2>
             <p className="text-white/40 text-lg mb-10">For ministers. For congregations. For everyone who loves the Word.</p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <a href="#" className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-black text-base transition-all hover:scale-105"
+            <div className="flex flex-wrap gap-3 justify-center mb-4">
+              <a href="https://apps.apple.com/us/app/the-preacher/id6775250750" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-black text-base transition-all hover:scale-105"
                 style={{ background: "white", boxShadow: "0 4px 20px rgba(255,255,255,0.15)" }}>
                 <AppleIcon />Download for iOS
               </a>
-              <a href="#" className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-white text-base border border-white/10 bg-white/[0.08] transition-all hover:scale-105 hover:bg-white/[0.12]">
-                <PlayIcon />Download for Android
-              </a>
+              <div className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl font-semibold text-white/30 text-base border border-white/[0.07] bg-white/[0.03] cursor-default select-none">
+                <PlayIcon />Coming soon to Google Play
+              </div>
             </div>
+            <p className="text-white/25 text-xs">3-day free trial, then $4.99/mo or $44.99/yr</p>
           </div>
         </section>
 

@@ -354,10 +354,10 @@ export default function Home() {
           {/* Three-phone fan */}
           <div className="relative z-10 mt-16 flex items-end justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
             <div className="hidden sm:block relative top-10 -mr-14" style={{ transform: "rotate(-7deg)" }}>
-              <PhoneFrame src="/screenshots/preaching.png" alt="The Preacher active sermon mode" width={220} height={450} />
+              <PhoneFrame src="/screenshots/home.png" alt="The Preacher home screen showing sermon dashboard" width={220} height={450} />
             </div>
             <div className="relative z-10">
-              <PhoneFrame src="/screenshots/home.png" alt="The Preacher home screen showing sermon dashboard" width={272} height={556} />
+              <PhoneFrame src="/screenshots/logo-card.png" alt="The Preacher logo" width={272} height={556} />
             </div>
             <div className="hidden sm:block relative top-10 -ml-14" style={{ transform: "rotate(7deg)" }}>
               <PhoneFrame src="/screenshots/bible.png" alt="The Preacher Bible study" width={220} height={450} />

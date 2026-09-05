@@ -109,9 +109,11 @@ Fixed, backdrop-blur, `rgba(7,7,15,0.85)` background. Logo left, nav links cente
 
 ## App Context
 The mobile app this site promotes:
-- **Name**: Preacher Log
-- **Platform**: iOS + Android (Flutter)
+- **Name**: The Preacher (App Store name; formerly "Preacher Log")
+- **Platform**: iOS (live on the App Store, id6775250750) + Android planned (Flutter)
 - **Purpose**: Sermon logging, Bible study, ministry tracking for pastors/ministers
-- **Bible versions**: KJV, ASV, ESV, NIV
+- **Bible versions**: KJV and ASV ONLY — never claim ESV or NIV on the site (licensed translations the app does not carry)
+- **Strong's Concordance**: real and shipped — interlinear Hebrew/Greek on KJV words, Word Study Notebook
+- **Pricing**: 3-day free trial, then $4.99/month or $44.99/year (25% savings), via App Store subscription
 - **Key features**: Log sermons, highlight Bible verses, track locations, prepare messages, offline access, cloud sync
 - **App repo**: github.com/RBurns02/preacher (branch: `claude/app-rework`)

@@ -97,7 +97,7 @@ export default function SupportPage() {
 
             <Question q="Does the app work without an internet connection?">
               <p>
-                Yes. All four Bible translations (KJV, ASV, ESV, NIV) are available fully offline.
+                Yes. Both Bible translations (KJV and ASV) are available fully offline.
                 Sermons, highlights, and notes are stored on your device first and synced to the
                 cloud when you reconnect.
               </p>

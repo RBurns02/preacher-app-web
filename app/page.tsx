@@ -232,8 +232,8 @@ function Nav() {
         {[
           { label: "Features", href: "#features" },
           { label: "Tour the App", href: "/tour" },
-          { label: "For Ministers", href: "#features" },
           { label: "For Congregations", href: "#congregation" },
+          { label: "Pricing", href: "#pricing" },
         ].map(({ label, href }) => (
           <a key={label} href={href} className="text-white/50 hover:text-white text-sm font-medium transition-colors duration-150">{label}</a>
         ))}
@@ -256,8 +256,8 @@ function Nav() {
           style={{ background: "rgba(14,14,28,0.98)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           {[
             { label: "Features", href: "#features" },
-            { label: "For Ministers", href: "#features" },
             { label: "For Congregations", href: "#congregation" },
+            { label: "Pricing", href: "#pricing" },
           ].map(({ label, href }) => (
             <a key={label} href={href} onClick={() => setOpen(false)}
               className="px-4 py-3 text-white/70 hover:text-white text-sm font-medium rounded-xl hover:bg-white/[0.04] transition-all">{label}</a>
@@ -292,7 +292,7 @@ export default function Home() {
 
   const features = [
     { icon: <MicIcon />, title: "Log in 30 Seconds", description: "Title, location, date — and you're done. Scriptures, outline, notes, tags, and attachments are there when you want them. Batch Log handles conferences and revivals.", accent: true },
-    { icon: <BookIcon />, title: "Study Bible + Strong's", description: "Four translations: KJV, ASV, ESV, NIV. Tap any KJV word for the original Hebrew or Greek with Strong's Concordance. Add it straight to a sermon.", accent: false },
+    { icon: <BookIcon />, title: "Study Bible + Strong's", description: "KJV and ASV built in, fully offline. Tap any KJV word for the original Hebrew or Greek with Strong's Concordance. Add it straight to a sermon.", accent: false },
     { icon: <ZapIcon />, title: "Prepare Mode", description: "Pulpit-ready view with a message timer, auto-scroll teleprompter, and screen-stays-awake. Finish preaching and log the service with one tap.", accent: false },
     { icon: <MapPinIcon />, title: "Library & Timeline", description: "Two ways to browse your sermons. Library shows one card per message. Timeline shows your full ministry history in date order, searchable and filterable.", accent: false },
     { icon: <CloudIcon />, title: "Analytics & Reports", description: "Top scriptures, top locations, charts, a Scripture Coverage report, an Annual Report, and a Ministry Report PDF you can export and share.", accent: false },
@@ -377,7 +377,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: "Every", label: "Sermon Logged" },
-              { value: "Multiple", label: "Bible Versions" },
+              { value: "Strong's", label: "Concordance Built In" },
               { value: "Full", label: "Offline Access" },
               { value: "Cloud", label: "Sync & Backup" },
             ].map((s, i) => (
@@ -466,8 +466,8 @@ export default function Home() {
                 <span style={{ background: "linear-gradient(135deg, #8B5CF6, #C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>mean it.</span>
               </h2>
               <p className="text-white/50 text-lg leading-relaxed mb-8">
-                Four translations in one reader — KJV, ASV, ESV, NIV. Tap any
-                KJV word to see the original Hebrew or Greek with Strong&apos;s
+                KJV and ASV in one fast offline reader. Tap any KJV word to
+                see the original Hebrew or Greek with Strong&apos;s
                 Concordance: definitions, cross-references, and a plain-English
                 meaning for every word. Add it straight to a sermon outline.
               </p>
@@ -527,6 +527,63 @@ export default function Home() {
             </p>
             <p className="text-white/30 text-sm font-medium uppercase tracking-widest">— The Mission of The Preacher</p>
           </ScaleUp>
+        </section>
+
+        {/* ── Pricing ── */}
+        <section id="pricing" className="py-24 px-6" style={{ background: "rgba(255,255,255,0.015)" }}>
+          <div className="max-w-4xl mx-auto">
+            <FadeUp className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-semibold text-gold-400 tracking-wide uppercase"
+                style={{ background: "rgba(217,119,6,0.1)", border: "1px solid rgba(217,119,6,0.25)" }}>
+                Simple Pricing
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight text-silver-gradient mb-4">
+                Try everything free<br />for 3 days.
+              </h2>
+              <p className="text-white/40 text-lg max-w-xl mx-auto">
+                One subscription unlocks the whole app. Start with a free trial — cancel anytime in your App Store settings.
+              </p>
+            </FadeUp>
+
+            <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+              {[
+                { name: "Monthly", price: "$4.99", per: "/month", badge: null, note: "3 days free, then $4.99 per month" },
+                { name: "Yearly", price: "$44.99", per: "/year", badge: "Save 25%", note: "3 days free, then $44.99 per year" },
+              ].map((plan, i) => (
+                <FadeUp key={plan.name} delay={i * 100} className="flex flex-col">
+                  <div className={`relative rounded-3xl p-8 flex flex-col gap-5 h-full text-center transition-all duration-300 hover:-translate-y-1 ${plan.badge ? "card-gold-border" : "card-border"}`}
+                    style={{
+                      background: plan.badge ? "linear-gradient(135deg, rgba(217,119,6,0.08), rgba(217,119,6,0.02))" : "rgba(255,255,255,0.025)",
+                      boxShadow: plan.badge ? "0 0 40px rgba(217,119,6,0.1), 0 4px 24px rgba(0,0,0,0.4)" : "0 4px 24px rgba(0,0,0,0.3)",
+                    }}>
+                    {plan.badge && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-bold text-black uppercase tracking-wide"
+                        style={{ background: "linear-gradient(135deg, #D97706, #F59E0B)" }}>
+                        {plan.badge}
+                      </div>
+                    )}
+                    <div className="text-white/50 text-sm font-semibold uppercase tracking-widest">{plan.name}</div>
+                    <div>
+                      <span className="text-5xl font-black text-gold-gradient">{plan.price}</span>
+                      <span className="text-white/40 text-base font-medium">{plan.per}</span>
+                    </div>
+                    <p className="text-white/40 text-sm">{plan.note}</p>
+                    <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer"
+                      className={`mt-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 ${plan.badge ? "text-black" : "text-white border border-white/15 hover:bg-white/[0.06]"}`}
+                      style={plan.badge ? { background: "linear-gradient(135deg, #D97706, #F59E0B)", boxShadow: "0 4px 20px rgba(217,119,6,0.35)" } : {}}>
+                      Start Free Trial
+                    </a>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+
+            <FadeUp className="text-center mt-8">
+              <p className="text-white/25 text-xs max-w-md mx-auto leading-relaxed">
+                Auto-renews after the trial. Manage or cancel anytime in your App Store subscription settings. One subscription covers all your devices signed in with the same account.
+              </p>
+            </FadeUp>
+          </div>
         </section>
 
         {/* ── Final CTA ── */}

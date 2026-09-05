@@ -323,7 +323,7 @@ export default function HowItWorksPage() {
               <span style={{ background: "linear-gradient(135deg,#8B5CF6,#C4B5FD)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>and dig deeper.</span>
             </>
           }
-          description="Four translations built in: KJV, ASV, ESV, NIV. Tap any KJV word to pull up its original Hebrew or Greek with Strong's Concordance — full definitions, cross-references, and plain-English meaning. Add any verse straight to a sermon."
+          description="KJV and ASV built in, fully offline. Tap any KJV word to pull up its original Hebrew or Greek with Strong's Concordance — full definitions, cross-references, and plain-English meaning. Add any verse straight to a sermon."
           items={[
             "Strong's Concordance for every KJV word — tap to see the original language",
             "Word Study Notebook keeps studied words with your personal notes",

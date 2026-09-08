@@ -71,12 +71,15 @@ body {
     box-shadow: 0 0 80px rgba(217, 119, 6, 0.16), 0 0 160px rgba(217, 119, 6, 0.06);
   }
 
-  /* Screenshot marquee */
+  /* Screenshot marquee. Pause-on-hover only on devices that truly hover —
+     on touch screens a tap "sticks" the :hover state and froze the strip. */
   .marquee-track {
     animation: marquee 48s linear infinite;
   }
-  .marquee:hover .marquee-track {
-    animation-play-state: paused;
+  @media (hover: hover) and (pointer: fine) {
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
   }
   @keyframes marquee {
     from { transform: translateX(0); }

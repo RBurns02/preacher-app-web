@@ -271,28 +271,27 @@ function BentoCard({ icon, title, description, accent = false, className = "", h
 /* ─── Marquee shot ───────────────────────────────────────────────────────── */
 function MarqueeShot({ src, label }: { src: string; label: string }) {
   return (
-    <div className="flex-shrink-0 w-44 md:w-52">
-      <div className="rounded-[22px] overflow-hidden card-border bg-white" style={{ boxShadow: "0 10px 30px rgba(28,23,18,0.10)" }}>
+    <div className="flex-shrink-0 w-56 md:w-64 select-none">
+      <div className="rounded-[22px] overflow-hidden card-border" style={{ boxShadow: "0 10px 30px rgba(28,23,18,0.14)", background: "#050e13" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={label} className="w-full h-auto block" />
+        <img src={src} alt={label} className="w-full h-auto block" draggable={false} />
       </div>
-      <p className="text-center text-ink/40 text-xs font-medium mt-2.5">{label}</p>
     </div>
   );
 }
 
 /* ─── Page ───────────────────────────────────────────────────────────────── */
 export default function Home() {
+  // The App Store marketing panels — captions are baked into the images.
   const shots = [
-    { src: "/screenshots/home.png", label: "Home" },
-    { src: "/screenshots/prepare.png", label: "Prepare Mode" },
-    { src: "/screenshots/sermons.png", label: "Sermon Library" },
-    { src: "/screenshots/bible.png", label: "Bible + Strong's" },
-    { src: "/screenshots/preaching-outline.png", label: "Preaching View" },
-    { src: "/screenshots/locations.png", label: "Locations Map" },
-    { src: "/screenshots/services.png", label: "Timeline" },
-    { src: "/screenshots/search.png", label: "Search" },
-    { src: "/screenshots/sermon-detail.png", label: "Sermon Detail" },
+    { src: "/screenshots/store/01_log.png", label: "Log a sermon in 30 seconds" },
+    { src: "/screenshots/store/02_hero.png", label: "The Preacher" },
+    { src: "/screenshots/store/03_preach.png", label: "Preach straight from your phone" },
+    { src: "/screenshots/store/04_bible.png", label: "Study with Strong's built in" },
+    { src: "/screenshots/store/05_library.png", label: "Every message, saved forever" },
+    { src: "/screenshots/store/06_timeline.png", label: "Your whole history, in order" },
+    { src: "/screenshots/store/07_locations.png", label: "Everywhere you've preached, mapped" },
+    { src: "/screenshots/store/08_search.png", label: "Find anything in seconds" },
   ];
 
   return (

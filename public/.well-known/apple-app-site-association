@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["VH9G7Z523U.com.robbie.ThePreacher"],
+        "components": [
+          {
+            "/": "/s/*",
+            "comment": "Shared sermon links open the sermon in the app"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -22,7 +22,7 @@ export default function PrivacyPage() {
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="text-4xl font-black text-ink mb-2">Privacy Policy</h1>
-        <p className="text-ink/45 text-sm mb-1">Effective Date: June 9, 2026</p>
+        <p className="text-ink/45 text-sm mb-1">Effective Date: October 1, 2026</p>
         <p className="text-ink/45 text-sm mb-12">Last Updated: August 13, 2026</p>
 
         <div className="flex flex-col gap-10" style={{ color: "rgba(28,23,18,0.68)", lineHeight: 1.8 }}>
@@ -47,6 +47,7 @@ export default function PrivacyPage() {
               "Sermon & Ministry Records — Sermon titles, dates, locations, scripture references, and notes you log",
               "Bible Study Data — Highlights, annotations, verse notes, and word studies you add while reading",
               "Message Preparation Notes — Content you create in the message preparation feature",
+              "Notes — Free-form notes you write in the Notes notebook",
               "Photos You Attach — Images you choose to attach to a sermon or service",
             ]} />
 
@@ -102,6 +103,7 @@ export default function PrivacyPage() {
               "Cloud Firestore & Firebase Storage — encrypted cloud sync of your ministry data and photo attachments",
               "Firebase Analytics & Crashlytics — anonymous usage statistics and crash reports, used only to improve stability and understand which features are used",
               "Google Places — suggests location names as you type when logging a service; only the text you type is sent",
+              "Google Cloud Translation — only when you choose Translate on a sermon, that sermon's title and text (nothing about your account) are sent to Google to be translated and returned to you. Nothing is sent unless you tap Translate. To enforce fair-use limits we keep a count of how many characters your account has translated each day, never the text itself",
             ]} />
             <p className="mt-3">
               We do not use any third-party advertising networks or data brokers, and we never sell your data.

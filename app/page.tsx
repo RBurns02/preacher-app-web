@@ -37,6 +37,21 @@ const ChartIcon = () => (
     <line x1="6" y1="20" x2="6" y2="14" />
   </svg>
 );
+const NoteIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+    <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+    <polyline points="14 3 14 9 20 9" />
+    <line x1="8" y1="13" x2="16" y2="13" />
+    <line x1="8" y1="17" x2="13" y2="17" />
+  </svg>
+);
+const GlobeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
 const ChevronDownIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
     <polyline points="6 9 12 15 18 9" />
@@ -305,11 +320,11 @@ export default function Home() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-hero-glow pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold text-gold-700 tracking-wide uppercase animate-fade-up"
+            <a href="#new" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold text-gold-700 tracking-wide uppercase animate-fade-up transition-colors hover:bg-gold-600/10"
               style={{ background: "rgba(217,119,6,0.08)", border: "1px solid rgba(180,83,9,0.22)", animationDelay: "0ms" }}>
               <span className="w-1.5 h-1.5 rounded-full bg-gold-600 animate-pulse" />
-              Built for Ministers
-            </div>
+              New: Notes &amp; Translate &rarr;
+            </a>
 
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.02] mb-6 animate-fade-up"
               style={{ animationDelay: "120ms" }}>
@@ -441,10 +456,96 @@ export default function Home() {
                 <BentoCard icon={<ChartIcon />} title="Analytics & Reports"
                   description="Top scriptures, top locations, charts, and a Ministry Report PDF you can export and share." className="h-full" />
               </FadeUp>
-              <FadeUp delay={400} className="md:col-span-6 flex flex-col">
+              <FadeUp delay={400} className="md:col-span-3 flex flex-col">
+                <BentoCard accent icon={<NoteIcon />} title="Notes → Sermons"
+                  description="A notebook for sermon ideas, right on the Home screen. When one is ready, tap “Make it a sermon” and it becomes an outline in Prepare Mode." className="h-full" />
+              </FadeUp>
+              <FadeUp delay={480} className="md:col-span-3 flex flex-col">
+                <BentoCard icon={<GlobeIcon />} title="Translate"
+                  description="Translate a sermon into Spanish, Portuguese, French and 30+ more languages. Scripture references stay as written." className="h-full" />
+              </FadeUp>
+              <FadeUp delay={560} className="md:col-span-6 flex flex-col">
                 <BentoCard horizontal icon={<CloudIcon />} title="Offline-First, Synced to the Cloud"
                   description="Everything saves to your phone first — full access with no signal, syncs automatically when you're back online. Deleted items go to a Recycle Bin for 30 days, and your whole record is backed up to your account." />
               </FadeUp>
+            </div>
+          </div>
+        </section>
+
+        {/* ── New in 1.6: Notes + Translate ── */}
+        <section id="new" className="py-24 px-6">
+          <div className="max-w-6xl mx-auto">
+            <FadeUp className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-semibold text-gold-700 tracking-wide uppercase"
+                style={{ background: "rgba(217,119,6,0.08)", border: "1px solid rgba(180,83,9,0.22)" }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-600 animate-pulse" />
+                New in The Preacher
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight text-ink mb-4">
+                From the first idea<br />to every language.
+              </h2>
+            </FadeUp>
+
+            <div className="flex flex-col lg:flex-row items-center gap-16 mb-24">
+              <SlideIn from="left" className="flex-1 flex justify-center lg:justify-start">
+                <PhoneFrame src="/screenshots/notes.png" alt="A note in The Preacher with the Make it a sermon button" width={240} height={490} />
+              </SlideIn>
+              <SlideIn from="right" delay={150} className="flex-1 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold text-gold-700 uppercase tracking-wide"
+                  style={{ background: "rgba(217,119,6,0.08)", border: "1px solid rgba(180,83,9,0.20)" }}>
+                  Notes
+                </div>
+                <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-6">
+                  <span className="text-ink-gradient">Catch the idea.</span>
+                  <br />
+                  <span className="text-gold-gradient">Preach the sermon.</span>
+                </h3>
+                <p className="text-ink/55 text-lg leading-relaxed mb-8">
+                  Stop typing sermon thoughts into your phone&apos;s Notes app and
+                  copying them out later. Tap Notes at the top of Home and write
+                  &mdash; the first line is the title and everything saves itself.
+                  When it&apos;s ready, one tap turns it into an outline.
+                </p>
+                <ul className="flex flex-col gap-3 text-left">
+                  {[
+                    "Right on the Home screen — one tap from opening the app",
+                    "Pin the ones that matter, search them all, synced across your devices",
+                    "“Make it a sermon”: headings become points, references become scripture with the verse filled in",
+                    "Opens straight in Prepare Mode, ready to preach",
+                  ].map((item) => <CheckItem key={item} text={item} color="#B45309" />)}
+                </ul>
+              </SlideIn>
+            </div>
+
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
+              <SlideIn from="right" className="flex-1 flex justify-center lg:justify-end">
+                <PhoneFrame src="/screenshots/translate.png" alt="A sermon translated into Spanish in The Preacher" width={240} height={490} />
+              </SlideIn>
+              <SlideIn from="left" delay={150} className="flex-1 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 text-xs font-semibold uppercase tracking-wide"
+                  style={{ background: "rgba(13,148,136,0.07)", border: "1px solid rgba(13,148,136,0.22)", color: "#0F766E" }}>
+                  Translate &middot; Premium
+                </div>
+                <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-6">
+                  <span className="text-ink-gradient">One sermon.</span>
+                  <br />
+                  <span style={{ background: "linear-gradient(135deg, #0F766E, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Every language.</span>
+                </h3>
+                <p className="text-ink/55 text-lg leading-relaxed mb-8">
+                  For an interpreter, a mission trip, or a bilingual church.
+                  Translate any sermon into Spanish, Portuguese, French, Haitian
+                  Creole, Swahili, Korean and 30+ more &mdash; the outline comes back
+                  exactly as you built it.
+                </p>
+                <ul className="flex flex-col gap-3 text-left">
+                  {[
+                    "From a sermon, a service, or the Prepare Mode header",
+                    "Scripture references stay as written",
+                    "Flip back to the original anytime to compare",
+                    "Copy it, share it, or save it as its own sermon",
+                  ].map((item) => <CheckItem key={item} text={item} color="#0F766E" />)}
+                </ul>
+              </SlideIn>
             </div>
           </div>
         </section>

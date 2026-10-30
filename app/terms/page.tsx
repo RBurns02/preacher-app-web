@@ -42,8 +42,8 @@ export default function TermsPage() {
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="text-4xl font-black text-ink mb-2">Terms of Use</h1>
-        <p className="text-ink/45 text-sm mb-1">Effective Date: June 9, 2026</p>
-        <p className="text-ink/45 text-sm mb-12">Last Updated: June 9, 2026</p>
+        <p className="text-ink/45 text-sm mb-1">Effective Date: November 1, 2026</p>
+        <p className="text-ink/45 text-sm mb-12">Last Updated: November 1, 2026</p>
 
         <div className="flex flex-col gap-10" style={{ color: "rgba(28,23,18,0.68)", lineHeight: 1.8 }}>
 
@@ -86,6 +86,25 @@ export default function TermsPage() {
               Content&quot;) remain yours. You grant us a limited license to store and sync Your
               Content solely to provide the App&apos;s features. We do not sell or share Your Content
               with third parties.
+            </p>
+          </Section>
+
+          <Section title="4a. Community, Profiles and Messages">
+            <p>
+              If you set up a community profile, other members can see your name, @username, photo,
+              ministry and bio, find you by name or username, and send you messages.
+            </p>
+            <p className="mt-3">
+              <strong>There is zero tolerance for objectionable content or abusive users.</strong>{" "}
+              You agree not to post or send anything that is profane, sexual, hateful, threatening,
+              harassing, fraudulent or unlawful; not to impersonate any person, church or ministry; not
+              to send spam or unsolicited advertising; and to share only sermons you wrote or have
+              permission to share.
+            </p>
+            <p className="mt-3">
+              You can report any message or profile and block any member from within the App. We
+              review reports within 24 hours, remove content that breaks these Terms, and may suspend
+              or remove the accounts of members who post it, without notice.
             </p>
           </Section>
 

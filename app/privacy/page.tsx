@@ -22,8 +22,8 @@ export default function PrivacyPage() {
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="text-4xl font-black text-ink mb-2">Privacy Policy</h1>
-        <p className="text-ink/45 text-sm mb-1">Effective Date: October 1, 2026</p>
-        <p className="text-ink/45 text-sm mb-12">Last Updated: August 13, 2026</p>
+        <p className="text-ink/45 text-sm mb-1">Effective Date: November 1, 2026</p>
+        <p className="text-ink/45 text-sm mb-12">Last Updated: November 1, 2026</p>
 
         <div className="flex flex-col gap-10" style={{ color: "rgba(28,23,18,0.68)", lineHeight: 1.8 }}>
 
@@ -48,6 +48,8 @@ export default function PrivacyPage() {
               "Bible Study Data — Highlights, annotations, verse notes, and word studies you add while reading",
               "Message Preparation Notes — Content you create in the message preparation feature",
               "Notes — Free-form notes you write in the Notes notebook",
+              "Community Profile (optional) — If you set one up: your name, @username, photo, ministry role, church and bio. These are visible to other signed-in members, who can find you by name or username",
+              "Messages (optional) — Messages and sermons you send to other members. They are visible only to you and the person you message. If you report a message or profile, a copy of the reported content is kept for review; we never read your messages except to review a report. Deleting your account removes your profile, photo and conversations",
               "Photos You Attach — Images you choose to attach to a sermon or service",
             ]} />
 

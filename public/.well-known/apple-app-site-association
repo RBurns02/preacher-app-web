@@ -2,11 +2,17 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["VH9G7Z523U.com.robbie.ThePreacher"],
+        "appIDs": [
+          "VH9G7Z523U.com.robbie.ThePreacher"
+        ],
         "components": [
           {
             "/": "/s/*",
             "comment": "Shared sermon links open the sermon in the app"
+          },
+          {
+            "/": "/g/*",
+            "comment": "Study Group invites open the join screen in the app"
           }
         ]
       }

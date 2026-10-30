@@ -229,6 +229,9 @@ function Nav() {
         ))}
       </div>
       <div className="hidden md:flex items-center gap-3">
+        <a href="/app/" className="px-3 py-2 text-sm font-semibold text-ink/70 hover:text-ink transition-colors">
+          Sign in
+        </a>
         <a href="#download" className="px-4 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:scale-105 active:scale-95"
           style={{ background: "linear-gradient(135deg, #B45309, #D97706)", boxShadow: "0 4px 18px rgba(180,83,9,0.30)" }}>
           Get the App
@@ -248,6 +251,10 @@ function Nav() {
             <a key={label} href={href} onClick={() => setOpen(false)}
               className="px-4 py-3 text-ink/70 hover:text-ink text-sm font-medium rounded-xl hover:bg-ink/[0.04] transition-all">{label}</a>
           ))}
+          <a href="/app/" onClick={() => setOpen(false)}
+            className="px-4 py-3 text-ink/70 hover:text-ink text-sm font-medium rounded-xl hover:bg-ink/[0.04] transition-all">
+            Sign in on the web
+          </a>
           <a href="#download" onClick={() => setOpen(false)}
             className="mt-2 px-4 py-3 rounded-xl text-sm font-semibold text-white text-center"
             style={{ background: "linear-gradient(135deg, #B45309, #D97706)" }}>

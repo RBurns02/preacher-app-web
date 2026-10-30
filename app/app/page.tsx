@@ -25,6 +25,8 @@ type Section = { label: string; segments: Segment[] };
 
 type Sermon = {
   id: string;
+  /** Lowercased title/scripture/series/outline, built once for search. */
+  haystack: string;
   title: string;
   scriptures: string;
   notes: string;
@@ -34,6 +36,7 @@ type Sermon = {
 
 type Service = {
   id: string;
+  haystack: string;
   message: string;
   place: string;
   time: number;
@@ -57,6 +60,8 @@ const millis = (v: unknown): number => {
 function toSermon(id: string, d: DocumentData): Sermon {
   return {
     id,
+    haystack: [d.title, d.scriptures, d.seriesName, outlineText(str(d.notes))]
+      .map(str).join(" ").toLowerCase(),
     title: str(d.title) || "Untitled sermon",
     scriptures: str(d.scriptures),
     notes: str(d.notes),
@@ -68,6 +73,8 @@ function toSermon(id: string, d: DocumentData): Sermon {
 function toService(id: string, d: DocumentData): Service {
   return {
     id,
+    haystack: [d.message, d.place, d.scriptures, d.pastor, outlineText(str(d.comments))]
+      .map(str).join(" ").toLowerCase(),
     message: str(d.message),
     place: str(d.place),
     time: millis(d.time),
@@ -80,30 +87,49 @@ function toService(id: string, d: DocumentData): Service {
   };
 }
 
+/** One outline point → its blocks. Mirrors segmentsFromNote() in the app
+ *  (lib/core/utils/outline_segments.dart): the `segments` list when it has
+ *  anything, otherwise the older scriptureTop / content / scripture fields. */
+function segmentsOf(n: Record<string, unknown>): Segment[] {
+  const segs: Segment[] = [];
+  if (Array.isArray(n.segments)) {
+    for (const raw of n.segments) {
+      if (!raw || typeof raw !== "object") continue;
+      const s = raw as Record<string, unknown>;
+      if (s.t === "space") {
+        segs.push({ kind: "space", value: "" });
+        continue;
+      }
+      const v = str(s.v).trim();
+      if (v) segs.push({ kind: s.t === "ref" ? "ref" : "text", value: v });
+    }
+    if (segs.length) return segs;
+  }
+  const refs = (x: string) => x.split(",").map((r) => r.trim()).filter(Boolean);
+  let scripture = str(n.scripture).trim();
+  let top = str(n.scriptureTop).trim();
+  if (!top && (n.scriptureAbove === true || n.scriptureAbove === "true")) {
+    top = scripture;
+    scripture = "";
+  }
+  const content = str(n.content).trim();
+  return [
+    ...refs(top).map((r) => ({ kind: "ref" as const, value: r })),
+    ...(content ? [{ kind: "text" as const, value: content }] : []),
+    ...refs(scripture).map((r) => ({ kind: "ref" as const, value: r })),
+  ];
+}
+
 /** The app's outline JSON → sections; null if the notes are plain text. */
 function parseOutline(notes: string): Section[] | null {
   if (!notes.trim().startsWith("{")) return null;
   try {
     const j = JSON.parse(notes);
     if (j?.type !== "sermon_outline" || !Array.isArray(j.notes)) return null;
-    return j.notes.map((n: Record<string, unknown>) => {
-      const segs: Segment[] = [];
-      if (Array.isArray(n.segments)) {
-        for (const s of n.segments as Record<string, unknown>[]) {
-          const t = s.t === "ref" ? "ref" : s.t === "space" ? "space" : "text";
-          const v = str(s.v).trim();
-          if (t === "space" || v) segs.push({ kind: t, value: v });
-        }
-      } else {
-        // Older outlines: scripture above, content, scripture below.
-        const refs = (x: unknown) =>
-          str(x).split(",").map((r) => r.trim()).filter(Boolean);
-        refs(n.scriptureTop).forEach((r) => segs.push({ kind: "ref", value: r }));
-        if (str(n.content).trim()) segs.push({ kind: "text", value: str(n.content).trim() });
-        refs(n.scripture).forEach((r) => segs.push({ kind: "ref", value: r }));
-      }
-      return { label: str(n.label), segments: segs };
-    });
+    // Skip anything malformed instead of losing the whole outline.
+    return (j.notes as unknown[])
+      .filter((n): n is Record<string, unknown> => !!n && typeof n === "object")
+      .map((n) => ({ label: str(n.label), segments: segmentsOf(n) }));
   } catch {
     return null;
   }
@@ -196,8 +222,15 @@ function SignIn() {
     setMessage("");
     try {
       await signInWithEmailAndPassword(auth(), email.trim(), password);
-    } catch {
-      setMessage("That email and password didn't match. Try again.");
+    } catch (err) {
+      const code = (err as { code?: string })?.code ?? "";
+      setMessage(
+        code === "auth/network-request-failed"
+          ? "Couldn't reach the server. Check your connection and try again."
+          : code === "auth/too-many-requests"
+          ? "Too many attempts. Wait a few minutes, then try again."
+          : "That email and password didn't match. Try again.",
+      );
     } finally {
       setBusy(false);
     }
@@ -228,10 +261,10 @@ function SignIn() {
         <p className="text-center text-ink/55 mb-8">
           Sign in with your app account to read, search and print your sermons.
         </p>
-        <input type="email" autoComplete="email" required placeholder="Email"
+        <input type="email" autoComplete="email" required placeholder="Email" aria-label="Email"
           value={email} onChange={(e) => setEmail(e.target.value)}
           className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 mb-3 outline-none focus:border-gold-600" />
-        <input type="password" autoComplete="current-password" required placeholder="Password"
+        <input type="password" autoComplete="current-password" required placeholder="Password" aria-label="Password"
           value={password} onChange={(e) => setPassword(e.target.value)}
           className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 mb-4 outline-none focus:border-gold-600" />
         <button type="submit" disabled={busy}
@@ -281,15 +314,11 @@ function Reader({ user }: { user: User }) {
 
   const query = q.trim().toLowerCase();
   const shownSermons = useMemo(
-    () => (sermons ?? []).filter((s) => !query ||
-      [s.title, s.scriptures, s.seriesName, outlineText(s.notes)]
-        .join(" ").toLowerCase().includes(query)),
+    () => (sermons ?? []).filter((s) => !query || s.haystack.includes(query)),
     [sermons, query],
   );
   const shownServices = useMemo(
-    () => services.filter((v) => !query ||
-      [v.message, v.place, v.scriptures, v.pastor, outlineText(v.comments)]
-        .join(" ").toLowerCase().includes(query)),
+    () => services.filter((v) => !query || v.haystack.includes(query)),
     [services, query],
   );
 
@@ -297,7 +326,7 @@ function Reader({ user }: { user: User }) {
   const service = tab === "services" ? services.find((s) => s.id === selected) : undefined;
 
   return (
-    <div className="min-h-screen print:bg-white" style={{ background: "#FAF8F3" }}>
+    <div className="min-h-screen bg-[#FAF8F3] print:bg-white">
       <header className="print:hidden sticky top-0 z-10 border-b border-ink/10 backdrop-blur"
         style={{ background: "rgba(250,248,243,0.92)" }}>
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
@@ -317,11 +346,11 @@ function Reader({ user }: { user: User }) {
         {/* List */}
         <aside className={`print:hidden ${selected ? "hidden md:block" : ""}`}>
           <input value={q} onChange={(e) => setQ(e.target.value)}
-            placeholder="Search titles, scriptures, places, notes…"
+            placeholder="Search titles, scriptures, places, notes…" aria-label="Search"
             className="w-full rounded-xl border border-ink/15 bg-white px-4 py-2.5 mb-3 outline-none focus:border-gold-600" />
           <div className="flex gap-2 mb-3">
             {(["sermons", "services"] as const).map((t) => (
-              <button key={t} onClick={() => { setTab(t); setSelected(null); }}
+              <button key={t} aria-pressed={tab === t} onClick={() => { setTab(t); setSelected(null); }}
                 className={`flex-1 rounded-xl py-2 text-sm font-bold ${tab === t ? "text-white" : "text-ink/60 bg-white border border-ink/10"}`}
                 style={tab === t ? { background: "#1C1712" } : {}}>
                 {t === "sermons" ? `Sermons (${shownSermons.length})` : `Services (${shownServices.length})`}
@@ -453,8 +482,13 @@ export default function WebApp() {
   const [user, setUser] = useState<User | null | undefined>(undefined);
 
   useEffect(() => onAuthStateChanged(auth(), async (u) => {
-    // Firebase caches emailVerified — refresh it once on sign-in.
-    if (u) await u.reload().catch(() => {});
+    // Firebase caches emailVerified — refresh it once on sign-in, and if
+    // they've just verified, get a fresh token too (the security rules read
+    // the token's claim, not the cached user).
+    if (u) {
+      await u.reload().catch(() => {});
+      if (u.emailVerified) await u.getIdToken(true).catch(() => {});
+    }
     setUser(u ?? null);
   }), []);
 
@@ -470,6 +504,18 @@ export default function WebApp() {
           <p className="text-ink/60 mb-6">
             Open the verification email we sent when you signed up in the app, then sign in again here.
           </p>
+          <button
+            onClick={async () => {
+              await user.reload().catch(() => {});
+              if (user.emailVerified) {
+                await user.getIdToken(true).catch(() => {});
+                window.location.reload();
+              }
+            }}
+            className="block mx-auto mb-3 rounded-xl px-5 py-2.5 font-bold text-white"
+            style={{ background: "#1C1712" }}>
+            I&apos;ve verified — check again
+          </button>
           <button onClick={() => signOut(auth())} className="font-semibold text-gold-700">Sign out</button>
         </div>
       </main>

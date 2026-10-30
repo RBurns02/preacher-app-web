@@ -92,7 +92,9 @@ export default function TermsPage() {
           <Section title="4a. Community, Profiles and Messages">
             <p>
               If you set up a community profile, other members can see your name, @username, photo,
-              ministry and bio, find you by name or username, and send you messages.
+              ministry, church and bio, find you by name or username, and send you messages. What
+              you post in a Study Group is visible to everyone in that group, and the group&apos;s
+              admins may remove posts and members.
             </p>
             <p className="mt-3">
               <strong>There is zero tolerance for objectionable content or abusive users.</strong>{" "}

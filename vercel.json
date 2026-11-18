@@ -60,6 +60,14 @@
     {
       "source": "/g/:code/",
       "destination": "/g/"
+    },
+    {
+      "source": "/c/:slug",
+      "destination": "/c/"
+    },
+    {
+      "source": "/c/:slug/",
+      "destination": "/c/"
     }
   ]
 }

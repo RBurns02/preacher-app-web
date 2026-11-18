@@ -52,7 +52,8 @@ export default function PrivacyPage() {
               "Messages (optional) — Messages and sermons you send to another member are visible only to you and that person. We never read your messages except to review a report",
               "Study Groups (optional) — Messages, sermons and notes you post in a Study Group are visible to everyone in that group. The group's admins can remove posts and members",
               "Reports — If you report a message or profile, a copy of the reported content (up to 4,000 characters) and who reported it are kept so we can review it and act on it",
-              "Deleting your account removes your profile, photo and the Study Groups you created, and blanks every message and post you sent (the other person keeps their side of a conversation)",
+              "Church pages (optional) — If you create a church page, its name, city and about text, and every sermon you choose to publish to it, are public on thepreacherapp.com and can be read by anyone with the link. Nothing is published until you publish it, and you can take a sermon or the whole page down at any time",
+              "Deleting your account removes your profile, photo, church page and the Study Groups you created, and blanks every message and post you sent (the other person keeps their side of a conversation)",
               "Photos You Attach — Images you choose to attach to a sermon or service",
             ]} />
 

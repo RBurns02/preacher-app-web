@@ -108,10 +108,10 @@ export function Nav() {
 }
 
 const HERO_SHOTS = [
+  { src: "/screenshots/web/home.jpg", label: "Home" },
   { src: "/screenshots/web/sermons.jpg", label: "Library" },
   { src: "/screenshots/web/prepare.jpg", label: "Prepare" },
   { src: "/screenshots/web/preaching.jpg", label: "Preach" },
-  { src: "/screenshots/web/bible.jpg", label: "Bible" },
   { src: "/screenshots/web/chat.jpg", label: "Messages" },
 ];
 

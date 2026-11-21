@@ -9,15 +9,15 @@ export const metadata: Metadata = {
 };
 
 const SCREENS = [
+  ["home", "Home"],
   ["sermons", "Library"],
-  ["service", "A service"],
+  ["sermon", "A sermon"],
   ["timeline", "Timeline"],
   ["prepare", "Prepare Mode"],
   ["preaching", "Preaching"],
-  ["preaching-outline", "Your outline, live"],
   ["notes", "Notes"],
-  ["translate", "Translate"],
-  ["search", "Search"],
+  ["voice", "Voice notes"],
+  ["group", "Study Groups"],
 ];
 
 export default function FeaturesPage() {
@@ -92,7 +92,7 @@ export default function FeaturesPage() {
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             <Reveal>
               <div className="pb-card flex h-full gap-6 p-7">
-                <div className="w-28 flex-none"><PhoneFrame src="/screenshots/web/service.jpg" alt="A logged service in The Preacher" /></div>
+                <div className="w-28 flex-none"><PhoneFrame src="/screenshots/web/timeline.jpg" alt="The Preacher timeline of services" /></div>
                 <div>
                   <p className="text-sm font-semibold text-pb-muted">For the congregation</p>
                   <h3 className="mt-2 font-cardo text-[1.7rem] leading-tight">Sat under a good word? Keep it.</h3>

@@ -29,7 +29,22 @@ preacher-web/
 └── package.json
 ```
 
-## Design System
+## Home page (redesign, `app/_home/`)
+The home page is laid out like a pulpit Bible: an ink hero, onionskin "chapters"
+(I Log, II Prepare & preach, III Bible, IV Together, V New tools, VI Pricing), and a
+thumb index down the right edge that fills in as you scroll (chips on phones).
+- `app/page.tsx` assembles it; components live in `app/_home/` (ui, shell, demos,
+  together, tools, pricing). Each chapter has a small working demo, not a description.
+- Palette: Tailwind `pb.*` colours + `.pb-*` classes in `globals.css`, all scoped under
+  `.pb-home` so the other pages (web reader, invites, legal, support, tour) are unchanged.
+- Cardo is self-hosted in `public/fonts` (OFL). Scripture is red letter; only real KJV
+  text from the app's bundled Bible, and Strong's entries from its lexicon.
+- Screenshots for the page are 660px JPGs in `public/screenshots/web/` (named for what
+  they actually show).
+- Motion respects prefers-reduced-motion; reveal-on-scroll only hides content once JS
+  has added `html.pb-armed`.
+
+## Design System (other pages)
 
 ### Colors
 | Token | Value | Use |

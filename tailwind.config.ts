@@ -6,8 +6,25 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        cardo: ["Cardo", "Georgia", "serif"],
       },
       colors: {
+        // The home page's Pulpit Bible palette (app/_home). Other pages keep
+        // the paper/ink/gold set below.
+        pb: {
+          onion: "#F1F2F0",
+          deep: "#E2E3E0",
+          lift: "#F8F9F7",
+          ink: "#1E1B2E",
+          muted: "#5E5A6B",
+          red: "#B3121F",
+          "red-night": "#F0A3A9",
+          gilt: "#B8913A",
+          "night-muted": "#A9A6B6",
+          "night-card": "#27243A",
+          hair: "rgba(30,27,46,0.12)",
+          "hair-strong": "rgba(30,27,46,0.22)",
+        },
         paper: "#FAF8F3",
         ink: "#1C1712",
         muted: "#6B6257",

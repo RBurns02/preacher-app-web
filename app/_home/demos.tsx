@@ -76,8 +76,8 @@ export function LogDemo() {
               </span>
             </li>
           )}
-          {EARLIER.map((e) => (
-            <li key={e.title} className="pb-timeline-item">
+          {EARLIER.map((e, i) => (
+            <li key={e.title} className={`pb-timeline-item ${i > 0 ? "hidden sm:grid" : ""}`}>
               <span className="font-cardo text-[17px]">{e.title}</span>
               <span className="text-xs text-pb-muted">
                 <span className="font-cardo text-[13px] text-pb-red">{e.ref}</span> · {e.meta}
@@ -211,34 +211,19 @@ const PSALM: { n: number; parts: Piece[] }[] = [
   { n: 3, parts: ["He ", { w: "restoreth", key: "restoreth" }, " my ", { w: "soul", key: "soul" }, ": he ", { w: "leadeth", key: "leadeth-3" }, " me in the ", { w: "paths", key: "paths" }, " of ", { w: "righteousness", key: "righteousness" }, " for his ", { w: "name's", key: "name's" }, " sake."] },
 ];
 
-const HIGHLIGHTS = [
-  { name: "Yellow", hex: "#FFFF00" },
-  { name: "Blue", hex: "#00E5FF" },
-  { name: "Orange", hex: "#FF6D00" },
-  { name: "Pink", hex: "#FF00FF" },
-];
-
 export function BibleDemo() {
   const [word, setWord] = useState("shepherd");
-  const [verse, setVerse] = useState<number | null>(null);
-  const [marks, setMarks] = useState<Record<number, string>>({ 1: "#FFFF00" });
   const e = STRONGS[word];
   return (
     <div className="pb-card grid overflow-hidden md:grid-cols-[1.25fr_1fr]">
-      <div className="p-6 md:p-8">
+      <div className="p-5 sm:p-6 md:p-8">
         <div className="mb-4">
           <span className="text-sm font-semibold">Psalm 23</span>
         </div>
-        <div className="font-cardo text-[1.3rem] leading-[1.75] text-pb-ink">
+        <div className="font-cardo text-[1.2rem] leading-[1.75] text-pb-ink sm:text-[1.3rem]">
           {PSALM.map((v) => (
-            <p
-              key={v.n}
-              className={`pb-verse ${verse === v.n ? "is-selected" : ""}`}
-              style={marks[v.n] ? { background: `${marks[v.n]}40`, boxShadow: `0 0 0 3px ${marks[v.n]}40` } : undefined}
-            >
-              <button type="button" className="pb-vnum" onClick={() => setVerse(verse === v.n ? null : v.n)} aria-label={`Select verse ${v.n}`} aria-pressed={verse === v.n}>
-                {v.n}
-              </button>
+            <p key={v.n} className="pb-verse">
+              <span className="pb-vnum" aria-hidden="true">{v.n}</span>
               {v.parts.map((p, i) =>
                 typeof p === "string" ? (
                   <span key={i}>{p}</span>
@@ -257,39 +242,7 @@ export function BibleDemo() {
             </p>
           ))}
         </div>
-        <div className="mt-5 flex flex-wrap items-center gap-2 text-sm">
-          <span className="text-pb-muted">{verse ? `Highlight verse ${verse}:` : "Tap a verse number to highlight it."}</span>
-          {verse &&
-            HIGHLIGHTS.map((h) => (
-              <button
-                key={h.name}
-                type="button"
-                className="h-7 w-7 rounded-full border border-pb-hair-strong"
-                style={{ background: h.hex }}
-                aria-label={`Highlight verse ${verse} ${h.name.toLowerCase()}`}
-                onClick={() => {
-                  setMarks((m) => ({ ...m, [verse]: h.hex }));
-                  setVerse(null);
-                }}
-              />
-            ))}
-          {verse && marks[verse] && (
-            <button
-              type="button"
-              className="pb-mini-btn"
-              onClick={() => {
-                setMarks((m) => {
-                  const c = { ...m };
-                  delete c[verse];
-                  return c;
-                });
-                setVerse(null);
-              }}
-            >
-              Clear
-            </button>
-          )}
-        </div>
+        <p className="mt-4 text-sm text-pb-muted">Tap an underlined word.</p>
       </div>
       <aside className="border-t border-pb-hair bg-pb-deep/60 p-6 md:border-l md:border-t-0 md:p-8" aria-live="polite">
         <p className="text-xs font-semibold text-pb-muted">Strong’s Concordance · {e.num}</p>
@@ -297,7 +250,7 @@ export function BibleDemo() {
         <p className="mt-3 font-semibold">{e.xlit}</p>
         <p className="text-sm text-pb-muted">{e.say}</p>
         <p className="mt-4 font-cardo text-[17px] leading-relaxed">{e.def}</p>
-        <p className="mt-5 text-xs text-pb-muted">Tap any underlined word in the psalm. Strong’s is part of Premium.</p>
+        <p className="mt-5 text-xs text-pb-muted">Strong’s is part of Premium.</p>
       </aside>
     </div>
   );

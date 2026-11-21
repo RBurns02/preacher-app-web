@@ -157,7 +157,7 @@ a.pb-store:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rg
 .pb-nav.is-solid { background: rgba(241,242,240,.88); color: var(--ink); backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px); box-shadow: 0 1px 0 var(--hair); }
 .pb-navlink { display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 10px; font-size: 14px; font-weight: 500; opacity: .85; transition: opacity .2s, background .2s; }
 .pb-navlink:hover { opacity: 1; background: rgba(127,127,127,.12); }
-.pb-navcta { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 600; background: var(--onion); color: var(--ink); transition: transform .2s; }
+.pb-navcta { white-space: nowrap; display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 600; background: var(--onion); color: var(--ink); transition: transform .2s; }
 .pb-nav.is-solid .pb-navcta { background: var(--ink); color: var(--onion); }
 .pb-navcta:hover { transform: translateY(-1px); }
 .pb-mobile-menu { display: grid; padding: 8px 20px 16px; background: var(--onion); color: var(--ink); box-shadow: 0 10px 20px -10px rgba(0,0,0,.25); }
@@ -359,3 +359,17 @@ a.pb-store:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rg
 @media (max-width: 520px) { .pb-book { padding: 20px; gap: 14px; } .pb-book-num { width: 2.4rem; } }
 .pb-turn-arrow { display: grid; place-items: center; flex: none; width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--ink); transition: transform .3s ease, background .3s ease, color .3s ease; }
 .pb-turn:hover .pb-turn-arrow { transform: translateX(6px); background: var(--ink); color: var(--onion); }
+
+/* Phones: fewer moving parts, tighter spacing */
+@media (max-width: 640px) {
+  .pb-band { padding-block: 52px; }
+  .pb-chapter-grid { gap: 32px; }
+  .pb-hero-phone { max-width: 250px; margin-inline: auto; }
+  .pb-ribbon { height: 80px; }
+  .pb-marquee-item { width: 132px; }
+  .pb-preach-scroll { max-height: 260px; }
+  .pb-tile { padding: 18px; }
+  .pb-page-head .pb-hero-rules { animation: none; }
+}
+.pb-menu-btn { min-width: 44px; justify-content: center; }
+@media (min-width: 1024px) { .pb-menu-btn { display: none; } }

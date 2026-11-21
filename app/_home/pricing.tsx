@@ -21,7 +21,7 @@ export function Pricing() {
           <p className="mt-2 font-cardo text-5xl">$0</p>
           <p className="mt-1 text-sm text-pb-muted">No trial, no card.</p>
           <ul className="mt-6 grid gap-2.5 text-[15px]">
-            <Check>The Bible, with highlights and verse notes</Check>
+            <Check>The Bible, with verse notes</Check>
             <Check>Your first 3 sermons: write, preach, print and export them</Check>
             <Check>Messages, friends, and joining Study Groups</Check>
             <Check>Reading plans and the Verse of the Day widget</Check>

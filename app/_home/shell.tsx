@@ -37,7 +37,7 @@ export function ThumbIndex({ current }: { current?: PageSlug }) {
           </a>
         ))}
       </nav>
-      <nav aria-label="Pages" className={`pb-chips ${past ? "is-shown" : ""}`}>
+      <nav aria-label="Pages" className={`pb-chips hidden ${past ? "is-shown" : ""}`}>
         <div className="pb-chips-row">
           {PAGES.map((c) => (
             <a key={c.slug} href={`/${c.slug}/`} className="pb-chip" aria-current={current === c.slug ? "page" : undefined}>
@@ -72,7 +72,7 @@ export function Nav() {
         <a href="/" className="flex items-center gap-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/favicon.png" alt="" width={32} height={32} className="h-8 w-8 rounded-lg" />
-          <span className="font-cardo text-[19px]">The Preacher</span>
+          <span className="whitespace-nowrap font-cardo text-[19px]">The Preacher</span>
         </a>
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {links.map(([href, label]) => (
@@ -80,11 +80,11 @@ export function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href="/app/" className="pb-navlink hidden sm:inline-flex">Sign in</a>
+          <span className="hidden sm:inline-flex"><a href="/app/" className="pb-navlink">Sign in</a></span>
           <a href={APP_STORE_URL} className="pb-navcta">Get the app</a>
           <button
             type="button"
-            className="pb-navlink lg:hidden"
+            className="pb-navlink pb-menu-btn"
             aria-expanded={open}
             aria-controls="pb-mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -157,12 +157,13 @@ export function Hero() {
           </p>
           <div id="download" className="pb-rise mt-8 flex flex-wrap items-center gap-3" style={{ animationDelay: "340ms" }}>
             <AppStoreButton dark />
-            <PlayComingSoon dark />
+            <span className="hidden sm:inline-flex"><PlayComingSoon dark /></span>
           </div>
           <p className="pb-rise mt-4 text-sm text-pb-night-muted" style={{ animationDelay: "420ms" }}>
             Free to start. Premium is $4.99 a month or $44.99 a year, with 3 days free.
+            <span className="sm:hidden"> Android is coming soon.</span>
           </p>
-          <p className="mt-10 max-w-md font-cardo text-xl leading-snug text-pb-red-night" aria-label="2 Timothy 4:2">
+          <p className="mt-10 hidden max-w-md font-cardo text-xl leading-snug text-pb-red-night sm:block" aria-label="2 Timothy 4:2">
             <Typewriter text="Preach the word; be instant in season, out of season." start={verseStart} speed={42} />
             <span className="ml-2 whitespace-nowrap text-sm opacity-75">2 Timothy 4:2</span>
           </p>
@@ -182,7 +183,7 @@ export function Hero() {
               </div>
             ))}
           </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-2" role="tablist" aria-label="App screens">
+          <div className="mt-6 hidden flex-wrap justify-center gap-2 sm:flex" role="tablist" aria-label="App screens">
             {HERO_SHOTS.map((s, i) => (
               <button
                 key={s.label}

@@ -35,7 +35,7 @@ export function SitePage({ slug, title, intro, verse, reference, children }: {
             </h1>
             <p className="pb-rise mt-5 max-w-2xl text-lg leading-relaxed text-pb-night-muted" style={{ animationDelay: "200ms" }}>{intro}</p>
             {verse && (
-              <p className="pb-rise mt-8 max-w-xl font-cardo text-xl leading-snug text-pb-red-night" style={{ animationDelay: "300ms" }}>
+              <p className="pb-rise mt-8 hidden max-w-xl font-cardo text-xl leading-snug text-pb-red-night sm:block" style={{ animationDelay: "300ms" }}>
                 {verse}
                 {reference && <span className="ml-2 whitespace-nowrap text-sm opacity-75">{reference}</span>}
               </p>
@@ -96,7 +96,7 @@ export function Closing() {
           <p className="mx-auto mt-5 max-w-md text-pb-night-muted">Free to download. Your first three sermons are on us.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <AppStoreButton dark />
-            <PlayComingSoon dark />
+            <span className="hidden sm:inline-flex"><PlayComingSoon dark /></span>
           </div>
         </Reveal>
       </div>

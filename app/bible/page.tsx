@@ -5,11 +5,11 @@ import { Reveal } from "../_home/ui";
 
 export const metadata: Metadata = {
   title: "Bible — The Preacher",
-  description: "A study Bible built in: highlights, verse notes, Strong’s Concordance and reading plans.",
+  description: "A study Bible built in: verse notes, Strong’s Concordance and reading plans.",
 };
 
 const MORE = [
-  ["Highlights and verse notes", "Mark verses in four colours and keep a note on any verse. Free, and yours forever."],
+  ["Verse notes", "Keep a note on any verse, and find it again next time you read. Free, and yours forever."],
   ["Strong’s Concordance", "The original Hebrew or Greek behind every word, with definitions and cross references. Part of Premium."],
   ["Word Study Notebook", "Save the words you study, with your own notes, and come back to them from the Bible’s top bar."],
   ["Reading plans", "The Bible in a Year, the New Testament in 90 days, the Gospels in 30, and Psalms & Proverbs in a month."],
@@ -22,7 +22,7 @@ export default function BiblePage() {
     <SitePage
       slug="bible"
       title={<>The words behind the words.</>}
-      intro="A study Bible built into the app you preach from. Read, highlight, keep notes, follow a plan, and tap a word to see the Hebrew or Greek behind it."
+      intro="A study Bible built into the app you preach from. Read, keep notes, follow a plan, and tap a word to see the Hebrew or Greek behind it."
       verse="Thy word is a lamp unto my feet, and a light unto my path."
       reference="Psalm 119:105"
     >

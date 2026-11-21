@@ -40,6 +40,8 @@ edge (chips on phones) moves between them; the current page's tab is filled.
   with a `Divider` (heavy double rule with a labelled marker) so a change of topic is obvious.
 - Interactive demos live in `demos.tsx`, `together.tsx`, `tools.tsx`, `pricing.tsx`.
 - Don't name Bible versions on the site.
+- No highlighter colours anywhere on the site (no highlight palette in the Bible demo, no "highlights" in copy).
+- Keep phones simple: below `sm` the hero verse, screenshot tabs, page-tab chips and the Play badge are hidden; the nav stays on one line (brand + Get the app + menu).
 - Palette: Tailwind `pb.*` + `.pb-*` classes in `globals.css`, scoped under `.pb-home`,
   so the web reader, invites, legal, support and tour pages are unchanged.
 - Cardo is self-hosted in `public/fonts` (OFL). Scripture is red letter and quoted

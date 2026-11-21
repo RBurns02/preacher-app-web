@@ -336,3 +336,26 @@ a.pb-store:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px rg
   .pb-armed .pb-reveal { opacity: 1; transform: none; }
   .pb-marquee { overflow-x: auto; }
 }
+
+/* Multi-page site: bands, dividers, page headers, the page index */
+.pb-band { padding-block: clamp(64px, 9vw, 104px); background: var(--onion); border-top: 1px solid var(--hair-strong); }
+.pb-band.is-alt { background: #FFFFFF; }
+.pb-band.is-ink { background: var(--ink); color: var(--onion); border-top-color: rgba(241,242,240,.18); }
+.pb-band.is-ink-alt { background: #24213A; }
+.pb-divider { display: flex; align-items: center; gap: 16px; }
+.pb-divider-rule { flex: 1; height: 6px; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); opacity: .9; }
+.pb-divider-label { display: inline-flex; align-items: baseline; gap: 10px; padding: 7px 16px; border: 1.5px solid var(--ink); border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap; background: inherit; }
+.pb-divider.is-dark .pb-divider-rule { border-color: var(--onion); }
+.pb-divider.is-dark .pb-divider-label { border-color: var(--onion); color: var(--onion); }
+@media (max-width: 520px) { .pb-divider { gap: 10px; } .pb-divider-label { font-size: 14px; padding: 6px 12px; } }
+.pb-page-head { position: relative; overflow: hidden; background: var(--ink); color: var(--onion); }
+.pb-book { display: flex; align-items: center; gap: 24px; padding: 26px 28px; border-radius: 20px; background: var(--lift); border: 1px solid var(--hair-strong); transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.pb-book:hover { transform: translateY(-3px); border-color: var(--ink); box-shadow: 0 24px 50px -30px rgba(30,27,46,.45); }
+.pb-book-num { flex: none; width: 3.6rem; font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1; color: var(--muted); }
+.pb-book-go { transition: gap .25s ease; }
+.pb-book:hover .pb-book-go { gap: 12px; }
+.pb-book-shot { transition: transform .4s ease; }
+.pb-book:hover .pb-book-shot { transform: rotate(-3deg) translateY(-4px); }
+@media (max-width: 520px) { .pb-book { padding: 20px; gap: 14px; } .pb-book-num { width: 2.4rem; } }
+.pb-turn-arrow { display: grid; place-items: center; flex: none; width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--ink); transition: transform .3s ease, background .3s ease, color .3s ease; }
+.pb-turn:hover .pb-turn-arrow { transform: translateX(6px); background: var(--ink); color: var(--onion); }

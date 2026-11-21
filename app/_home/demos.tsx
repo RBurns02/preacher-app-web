@@ -203,7 +203,7 @@ const STRONGS: Record<string, { num: string; lemma: string; xlit: string; say: s
   "name's": { num: "H8034", lemma: "שֵׁם", xlit: "shêm", say: "shame", def: "An appellation, as a mark or memorial of individuality; by implication honor, authority, character." },
 };
 
-// Psalm 23:1–3 (KJV), split so the studied words are tappable.
+// Psalm 23:1–3, split so the studied words are tappable.
 type Piece = string | { w: string; key: string; caps?: boolean };
 const PSALM: { n: number; parts: Piece[] }[] = [
   { n: 1, parts: ["The ", { w: "Lord", key: "LORD", caps: true }, " is my ", { w: "shepherd", key: "shepherd" }, "; I shall not ", { w: "want", key: "want" }, "."] },
@@ -226,9 +226,8 @@ export function BibleDemo() {
   return (
     <div className="pb-card grid overflow-hidden md:grid-cols-[1.25fr_1fr]">
       <div className="p-6 md:p-8">
-        <div className="mb-4 flex items-baseline justify-between">
+        <div className="mb-4">
           <span className="text-sm font-semibold">Psalm 23</span>
-          <span className="text-xs text-pb-muted">KJV</span>
         </div>
         <div className="font-cardo text-[1.3rem] leading-[1.75] text-pb-ink">
           {PSALM.map((v) => (

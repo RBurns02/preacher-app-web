@@ -29,18 +29,22 @@ preacher-web/
 └── package.json
 ```
 
-## Home page (redesign, `app/_home/`)
-The home page is laid out like a pulpit Bible: an ink hero, onionskin "chapters"
-(I Log, II Prepare & preach, III Bible, IV Together, V New tools, VI Pricing), and a
-thumb index down the right edge that fills in as you scroll (chips on phones).
-- `app/page.tsx` assembles it; components live in `app/_home/` (ui, shell, demos,
-  together, tools, pricing). Each chapter has a small working demo, not a description.
-- Palette: Tailwind `pb.*` colours + `.pb-*` classes in `globals.css`, all scoped under
-  `.pb-home` so the other pages (web reader, invites, legal, support, tour) are unchanged.
-- Cardo is self-hosted in `public/fonts` (OFL). Scripture is red letter; only real KJV
-  text from the app's bundled Bible, and Strong's entries from its lexicon.
-- Screenshots for the page are 660px JPGs in `public/screenshots/web/` (named for what
-  they actually show).
+## Marketing pages (redesign, `app/_home/`)
+Laid out like a pulpit Bible. Home (`app/page.tsx`) is the cover: hero, a few numbers,
+and links to five "books", each its own page: `/features/`, `/bible/`, `/community/`,
+`/whats-new/`, `/pricing/` (list in `app/_home/pages.ts`). A thumb index down the right
+edge (chips on phones) moves between them; the current page's tab is filled.
+- Every page uses `SitePage` (`app/_home/site.tsx`): ink page header, content bands,
+  a "Next" link to the following page, the closing call, footer.
+- Sections are `.pb-band` blocks (alternating onionskin / white / ink) and each opens
+  with a `Divider` (heavy double rule with a labelled marker) so a change of topic is obvious.
+- Interactive demos live in `demos.tsx`, `together.tsx`, `tools.tsx`, `pricing.tsx`.
+- Don't name Bible versions on the site.
+- Palette: Tailwind `pb.*` + `.pb-*` classes in `globals.css`, scoped under `.pb-home`,
+  so the web reader, invites, legal, support and tour pages are unchanged.
+- Cardo is self-hosted in `public/fonts` (OFL). Scripture is red letter and quoted
+  exactly from the app's bundled Bible; Strong's entries come from its lexicon.
+- Screenshots: 660px JPGs in `public/screenshots/web/`, named for what they show.
 - Motion respects prefers-reduced-motion; reveal-on-scroll only hides content once JS
   has added `html.pb-armed`.
 

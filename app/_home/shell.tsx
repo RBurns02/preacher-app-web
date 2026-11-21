@@ -1,56 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AppStoreButton, PhoneFrame, PlayComingSoon, Typewriter, useReducedMotion } from "./ui";
+import { PAGES, type PageSlug } from "./pages";
+import { APP_STORE_URL, AppStoreButton, PhoneFrame, PlayComingSoon, Typewriter, useReducedMotion } from "./ui";
 
-/* The page is laid out like a Bible you thumb through: each section is a
-   chapter, and the index down the right edge fills in as you read. */
-export const CHAPTERS = [
-  { id: "log", numeral: "I", label: "Log" },
-  { id: "preach", numeral: "II", label: "Prepare & preach" },
-  { id: "bible", numeral: "III", label: "Bible" },
-  { id: "together", numeral: "IV", label: "Together" },
-  { id: "new", numeral: "V", label: "New tools" },
-  { id: "pricing", numeral: "VI", label: "Pricing" },
-] as const;
-
-/** Which chapter is at a third of the way down the screen (null above the first). */
-function useCurrentChapter() {
-  const [current, setCurrent] = useState<string | null>(null);
+/** Shows once the visitor has scrolled past the top of the page. */
+function useScrolledPast(y = 280) {
+  const [past, setPast] = useState(false);
   useEffect(() => {
-    const onScroll = () => {
-      const line = window.innerHeight / 3;
-      let found: string | null = null;
-      for (const c of CHAPTERS) {
-        const el = document.getElementById(c.id);
-        if (el && el.getBoundingClientRect().top <= line) found = c.id;
-      }
-      // Past the bottom of the pricing chapter (FAQ, footer) keep it filled.
-      setCurrent(found);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-  return current;
+    const on = () => setPast(window.scrollY > y);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, [y]);
+  return past;
 }
 
-/** Thumb-index tabs down the right edge (desktop) and chapter chips (phone). */
-export function ThumbIndex() {
-  const current = useCurrentChapter();
+/** Thumb-index tabs down the right edge (desktop) and page chips (phone):
+ *  one per page, the current page filled. */
+export function ThumbIndex({ current }: { current?: PageSlug }) {
+  const past = useScrolledPast();
+  const shown = past || Boolean(current);
   return (
     <>
-      <nav aria-label="Chapters" className={`pb-thumbs ${current ? "is-shown" : ""}`}>
-        {CHAPTERS.map((c) => (
+      <nav aria-label="Pages" className={`pb-thumbs ${shown ? "is-shown" : ""}`}>
+        {PAGES.map((c) => (
           <a
-            key={c.id}
-            href={`#${c.id}`}
+            key={c.slug}
+            href={`/${c.slug}/`}
             className="pb-thumb"
-            aria-current={current === c.id ? "true" : undefined}
+            aria-current={current === c.slug ? "page" : undefined}
             aria-label={`${c.numeral}. ${c.label}`}
           >
             <span className="pb-thumb-label" aria-hidden="true">{c.label}</span>
@@ -58,10 +37,10 @@ export function ThumbIndex() {
           </a>
         ))}
       </nav>
-      <nav aria-label="Chapters" className={`pb-chips ${current ? "is-shown" : ""}`}>
+      <nav aria-label="Pages" className={`pb-chips ${past ? "is-shown" : ""}`}>
         <div className="pb-chips-row">
-          {CHAPTERS.map((c) => (
-            <a key={c.id} href={`#${c.id}`} className="pb-chip" aria-current={current === c.id ? "true" : undefined}>
+          {PAGES.map((c) => (
+            <a key={c.slug} href={`/${c.slug}/`} className="pb-chip" aria-current={current === c.slug ? "page" : undefined}>
               <span className="font-cardo">{c.numeral}</span> {c.label}
             </a>
           ))}
@@ -86,12 +65,7 @@ export function Nav() {
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
-  const links = [
-    ["#log", "Features"],
-    ["#new", "What’s new"],
-    ["#pricing", "Pricing"],
-    ["/support/", "Support"],
-  ];
+  const links = PAGES.map((p) => [`/${p.slug}/`, p.label] as const);
   return (
     <header className={`pb-nav ${scrolled ? "is-solid" : ""}`}>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
@@ -100,17 +74,17 @@ export function Nav() {
           <img src="/favicon.png" alt="" width={32} height={32} className="h-8 w-8 rounded-lg" />
           <span className="font-cardo text-[19px]">The Preacher</span>
         </a>
-        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {links.map(([href, label]) => (
             <a key={href} href={href} className="pb-navlink">{label}</a>
           ))}
         </nav>
         <div className="flex items-center gap-2">
           <a href="/app/" className="pb-navlink hidden sm:inline-flex">Sign in</a>
-          <a href="#download" className="pb-navcta">Get the app</a>
+          <a href={APP_STORE_URL} className="pb-navcta">Get the app</a>
           <button
             type="button"
-            className="pb-navlink md:hidden"
+            className="pb-navlink lg:hidden"
             aria-expanded={open}
             aria-controls="pb-mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -123,8 +97,8 @@ export function Nav() {
         </div>
       </div>
       {open && (
-        <div id="pb-mobile-menu" className="pb-mobile-menu md:hidden">
-          {[...links, ["/app/", "Sign in"]].map(([href, label]) => (
+        <div id="pb-mobile-menu" className="pb-mobile-menu lg:hidden">
+          {[...links, ["/support/", "Support"] as const, ["/app/", "Sign in"] as const].map(([href, label]) => (
             <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
           ))}
         </div>
@@ -241,9 +215,11 @@ export function Footer() {
           <span className="font-cardo text-lg text-pb-onion">The Preacher</span>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
-          <a href="/app/" className="hover:text-pb-onion">Sign in</a>
-          <a href="/tour/" className="hover:text-pb-onion">Tour</a>
+          {PAGES.map((p) => (
+            <a key={p.slug} href={`/${p.slug}/`} className="hover:text-pb-onion">{p.label}</a>
+          ))}
           <a href="/support/" className="hover:text-pb-onion">Support</a>
+          <a href="/app/" className="hover:text-pb-onion">Sign in</a>
           <a href="/privacy/" className="hover:text-pb-onion">Privacy</a>
           <a href="/terms/" className="hover:text-pb-onion">Terms</a>
         </nav>

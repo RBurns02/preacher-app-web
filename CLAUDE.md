@@ -40,6 +40,7 @@ edge (chips on phones) moves between them; the current page's tab is filled.
   with a `Divider` (heavy double rule with a labelled marker) so a change of topic is obvious.
 - Interactive demos live in `demos.tsx`, `together.tsx`, `tools.tsx`, `pricing.tsx`.
 - Don't name Bible versions on the site.
+- Free vs Premium (since app 1.9.0): the Pulpit Bible look and Study Groups (start or join) are FREE; Premium = unlimited sermons, Strong's, translation, analytics/map, Batch Log, the Sharp and Paper looks, multi-device sync.
 - No highlighter colours anywhere on the site (no highlight palette in the Bible demo, no "highlights" in copy).
 - Keep phones simple: below `sm` the hero verse, screenshot tabs, page-tab chips and the Play badge are hidden; the nav stays on one line (brand + Get the app + menu).
 - Palette: Tailwind `pb.*` + `.pb-*` classes in `globals.css`, scoped under `.pb-home`,
@@ -135,6 +136,6 @@ The mobile app this site promotes:
 - **Purpose**: Sermon logging, Bible study, ministry tracking for pastors/ministers
 - **Bible versions**: KJV and ASV ONLY — never claim ESV or NIV on the site (licensed translations the app does not carry)
 - **Strong's Concordance**: real and shipped — interlinear Hebrew/Greek on KJV words, Word Study Notebook
-- **Pricing**: 3-day free trial, then $4.99/month or $44.99/year (25% savings), via App Store subscription
+- **Pricing**: 7-day free trial (since Nov 2026), then $4.99/month or $44.99/year (25% savings), via App Store subscription
 - **Key features**: Log sermons, highlight Bible verses, track locations, prepare messages, offline access, cloud sync
 - **App repo**: github.com/RBurns02/preacher (branch: `claude/app-rework`)

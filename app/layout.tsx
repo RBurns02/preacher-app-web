@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://thepreacherapp.com"),
   title: "The Preacher — Sermon Log & Study for Pastors",
   description:
-    "The record of your ministry. Log every sermon, preach from your phone, and study with Strong's Concordance. Now on the App Store with a 3-day free trial.",
+    "The record of your ministry. Log every sermon, preach from your phone, and study with Strong's Concordance. Now on the App Store with a 7-day free trial.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },

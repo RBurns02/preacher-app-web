@@ -23,7 +23,8 @@ export function Pricing() {
           <ul className="mt-6 grid gap-2.5 text-[15px]">
             <Check>The Bible, with verse notes</Check>
             <Check>Your first 3 sermons: write, preach, print and export them</Check>
-            <Check>Messages, friends, and joining Study Groups</Check>
+            <Check>Messages, friends, and Study Groups: start one or join one</Check>
+            <Check>The Pulpit Bible look</Check>
             <Check>Reading plans and the Verse of the Day widget</Check>
           </ul>
           <a href={APP_STORE_URL} className="pb-cta-outline mt-auto">Download free</a>
@@ -34,16 +35,16 @@ export function Pricing() {
             <span key={String(yearly)} className="pb-pop inline-block">{yearly ? "$44.99" : "$4.99"}</span>
             <span className="ml-1 text-lg">{yearly ? "/ year" : "/ month"}</span>
           </p>
-          <p className="mt-1 text-sm opacity-80">{yearly ? "About $3.75 a month. " : ""}3 days free, cancel anytime.</p>
+          <p className="mt-1 text-sm opacity-80">{yearly ? "About $3.75 a month. " : ""}7 days free, cancel anytime.</p>
           <ul className="mt-6 grid gap-2.5 text-[15px]">
             <Check dark>Unlimited saved sermons and services</Check>
             <Check dark>Strong’s Concordance and the Word Study Notebook</Check>
             <Check dark>Translate a sermon into 30+ languages</Check>
             <Check dark>Analytics, the annual report and the map of everywhere you’ve preached</Check>
             <Check dark>Batch Log for a revival, conference or series</Check>
-            <Check dark>Start Study Groups, every app look, and sync on every device you sign in to</Check>
+            <Check dark>The Sharp and Paper looks, and sync on every device you sign in to</Check>
           </ul>
-          <a href={APP_STORE_URL} className="pb-cta-light mt-8">Start 3 days free</a>
+          <a href={APP_STORE_URL} className="pb-cta-light mt-8">Start 7 days free</a>
         </div>
       </div>
       <p className="mt-5 text-center text-xs text-pb-muted">

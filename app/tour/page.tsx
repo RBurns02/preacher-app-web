@@ -403,7 +403,7 @@ export default function HowItWorksPage() {
                 <PlayIcon />Coming soon to Google Play
               </div>
             </div>
-            <p className="text-ink/35 text-xs">3-day free trial, then $4.99/mo or $44.99/yr</p>
+            <p className="text-ink/35 text-xs">7-day free trial, then $4.99/mo or $44.99/yr</p>
           </div>
         </section>
 

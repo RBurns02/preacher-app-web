@@ -13,7 +13,7 @@ export default function CommunityPage() {
     <SitePage
       slug="community"
       title={<>Preachers, connected.</>}
-      intro="Set up a profile, find other preachers by name or @username, and keep each other sharp. New in version 1.8."
+      intro="Set up a profile, find other preachers by name or @username, and keep each other sharp. New in version 1.9."
       verse="Iron sharpeneth iron; so a man sharpeneth the countenance of his friend."
       reference="Proverbs 27:17"
     >
@@ -62,7 +62,7 @@ export default function CommunityPage() {
                 <Check>Share sermons and notes, and invite people with a link or from your friends.</Check>
                 <Check>Pick a reading plan for the whole group and watch everyone’s progress.</Check>
               </ul>
-              <p className="mt-6 text-sm text-pb-muted">Joining a group is free. Starting one is part of Premium.</p>
+              <p className="mt-6 text-sm text-pb-muted">Starting a group and joining one are both free.</p>
             </Reveal>
             <Reveal delay={140}><GroupPlan /></Reveal>
           </div>

@@ -160,7 +160,7 @@ export function Hero() {
             <span className="hidden sm:inline-flex"><PlayComingSoon dark /></span>
           </div>
           <p className="pb-rise mt-4 text-sm text-pb-night-muted" style={{ animationDelay: "420ms" }}>
-            Free to start. Premium is $4.99 a month or $44.99 a year, with 3 days free.
+            Free to start. Premium is $4.99 a month or $44.99 a year, with 7 days free.
             <span className="sm:hidden"> Android is coming soon.</span>
           </p>
           <p className="mt-10 hidden max-w-md font-cardo text-xl leading-snug text-pb-red-night sm:block" aria-label="2 Timothy 4:2">

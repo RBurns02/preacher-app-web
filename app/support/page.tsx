@@ -124,7 +124,7 @@ export default function SupportPage() {
             <Question q="How do I delete my account?">
               <p>
                 Go to{" "}
-                <strong className="text-ink">Settings → Account → Delete Account</strong>. This
+                <strong className="text-ink">Settings → Delete Account (at the bottom of Settings)</strong>. This
                 permanently removes all your data from our servers. If you need assistance, email us
                 at{" "}
                 <a

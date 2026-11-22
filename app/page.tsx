@@ -29,7 +29,7 @@ export default function Home() {
             {[
               { n: 30, s: " sec", l: "to log a sermon" },
               { n: 30, s: "+", l: "languages to translate a sermon into" },
-              { n: 3, s: " days", l: "free to try Premium" },
+              { n: 7, s: " days", l: "free to try Premium" },
               { n: 0, s: "", l: "ads, and no selling your data" },
             ].map((x) => (
               <div key={x.l} className="px-2 text-center">

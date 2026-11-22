@@ -5,7 +5,7 @@ import { Reveal } from "../_home/ui";
 
 export const metadata: Metadata = {
   title: "Pricing — The Preacher",
-  description: "Free to start. Premium is $4.99 a month or $44.99 a year, with 3 days free.",
+  description: "Free to start. Premium is $4.99 a month or $44.99 a year, with 7 days free.",
 };
 
 export default function PricingPage() {
@@ -13,7 +13,7 @@ export default function PricingPage() {
     <SitePage
       slug="pricing"
       title={<>Free to start. Premium when you need it.</>}
-      intro="Read the Bible, message other preachers and keep your first three sermons free. Premium is $4.99 a month or $44.99 a year, with 3 days free."
+      intro="Read the Bible, message other preachers and keep your first three sermons free. Premium is $4.99 a month or $44.99 a year, with 7 days free."
       verse="…freely ye have received, freely give."
       reference="Matthew 10:8"
     >

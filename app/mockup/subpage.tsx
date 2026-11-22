@@ -21,7 +21,7 @@ function PageHero({ page }: { page: MockupPageData }) {
       <div className="mp-page-hero-rules" aria-hidden="true" />
       <div className="mp-page-hero-inner">
         <div className="mp-page-hero-copy">
-          <p className="mp-kicker mp-kicker-light"><span>{page.numeral}</span>{page.label}</p>
+          <p className="mp-kicker mp-kicker-light">{page.label}</p>
           <h1>{page.title}</h1>
           <p className="mp-page-intro">{page.intro}</p>
           {page.verse && <blockquote>“{page.verse}” <cite>{page.reference}</cite></blockquote>}
@@ -38,18 +38,6 @@ function PageHero({ page }: { page: MockupPageData }) {
   );
 }
 
-function PageRail({ current }: { current: string }) {
-  return (
-    <nav className="mp-page-rail" aria-label="Mockup page index">
-      {MOCKUP_PAGES.map((item) => (
-        <a key={item.slug} href={`/mockup/${item.slug}/`} aria-current={item.slug === current ? "page" : undefined}>
-          <span>{item.numeral}</span><b>{item.label}</b>
-        </a>
-      ))}
-    </nav>
-  );
-}
-
 function StandardPage({ page }: { page: MockupPageData }) {
   return (
     <>
@@ -57,25 +45,23 @@ function StandardPage({ page }: { page: MockupPageData }) {
       {page.slug === "community" && <MessageDemo />}
       <div className="mp-story-sections">
         {page.sections?.map((section, index) => (
-          <section className={`mp-story ${index % 2 ? "is-reversed" : ""}`} key={section.title}>
+          <section className={`mp-story ${index % 2 ? "is-reversed" : ""} ${section.image ? "" : "is-copy-only"}`} key={section.title}>
             <div className="mp-story-copy">
-              <p className="mp-kicker"><span>{section.eyebrow.split(" · ")[0]}</span>{section.eyebrow.split(" · ")[1] || ""}</p>
+              <p className="mp-kicker">{section.eyebrow.split(" · ")[1] || section.eyebrow}</p>
               <h2>{section.title}</h2>
               <p>{section.body}</p>
               {section.bullets && (
                 <ul>{section.bullets.map((bullet) => <li key={bullet}><CheckIcon />{bullet}</li>)}</ul>
               )}
             </div>
-            <div className={`mp-story-visual ${section.image ? "has-image" : "is-texture"}`}>
-              {section.image ? (
+            {section.image && (
+              <div className="mp-story-visual has-image">
                 <figure>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={section.image} alt={section.imageAlt || ""} width="660" height="1434" />
                 </figure>
-              ) : (
-                <div className="mp-story-quote" aria-hidden="true"><span>{String(index + 1).padStart(2, "0")}</span><i /></div>
-              )}
-            </div>
+              </div>
+            )}
           </section>
         ))}
       </div>
@@ -168,7 +154,7 @@ function PricingPage() {
           <small>Renews unless canceled in App Store settings before the trial ends.</small>
         </article>
       </div>
-      <div className="mp-faq-wrap"><p className="mp-kicker"><span>02</span>Questions</p><h2>Know the terms before the trial starts.</h2><Accordion /></div>
+      <div className="mp-faq-wrap"><p className="mp-kicker">Trial and billing questions</p><h2>Know the terms before the trial starts.</h2><Accordion /></div>
     </section>
   );
 }
@@ -184,8 +170,8 @@ function SupportPage() {
   return (
     <section className="mp-support-page">
       <div className="mp-support-search"><label htmlFor="mock-support-search">Search help</label><div><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m16.5 16.5 4 4" /></svg><input id="mock-support-search" type="search" placeholder="Try “restore sermons”" /></div><small>Preview field — no search request is sent.</small></div>
-      <div className="mp-support-grid"><div><p className="mp-kicker"><span>01</span>Common questions</p><h2>Start with the shortest useful answer.</h2></div><Accordion items={SUPPORT_FAQS} /></div>
-      <div className="mp-contact-card"><div><p className="mp-kicker"><span>02</span>Contact</p><h2>Still stuck? Write to a person.</h2><p>Include the screen you were on and what you expected to happen. Never email a password or verification code.</p></div><a className="mp-button mp-button-primary" href="mailto:thepreacherapp@gmail.com">Email support <ArrowIcon /></a></div>
+      <div className="mp-support-grid"><div><p className="mp-kicker">Common questions</p><h2>Start with the shortest useful answer.</h2></div><Accordion items={SUPPORT_FAQS} /></div>
+      <div className="mp-contact-card"><div><p className="mp-kicker">Contact</p><h2>Still stuck? Write to a person.</h2><p>Include the screen you were on and what you expected to happen. Never email a password or verification code.</p></div><a className="mp-button mp-button-primary" href="mailto:thepreacherapp@gmail.com">Email support <ArrowIcon /></a></div>
     </section>
   );
 }
@@ -193,8 +179,8 @@ function SupportPage() {
 function LegalPage({ page }: { page: MockupPageData }) {
   return (
     <section className="mp-legal-page">
-      <aside><span>On this page</span>{page.sections?.map((section) => <a key={section.title} href={`#${section.eyebrow}`}>{section.eyebrow} · {section.title}</a>)}<p>Concept layout. Approved legal copy remains authoritative.</p></aside>
-      <article><header><span>Effective November 1, 2026</span><p>This mockup demonstrates the reading structure. It does not replace the current approved legal document.</p></header>{page.sections?.map((section) => <section id={section.eyebrow} key={section.title}><span>{section.eyebrow}</span><h2>{section.title}</h2><p>{section.body}</p></section>)}</article>
+      <aside><span>On this page</span>{page.sections?.map((section, index) => <a key={section.title} href={`#legal-section-${index + 1}`}>{section.title}</a>)}<p>Concept layout. Approved legal copy remains authoritative.</p></aside>
+      <article><header><span>Effective November 1, 2026</span><p>This mockup demonstrates the reading structure. It does not replace the current approved legal document.</p></header>{page.sections?.map((section, index) => <section id={`legal-section-${index + 1}`} key={section.title}><h2>{section.title}</h2><p>{section.body}</p></section>)}</article>
     </section>
   );
 }
@@ -231,7 +217,7 @@ function InvitePage({ group = false }: { group?: boolean }) {
 function NextPage({ current }: { current: string }) {
   const index = MOCKUP_PAGES.findIndex((page) => page.slug === current);
   const next = MOCKUP_PAGES[(index + 1) % MOCKUP_PAGES.length];
-  return <a className="mp-next-page" href={`/mockup/${next.slug}/`}><span><small>Next · {next.numeral}</small><strong>{next.label}</strong></span><ArrowIcon /></a>;
+  return <a className="mp-next-page" href={`/mockup/${next.slug}/`}><span><small>Next page</small><strong>{next.label}</strong></span><ArrowIcon /></a>;
 }
 
 export function MockupSubpage({ page }: { page: MockupPageData }) {
@@ -239,7 +225,6 @@ export function MockupSubpage({ page }: { page: MockupPageData }) {
     <div className="mp-site mp-subpage-site">
       <a className="mp-skip" href="#main">Skip to content</a>
       <MockupNav current={page.slug} />
-      <PageRail current={page.slug} />
       <main id="main">
         <PageHero page={page} />
         {page.kind === "pricing" ? <PricingPage /> : page.kind === "support" ? <SupportPage /> : page.kind === "legal" ? <LegalPage page={page} /> : page.kind === "signin" ? <SignInPage /> : page.kind === "sermon-invite" ? <InvitePage /> : page.kind === "group-invite" ? <InvitePage group /> : <StandardPage page={page} />}

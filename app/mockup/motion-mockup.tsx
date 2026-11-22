@@ -79,7 +79,7 @@ export function MotionMockup() {
       <main id="main">
         <section className="mp-hero" aria-labelledby="mockup-title">
           <div className="mp-hero-copy">
-            <p className="mp-kicker"><span>01</span> Prepare with a clear mind</p>
+            <p className="mp-kicker">Prepare with a clear mind</p>
             <h1 id="mockup-title">From Monday notes to <em>Sunday pulpit.</em></h1>
             <p className="mp-lede">
               One focused place to shape the message, carry Scripture into the pulpit,
@@ -156,7 +156,7 @@ export function MotionMockup() {
 
         <section className="mp-workflow" id="workflow" aria-labelledby="workflow-title">
           <div className="mp-section-head">
-            <p className="mp-kicker"><span>02</span> One sermon, one continuous flow</p>
+            <p className="mp-kicker">One sermon, one continuous flow</p>
             <h2 id="workflow-title">The work stays connected.</h2>
             <p>Each state answers the next question without making the preacher hunt for the thread.</p>
           </div>
@@ -183,7 +183,7 @@ export function MotionMockup() {
 
         <section className="mp-pulpit" id="pulpit" aria-labelledby="pulpit-title">
           <div className="mp-pulpit-copy">
-            <p className="mp-kicker mp-kicker-light"><span>03</span> Quiet in the pulpit</p>
+            <p className="mp-kicker mp-kicker-light">Quiet in the pulpit</p>
             <h2 id="pulpit-title">The screen gets out of the sermon’s way.</h2>
             <p>
               Large type, one active point, and no decorative motion while preaching.
@@ -214,7 +214,7 @@ export function MotionMockup() {
             <div className="mp-finish-mark" aria-hidden="true">
               <span className={previewComplete ? "is-complete" : ""}><CheckIcon /></span>
             </div>
-            <p className="mp-kicker"><span>04</span> A strong finish</p>
+            <p className="mp-kicker">A strong finish</p>
             <h2 id="finish-title">Close the loop while the details are still near.</h2>
             <p className="mp-finish-text">
               Confirm the date, place, and service. The sermon enters your ministry record only after you choose to log it.

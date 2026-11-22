@@ -18,10 +18,10 @@ export function MockupNav({ current }: { current?: string }) {
       <div className="mp-nav-actions">
         <details className="mp-all-pages">
           <summary>Pages</summary>
-          <nav aria-label="All mockup pages">
-            {MOCKUP_PAGES.map((page) => (
+          <nav aria-label="Main mockup pages">
+            {PRIMARY_PAGES.map((page) => (
               <a key={page.slug} href={`/mockup/${page.slug}/`} aria-current={current === page.slug ? "page" : undefined}>
-                <span>{page.numeral}</span>{page.label}
+                {page.label}
               </a>
             ))}
           </nav>

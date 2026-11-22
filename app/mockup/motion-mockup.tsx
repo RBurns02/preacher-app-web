@@ -162,7 +162,7 @@ export function MotionMockup() {
           </div>
 
           <ol className="mp-steps">
-            <li className="is-current">
+            <li>
               <span className="mp-step-num">1</span>
               <div><strong>Capture</strong><span>Hold the thought before it leaves.</span></div>
             </li>

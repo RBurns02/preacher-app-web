@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { MockupFooter, MockupNav } from "./site-shell";
 
 const APP_STORE_URL = "https://apps.apple.com/us/app/the-preacher/id6775250750";
 const VERSE = "Preach the word; be instant in season, out of season.";
@@ -73,20 +74,7 @@ export function MotionMockup() {
   return (
     <div className="mp-site">
       <a className="mp-skip" href="#main">Skip to content</a>
-
-      <header className="mp-nav">
-        <a className="mp-brand" href="/" aria-label="The Preacher home">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/favicon.png" alt="" width="36" height="36" />
-          <span>The Preacher</span>
-        </a>
-        <nav aria-label="Mockup sections">
-          <a href="#workflow">Workflow</a>
-          <a href="#pulpit">Pulpit</a>
-          <a href="#trial">Trial</a>
-        </nav>
-        <a className="mp-nav-cta" href={APP_STORE_URL}>Get the app</a>
-      </header>
+      <MockupNav />
 
       <main id="main">
         <section className="mp-hero" aria-labelledby="mockup-title">
@@ -261,15 +249,7 @@ export function MotionMockup() {
         </section>
       </main>
 
-      <footer className="mp-footer">
-        <div className="mp-brand">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/favicon.png" alt="" width="32" height="32" />
-          <span>The Preacher</span>
-        </div>
-        <p>The record of your ministry.</p>
-        <a href="/">View the current website</a>
-      </footer>
+      <MockupFooter />
     </div>
   );
 }

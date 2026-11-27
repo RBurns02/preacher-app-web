@@ -26,6 +26,7 @@ export function Pricing() {
             <Check>Messages, friends, and Study Groups: start one or join one</Check>
             <Check>The Pulpit Bible look</Check>
             <Check>Reading plans and the Verse of the Day widget</Check>
+            <Check>Backup, and sync on every device you sign in to</Check>
           </ul>
           <a href={APP_STORE_URL} className="pb-cta-outline mt-auto">Download free</a>
         </div>
@@ -42,7 +43,7 @@ export function Pricing() {
             <Check dark>Translate a sermon into 30+ languages</Check>
             <Check dark>Analytics, the annual report and the map of everywhere you’ve preached</Check>
             <Check dark>Batch Log for a revival, conference or series</Check>
-            <Check dark>The Sharp and Paper looks, and sync on every device you sign in to</Check>
+            <Check dark>The Sharp and Paper looks</Check>
           </ul>
           <a href={APP_STORE_URL} className="pb-cta-light mt-8">Start 7 days free</a>
         </div>

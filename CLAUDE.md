@@ -40,7 +40,7 @@ edge (chips on phones) moves between them; the current page's tab is filled.
   with a `Divider` (heavy double rule with a labelled marker) so a change of topic is obvious.
 - Interactive demos live in `demos.tsx`, `together.tsx`, `tools.tsx`, `pricing.tsx`.
 - Don't name Bible versions on the site.
-- Free vs Premium (since app 1.9.0): the Pulpit Bible look and Study Groups (start or join) are FREE; Premium = unlimited sermons, Strong's, translation, analytics/map, Batch Log, the Sharp and Paper looks, multi-device sync.
+- Free vs Premium (since app 1.9.0): the Pulpit Bible look and Study Groups (start or join) are FREE; Premium = unlimited sermons, Strong's, translation, analytics/map, Batch Log, the Sharp and Paper looks. Backup and multi-device sync are FREE (owner, Nov 27 2026).
 - No highlighter colours anywhere on the site (no highlight palette in the Bible demo, no "highlights" in copy).
 - Keep phones simple: below `sm` the hero verse, screenshot tabs, page-tab chips and the Play badge are hidden; the nav stays on one line (brand + Get the app + menu).
 - Palette: Tailwind `pb.*` + `.pb-*` classes in `globals.css`, scoped under `.pb-home`,

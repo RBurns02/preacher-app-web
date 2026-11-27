@@ -13,6 +13,10 @@
           {
             "/": "/g/*",
             "comment": "Study Group invites open the join screen in the app"
+          },
+          {
+            "/": "/r/*",
+            "comment": "Referral invite links open the app (the code is entered at sign-up)"
           }
         ]
       }

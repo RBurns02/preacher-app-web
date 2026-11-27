@@ -1,3 +1,4 @@
+import { PromoBar } from "./promo";
 import type { ReactNode } from "react";
 import { PAGES, type PageSlug } from "./pages";
 import { Footer, Nav, ThumbIndex } from "./shell";
@@ -47,6 +48,7 @@ export function SitePage({ slug, title, intro, verse, reference, children }: {
         <Closing />
       </main>
       <Footer />
+      <PromoBar />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { PromoBar } from "./_home/promo";
 import { PAGES } from "./_home/pages";
 import { Footer, Hero, Nav, ThumbIndex } from "./_home/shell";
 import { Closing, Divider } from "./_home/site";
@@ -75,6 +76,7 @@ export default function Home() {
         <Closing />
       </main>
       <Footer />
+      <PromoBar />
     </div>
   );
 }
